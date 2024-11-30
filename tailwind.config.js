@@ -5,7 +5,11 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        Nosifer: ['Nosifer', 'cursive'], // Ajoutez la police Nosifer
+      },
+    },
   },
   plugins: [],
-}
+};

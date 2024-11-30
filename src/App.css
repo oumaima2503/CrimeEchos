@@ -1,3 +1,4 @@
+/*
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -40,3 +41,24 @@
 .read-the-docs {
   color: #888;
 }
+  */
+  .nosifer {
+    font-family: "Nosifer", serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  .koulen {
+    font-family: "Koulen", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  /* Ajoutez ce CSS pour masquer la barre de défilement */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* Pour les navigateurs IE et Edge */
+  scrollbar-width: none;      /* Pour Firefox */
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;  /* Pour Chrome, Safari, et Opera */
+}
+
