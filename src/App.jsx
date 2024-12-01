@@ -2,6 +2,10 @@ import React from 'react';
 import arriere from './assets/arriere.png';  // Assurez-vous que l'image est dans ce dossier
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from './pages/Home';
+import Dash from './pages/Dash';
+import List from './pages/List';
+import Witness from './pages/Witness';
+import Map from './pages/Map';
 
 function App() {
   return (
@@ -9,6 +13,11 @@ function App() {
     <Routes>
           <Route index element={<Home />} />
           <Route path='/Home' element={<Home />} />
+          <Route path='/DashBoard' element={<Dash />} />
+          <Route path='/List_Crimes' element={<List />} />
+          <Route path='/Witness' element={<Witness />} />
+          <Route path='/Map' element={<Map/>} />
+          
     </Routes>
     </BrowserRouter>
   );
