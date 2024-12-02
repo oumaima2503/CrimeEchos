@@ -45,7 +45,7 @@ const Header = () => {
     ];
 
     return (
-        <div className='z-20 pl-10 pr-10 py-6'>
+        <div className='z-20 pl-10 pr-10 py-6 '>
             {/* Header */}
             <div className='flex justify-between'>
                 <div>
