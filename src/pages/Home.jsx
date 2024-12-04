@@ -65,7 +65,7 @@ function Home() {
       >
         {/* Section 1 - Home */}
         <div
-          ref={homeRef}
+          ref={homeRef} id='home'
           className="flex-shrink-0 w-full h-screen flex justify-center items-center flex-col text-center snap-start px-4 -mt-24 sm:-mt-16"
         >
           <h1 className="text-white text-3xl md:text-7xl font-bold z-10 nosifer">CRIMECHOS</h1>
@@ -83,7 +83,7 @@ function Home() {
 
         {/* Section 2 - Services */}
         <div
-          ref={servicesRef}
+          ref={servicesRef} id='services'
           className="flex-shrink-0 w-full h-screen flex justify-center items-center
            flex-col text-center px-4 snap-start gap-6 md:gap-10 md:-mt-16 mt-44 max-[360px]:mt-56"
         >
@@ -137,7 +137,7 @@ function Home() {
 
         {/* Section 3 - About */}
         <div
-          ref={aboutRef}
+          ref={aboutRef} id='about'
           className="flex-shrink-0 w-full h-screen flex justify-center items-center flex-col text-center px-4 snap-start"
         >
           <h1 className="text-white text-3xl md:text-5xl font-bold z-10 nosifer md:-mt-36  -mt-40">
