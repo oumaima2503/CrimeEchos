@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+
 const NavHome = ({ currentSection, setCurrentSection, scrollToSection }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false); // État pour le menu hamburger
 
@@ -64,14 +65,14 @@ const NavHome = ({ currentSection, setCurrentSection, scrollToSection }) => {
         <div className="absolute top-20 right-10 bg-[#982222] text-white rounded-md shadow-lg p-4 md:hidden">
           <ul className="flex flex-col gap-4 text-lg">
             <li>
-              <button className="py-2 px-4" onClick={toggleMenu}>
+              <link to="/signin" className="py-2 px-4" onClick={toggleMenu}>
                 SIGN IN
-              </button>
+              </link>
             </li>
             <li>
-              <button className="bg-white text-[#982222] rounded py-2 px-4" onClick={toggleMenu}>
+              <link  to="/Signup" className="bg-white text-[#982222] rounded py-2 px-4" onClick={toggleMenu}>
                 SIGN UP
-              </button>
+              </link>
             </li>
           </ul>
         </div>
