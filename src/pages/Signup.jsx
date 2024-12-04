@@ -3,8 +3,15 @@ import blood from '../assets/blood.svg';
 import arriere from '../assets/arriere.png';
 import arr from '../assets/arrieresansblood.svg'
 import logo from '../assets/logo_crime.png';
+import { useNavigate } from "react-router-dom";
 
 function SignUpPage() {
+  const navigate = useNavigate();
+  const handleSignUp = (e) => {
+    e.preventDefault(); 
+    
+    navigate('/DashBoard');
+  };
   return (
     
     <div className="min-h-screen flex items-center justify-center bg-black text-white">
@@ -53,7 +60,7 @@ function SignUpPage() {
             </div>
             <div className="flex justify-center">
             <button
-              type="submit"
+              type="submit"  onClick={handleSignUp}
               className="w-24 bg-[#982222] text-white py-2 rounded-md font-bold hover:bg-red-700 text-2xl koulen">
               SIGN UP
             </button></div>

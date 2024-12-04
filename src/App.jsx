@@ -2,7 +2,9 @@ import React from 'react';
 import arriere from './assets/arriere.png';  // Assurez-vous que l'image est dans ce dossier
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from './pages/Home';
+
 import SignUpPage from './pages/Signup';
+
 import Dash from './pages/Dash';
 import List from './pages/List';
 import Witness from './pages/Witness';
