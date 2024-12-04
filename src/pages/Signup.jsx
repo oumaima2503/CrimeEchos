@@ -2,8 +2,15 @@ import React from "react";
 import blood from '../assets/blood.svg';
 import arriere from '../assets/arriere.png';
 import logo from '../assets/logo_crime.png';
+import { useNavigate } from "react-router-dom";
 
 function SignUpPage() {
+  const navigate = useNavigate();
+  const handleSignUp = (e) => {
+    e.preventDefault(); 
+    
+    navigate('/DashBoard');
+  };
   return (
     
     <div className="min-h-screen flex items-center justify-center bg-black text-white">
@@ -14,7 +21,7 @@ function SignUpPage() {
 />
       {/* Left Side: Form */}
       <div className="w-full md:w-1/2  relative flex items-center justify-center koulen "> 
-      <div className="w-full md:w-1/2 bg-white p-6 rounded-lg flex flex-col justify-center border border-white rounded-3xl backdrop-blur-sm bg-opacity-40 ml-10 mr-10">     
+      <div className="w-full md:w-1/2 bg-white p-6 flex flex-col justify-center border border-white rounded-3xl backdrop-blur-sm bg-opacity-40 ml-10 mr-10">     
            <h1 className="text-3xl font-bold mb-4 text-center koulen">CREATE ACCOUNT</h1>
           <p className="text-sm text-center text-white mb-6">
             Already have an Account?{" "}
@@ -48,7 +55,7 @@ function SignUpPage() {
               />
             </div>
             <button
-              type="submit"
+              type="submit"  onClick={handleSignUp}
               className="w- bg-[#982222] text-white py-2 rounded-md font-bold hover:bg-red-700 "
             >
               SIGN UP

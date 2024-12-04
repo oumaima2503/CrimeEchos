@@ -8,6 +8,7 @@ import data from '../assets/data.svg';
 import list from '../assets/list.svg';
 import msg from '../assets/msg.svg';
 
+
 function Home() {
   const containerRef = useRef(null);
   const homeRef = useRef(null);

@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
-
+import React, { useState } from "react";
+import { Link } from "react-router-dom"; // Import for react-router-dom
 
 const NavHome = ({ currentSection, setCurrentSection, scrollToSection }) => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false); // État pour le menu hamburger
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen); // Basculer entre affiché/masqué
+    setIsMenuOpen(!isMenuOpen);
   };
 
-  const handleSectionClick = (section, ref) => {
-    setCurrentSection(section); // Mettre à jour la section active
-    scrollToSection(ref); // Effectuer le défilement vers la section correspondante
+  const handleSectionClick = (section) => {
+    if (setCurrentSection) setCurrentSection(section);
+    if (scrollToSection) scrollToSection(section); // Pass section if refs are not used
   };
 
   return (
@@ -25,39 +25,44 @@ const NavHome = ({ currentSection, setCurrentSection, scrollToSection }) => {
         <button
           onClick={toggleMenu}
           className="text-white text-3xl focus:outline-none"
+          aria-label="Toggle menu"
         >
-          {isMenuOpen ? '✖' : '☰'}
+          {isMenuOpen ? "✖" : "☰"}
         </button>
       </div>
 
       {/* Navigation Links for Large Screens */}
       <div className="hidden md:flex md:gap-6 text-2xl">
         <button
-          onClick={() => handleSectionClick('home')}
+          onClick={() => handleSectionClick("home")}
           className={`py-2 px-4 ${
-            currentSection === 'home' ? 'border-b-4 border-white' : ''
+            currentSection === "home" ? "border-b-4 border-white" : ""
           }`}
         >
-        <a href="#home">HOME</a>  
+          <a href="#home">HOME</a>
         </button>
         <button
-          onClick={() => handleSectionClick('services')}
+          onClick={() => handleSectionClick("services")}
           className={`py-2 px-4 ${
-            currentSection === 'services' ? 'border-b-4 border-white' : ''
+            currentSection === "services" ? "border-b-4 border-white" : ""
           }`}
         >
           <a href="#services">SERVICES</a>
         </button>
         <button
-          onClick={() => handleSectionClick('about')}
+          onClick={() => handleSectionClick("about")}
           className={`py-2 px-4 ${
-            currentSection === 'about' ? 'border-b-4 border-white' : ''
+            currentSection === "about" ? "border-b-4 border-white" : ""
           }`}
         >
-         <a href="#about">ABOUT</a> 
+          <a href="#about">ABOUT</a>
         </button>
-        <button className="py-2 px-4">SIGN IN</button>
-        <button className="bg-[#982222] py-2 px-4">SIGN UP</button>
+        <Link to="/signin" className="py-2 px-4">
+          SIGN IN
+        </Link>
+        <Link to="/signup" className="bg-[#982222] py-2 px-4">
+          SIGN UP
+        </Link>
       </div>
 
       {/* Hamburger Dropdown Menu for Small Screens */}
@@ -65,14 +70,22 @@ const NavHome = ({ currentSection, setCurrentSection, scrollToSection }) => {
         <div className="absolute top-20 right-10 bg-[#982222] text-white rounded-md shadow-lg p-4 md:hidden">
           <ul className="flex flex-col gap-4 text-lg">
             <li>
-              <link to="/signin" className="py-2 px-4" onClick={toggleMenu}>
+              <Link
+                to="/signin"
+                className="py-2 px-4"
+                onClick={toggleMenu}
+              >
                 SIGN IN
-              </link>
+              </Link>
             </li>
             <li>
-              <link  to="/Signup" className="bg-white text-[#982222] rounded py-2 px-4" onClick={toggleMenu}>
+              <Link
+                to="/signup"
+                className="bg-white text-[#982222] rounded py-2 px-4"
+                onClick={toggleMenu}
+              >
                 SIGN UP
-              </link>
+              </Link>
             </li>
           </ul>
         </div>
