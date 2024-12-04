@@ -37,7 +37,7 @@ const NavHome = ({ currentSection, setCurrentSection, scrollToSection }) => {
             currentSection === 'home' ? 'border-b-4 border-white' : ''
           }`}
         >
-          HOME
+        <a href="#home">HOME</a>  
         </button>
         <button
           onClick={() => handleSectionClick('services')}
@@ -45,7 +45,7 @@ const NavHome = ({ currentSection, setCurrentSection, scrollToSection }) => {
             currentSection === 'services' ? 'border-b-4 border-white' : ''
           }`}
         >
-          SERVICES
+          <a href="#services">SERVICES</a>
         </button>
         <button
           onClick={() => handleSectionClick('about')}
@@ -53,7 +53,7 @@ const NavHome = ({ currentSection, setCurrentSection, scrollToSection }) => {
             currentSection === 'about' ? 'border-b-4 border-white' : ''
           }`}
         >
-          ABOUT
+         <a href="#about">ABOUT</a> 
         </button>
         <button className="py-2 px-4">SIGN IN</button>
         <button className="bg-[#982222] py-2 px-4">SIGN UP</button>
