@@ -1,6 +1,5 @@
 import React from "react";
 import blood from '../assets/blood.svg';
-import arriere from '../assets/arriere.png';
 import arr from '../assets/arrieresansblood.svg'
 import logo from '../assets/logo_crime.png';
 import { useNavigate } from "react-router-dom";
@@ -16,13 +15,13 @@ function SignUpPage() {
     
     <div className="min-h-screen flex items-center justify-center bg-black text-white">
 <img 
-  className="absolute z-0 opacity-60 top-0 left-0 h-64" 
+  className="absolute z-0 opacity-60 top-0 left-0 h-64 " 
   src={blood} 
   alt="Blood Icon" 
 />
       {/* Left Side: Form */}
-      <div className="w-full md:w-1/2  relative flex items-center justify-center  "> 
-      <div className="w-full h-[500px] bg-white p-6 flex flex-col justify-center border border-white rounded-3xl backdrop-blur-sm bg-opacity-40 ml-10 mr-10">     
+      <div className="w-full md:w-3/5 relative flex items-center justify-center  "> 
+      <div className="w-[500px]  h-[500px] bg-white p-6 flex flex-col justify-center border border-white rounded-3xl backdrop-blur-xl bg-opacity-30 ml-10 mr-10">     
            <h1 className="text-3xl font-bold mb-4 text-center koulen">CREATE ACCOUNT</h1>
           <p className="text-lg text-center text-white mb-6">
             Already have an Account?{" "}
@@ -31,33 +30,28 @@ function SignUpPage() {
             </a>
           </p>
           <form className="space-y-4">
-            <div>
-              <label className="block text-lg font-medium ">Name</label>
-              <input
-  type="text"
-  className="w-full px-3 py-1 bg-transparent border-b-2 border-white focus:outline-none focus:border-yellow-400"
+          <div className="group">
+  <label className="block text-lg font-medium group-focus-within:text-yellow-400">Name</label>
+  <input
+    type="text"
+    className="w-full px-3 py-1 bg-transparent border-b-2 border-white focus:outline-none focus:border-yellow-400"
+  />
+</div>
 
-/>
-
-            </div>
-            <div>
-              <label className="block text-lg font-medium ">Email</label>
-              <input
-  type="text"
-  className="w-full px-3 py-1 bg-transparent border-b-2 border-white focus:outline-none focus:border-yellow-400"
-
-/>
-
-            </div>
-            <div>
-              <label className="block text-lg font-medium ">Password</label>
-              <input
-  type="text"
-  className="w-full px-3 py-1 bg-transparent border-b-2 border-white focus:outline-none focus:border-yellow-400"
-
-/>
-
-            </div>
+<div className="group">
+  <label className="block text-lg font-medium group-focus-within:text-yellow-400">Email</label>
+  <input
+    type="text"
+    className="w-full px-3 py-1 bg-transparent border-b-2 border-white focus:outline-none focus:border-yellow-400"
+  />
+</div>
+<div className="group">
+  <label className="block text-lg font-medium group-focus-within:text-yellow-400">Password</label>
+  <input
+    type="text"
+    className="w-full px-3 py-1 bg-transparent border-b-2 border-white focus:outline-none focus:border-yellow-400"
+  />
+</div>
             <div className="flex justify-center">
             <button
               type="submit"  onClick={handleSignUp}
@@ -68,7 +62,7 @@ function SignUpPage() {
         </div>
         </div>
   {/* Right Side: Logo and Decoration */}
-<div className="w-full md:w-1/2 bg-cover bg-right relative h-screen">
+<div className="w-full md:w-2/5 bg-cover bg-right relative h-screen ml-auto">
   <div className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-0 p-6">
     <h1 className="text-4xl font-bold mb-4"></h1>
 
@@ -84,7 +78,7 @@ function SignUpPage() {
   <img 
     src={arr} 
     alt="Crime Scene Background"
-    className="w-full h-full  object-cover rounded-3xl "
+    className="w-[600px] h-full  object-cover  "
   />
 </div>
 
