@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from './pages/Home';
 
 import SignUpPage from './pages/Signup';
+import SigninPage from './pages/Login';
 
 import Dash from './pages/Dash';
 import List from './pages/List';
@@ -19,7 +20,7 @@ function App() {
           <Route path='/Home' element={<Home />} />
 
           <Route path='/Signup' element={<SignUpPage />} />
-
+          <Route path='/Login' element={<SigninPage />} />
           <Route path='/DashBoard' element={<Dash />} />
           <Route path='/List_Crimes' element={<List />} />
           <Route path='/Witness' element={<Witness />} />
