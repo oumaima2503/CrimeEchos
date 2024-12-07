@@ -7,9 +7,16 @@ import blood from '../assets/blood.svg';
 import data from '../assets/data.svg';
 import list from '../assets/list.svg';
 import msg from '../assets/msg.svg';
+import { useNavigate } from "react-router-dom";
 
 
 function Home() {
+  const navigate = useNavigate();
+  const handleExplore = (e) => {
+    e.preventDefault(); 
+    
+    navigate('/Signup');
+  };
   const containerRef = useRef(null);
   const homeRef = useRef(null);
   const servicesRef = useRef(null);
@@ -77,7 +84,8 @@ function Home() {
             Welcome to CrimEchos, your interactive
             <br /> criminal analysis portal
           </p>
-          <button className="bg-[#982222] mt-6 md:mt-8 py-2 px-5 koulen text-white text-xl md:text-3xl">
+          <button className="bg-[#982222] mt-6 md:mt-8 py-2 px-5 koulen text-white text-xl md:text-3xl"
+          onClick={handleExplore } >
             EXPLORE
           </button>
         </div>
