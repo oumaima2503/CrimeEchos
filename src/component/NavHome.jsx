@@ -57,7 +57,7 @@ const NavHome = ({ currentSection, setCurrentSection, scrollToSection }) => {
         >
           <a href="#about">ABOUT</a>
         </button>
-        <Link to="/signin" className="py-2 px-4">
+        <Link to="/Login" className="py-2 px-4">
           SIGN IN
         </Link>
         <Link to="/signup" className="bg-[#982222] py-2 px-4">
@@ -71,7 +71,11 @@ const NavHome = ({ currentSection, setCurrentSection, scrollToSection }) => {
           <ul className="flex flex-col gap-4 text-lg">
             <li>
               <Link
+<<<<<<< HEAD
                 to="/login"
+=======
+                to="/Login"
+>>>>>>> aeeed4d89cd2ae643db291668b5534428e806058
                 className="py-2 px-4"
                 onClick={toggleMenu}
               >
