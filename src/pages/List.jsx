@@ -9,6 +9,7 @@ import { FaCalendarCheck } from "react-icons/fa";
 import { RiCriminalFill } from "react-icons/ri";
 import { TbProgressHelp } from "react-icons/tb";
 import { FiFilter } from "react-icons/fi";
+import { FaQuestionCircle } from "react-icons/fa";
 
 // Modal Component
 const CrimeModal = ({ crime, onClose }) => {
@@ -32,40 +33,41 @@ const CrimeModal = ({ crime, onClose }) => {
         <div className='flex gap-4 text-center items-center justify-center max-[600px]:text-[20px] max-[900px]:text-2xl
          neon font-bold text-3xl py-3'>
         
-          <h2 className='nosifer'>{crime.category}</h2>
+          <h2 className='nosifer'>{crime?.category || "No category"}</h2>
         </div>
         <div className=" my-4"></div>
     
         <p className=''>
-          <strong className="nosifer">Criminal Info:</strong> <br /> {crime.criminalInfo.sex}, {crime.criminalInfo.description}
+          <strong className="nosifer">Criminal Info:</strong> 
+          <br /> {crime?.criminalInfo?.sex || "Unknown"}, {crime?.criminalInfo?.description || "No description"}
         </p>
         <div className=" my-4"></div>
     
         <p>
-          <strong className="nosifer">Description:</strong> <br />{crime.description}
+          <strong className="nosifer">Description:</strong> <br /> {crime?.description || "No description available"}
         </p>
         <div className=" my-4"></div>
      <div className='flex gap-10 items-center justify-center max-[600px]:gap-6'>
 
      <p>
-          <strong className="nosifer ">Location:</strong> <br  /> {crime.crimeAddress.city}, {crime.crimeAddress.district}
+          <strong className="nosifer ">Location:</strong> <br  />  {crime?.crimeAddress?.city || "Unknown city"}, {crime?.crimeAddress?.district || "Unknown district"}
         </p>
         <div className=" my-4"></div>
     
         <p>
-          <strong className="nosifer">Date:</strong> <br />{crime.crimeDate}
+          <strong className="nosifer">Date:</strong> <br />{crime?.crimeDate || "Unknown date"}
         </p>
      </div>
         
         <div className=" my-4"></div>
     
         <p>
-          <strong className="nosifer">Responsible Force:</strong>  {crime.responsibleForce.name}
+          <strong className="nosifer">Responsible Force:</strong>   {crime?.responsibleForce?.name || "Unknown force"}
         </p>
         <div className="my-4"></div>
     
         <p>
-          <strong className="nosifer">Solved:</strong> {crime.isSolved ? 'Yes' : 'No'}
+          <strong className="nosifer">Solved:</strong>   {crime?.isSolved ? "Yes" : "No"}
         </p>
     
         {/* Bouton stylisé */}
@@ -179,7 +181,7 @@ const List = () => {
 
   {/* Dropdown Menu */}
   {dropdownVisible && (
-    <div className="absolute top-16 left-0 right-0 bg-white shadow-md rounded-md p-4 z-20">
+    <div className="absolute top-16 left-0 right-0 bg-white/90 shadow-md rounded-md p-4 z-20">
       <div className="flex flex-col gap-4 text-[#982222] font-bold">
         {/* Place Filter */}
         <div>
@@ -261,7 +263,7 @@ const List = () => {
       <select
         value={placeFilter}
         onChange={handlePlaceChange}
-        className="mt-2 p-2 border rounded w-full"
+        className="mt-2 p-2 border rounded w-full bg-white/90"
       >
         <option value="">Select Place</option>
         {uniquePlaces.map((place, index) => (
@@ -276,14 +278,14 @@ const List = () => {
         type="date"
         value={dateFilter}
         onChange={handleDateChange}
-        className="mt-2 p-2 border rounded w-full"
+        className="mt-2 p-2 border rounded w-full bg-white/90"
       />
     </div>
     <div className="flex-1">
       <select
         value={categoryFilter}
         onChange={(e) => setCategoryFilter(e.target.value)}
-        className="mt-2 p-2 border rounded w-full"
+        className="mt-2 p-2 border rounded w-full bg-white/90"
       >
         <option value="">All Categories</option>
         <option value="Theft">Theft</option>
@@ -297,7 +299,7 @@ const List = () => {
       <select
         value={solvedFilter}
         onChange={(e) => setSolvedFilter(e.target.value ? JSON.parse(e.target.value) : null)}
-        className="mt-2 p-2 border rounded w-full"
+        className="mt-2 p-2 border rounded w-full bg-white/90"
       >
         <option value="">Solved Status</option>
         <option value="true">Solved</option>
@@ -354,7 +356,7 @@ const List = () => {
 
 const CrimeCard = ({ crime, onSeeMore }) => {
     return (
-        <div className="flex items-stretch bg-white rounded-lg shadow-md overflow-hidden koulen ">
+        <div className="flex items-stretch bg-white/90 rounded-lg shadow-md overflow-hidden koulen ">
             <div className="bg-[#982222] text-white p-4 flex flex-col justify-center">
             <div className="mb-2 flex items-center gap-2">
               <MdPlace />
@@ -370,7 +372,7 @@ const CrimeCard = ({ crime, onSeeMore }) => {
                     {crime.crimeDate}
                 </div>
                 <div className="mb-2 flex items-center gap-2">
-                    <TbProgressHelp />
+                <FaQuestionCircle />
                     Solved: {crime.isSolved ? 'Yes' : 'No'}
                 </div>
             </div>
