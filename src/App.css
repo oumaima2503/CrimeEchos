@@ -45,6 +45,11 @@
   color: #888;
 }
   */
+  .fixed {
+    z-index: 9999; /* Ensure it's on top */
+    position: fixed;
+}
+
   .nosifer {
     font-family: "Nosifer", serif;
     font-weight: 400;
