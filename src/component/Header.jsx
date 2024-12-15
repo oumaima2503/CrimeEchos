@@ -45,9 +45,9 @@ const Header = () => {
     ];
 
     return (
-        <div className='z-0 pl-10 pr-10 py-6 '>
+        <div className='z-20 pl-10 pr-10 py-6 '>
             {/* Header */}
-            <div className='flex justify-between'>
+            <div className='flex justify-between z-20'>
                 <div>
                     <p className="text-3xl koulen max-[600px]:text-xl max-[500px]:text-lg text-white">CRIMECHOS</p>
                 </div>
@@ -67,7 +67,7 @@ const Header = () => {
                         </p>
                     </div>
                     {dropdownOpen && (
-                        <div className='absolute right-0 mt-2 w-64 bg-white shadow-lg rounded-md p-4 max-[500px]:w-40 max-[500px]:text-xs '>
+                        <div className='absolute right-0 mt-2 w-64 z-20 bg-white shadow-lg rounded-md p-4 max-[500px]:w-40 max-[500px]:text-xs '>
                             <label
                                 htmlFor="image-upload"
                                 className="block px-4 py-2 text-[#982222] font-bold hover:scale-105 bg-gray-100 rounded-md cursor-pointer mb-2 "

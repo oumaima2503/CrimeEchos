@@ -14,10 +14,10 @@ import { FaQuestionCircle } from "react-icons/fa";
 // Modal Component
 const CrimeModal = ({ crime, onClose }) => {
     return (
-      <div className="fixed inset-0 bg-black bg-opacity-90 flex justify-center items-center z-10">
+      <div className="fixed inset-0 bg-black bg-opacity-90 flex justify-center items-center" onClick={onClose}>
       <div
         className="relative bg-gradient-to-br from-gray-800 via-black to-gray-900 p-6 rounded-lg w-3/4
-         md:w-1/2 text-white text-center shadow-lg  max-[900px]:text-[15px] max-[600px]:text-[10px]"
+         md:w-1/2 text-white shadow-lg  max-[900px]:text-[15px] max-[600px]:text-[10px]    "
         style={{
           backgroundImage: `url(${arriere})`,
           backgroundPosition: '90% 30%',
@@ -26,14 +26,13 @@ const CrimeModal = ({ crime, onClose }) => {
         }}
       >
        
-    
        
         <div className=" my-6"></div>
     
-        <div className='flex gap-4 text-center items-center justify-center max-[600px]:text-[20px] max-[900px]:text-2xl
+        <div className='flex gap-4 text-center items-center justify-center max-[600px]:text-[15px] max-[900px]:text-2xl
          neon font-bold text-3xl py-3'>
         
-          <h2 className='nosifer'>{crime?.category || "No category"}</h2>
+          <h2 className='nosifer mb-6 max-[600px]:mb-0'>{crime?.category || "No category"}</h2>
         </div>
         <div className=" my-4"></div>
     
@@ -47,22 +46,12 @@ const CrimeModal = ({ crime, onClose }) => {
           <strong className="nosifer">Description:</strong> <br /> {crime?.description || "No description available"}
         </p>
         <div className=" my-4"></div>
-     <div className='flex gap-10 items-center justify-center max-[600px]:gap-6'>
-
-     <p>
-          <strong className="nosifer ">Location:</strong> <br  />  {crime?.crimeAddress?.city || "Unknown city"}, {crime?.crimeAddress?.district || "Unknown district"}
-        </p>
-        <div className=" my-4"></div>
-    
-        <p>
-          <strong className="nosifer">Date:</strong> <br />{crime?.crimeDate || "Unknown date"}
-        </p>
-     </div>
+     
         
         <div className=" my-4"></div>
     
         <p>
-          <strong className="nosifer">Responsible Force:</strong>   {crime?.responsibleForce?.name || "Unknown force"}
+          <strong className="nosifer">Responsible Force:</strong> <br />  {crime?.responsibleForce?.name || "Unknown force"}
         </p>
         <div className="my-4"></div>
     
@@ -71,12 +60,16 @@ const CrimeModal = ({ crime, onClose }) => {
         </p>
     
         {/* Bouton stylisé */}
-        <button
-          className="mt-6 bg-[#982222] text-white px-6 py-2 nosifer text-sm rounded transition-transform transform hover:scale-105 hover:bg-[#c12c2c] shadow-lg"
-          onClick={onClose}
-        >
-          Close
-        </button>
+        <div className="flex justify-end">
+  <button
+    className=" bg-[#982222] text-white px-6 py-2 koulen -mt-8  max-[600px]:text-[10px] max-[600px]:px-3 max-[600px]:py-1
+    text-sm rounded transition-transform transform hover:scale-105 hover:bg-[#c12c2c] shadow-lg"
+    onClick={onClose}
+  >
+    Close
+  </button>
+</div>
+
       </div>
     
       {/* Effet néon */}
@@ -378,11 +371,11 @@ const CrimeCard = ({ crime, onSeeMore }) => {
             </div>
 
             <div className="flex-1 p-4">
-                <h2 className="text-xl font-semibold mb-2 max-[600px]:text-lg ">{crime.name}</h2>
+                <h2 className="text-xl font-semibold mb-2 max-[600px]:text-lg nosifer ">{crime.name}</h2>
                 <p className="text-md text-gray-600 ">Crime Category : {crime.category}</p>
                 <button
                     className="bg-[#982222] text-white px-4 py-2 rounded text-xs max-[600px]:text-[8px] 
-                     mt-4 nosifer hover:text-[#982222] hover:bg-[#982222]/50 hover:scale-110"
+                     mt-4  hover:text-[#982222] hover:bg-[#982222]/50 hover:scale-110"
                     onClick={() => onSeeMore(crime)}
                 >
                     See More
