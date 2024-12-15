@@ -530,7 +530,7 @@ export const crimes = Array.from({ length: 1000 }, (_, index) => {
     const category = categories[Math.floor(Math.random() * categories.length)];
 
     // Randomize the criminal's gender and description
-    const sex = ['Male', 'Female', 'Non-binary', 'Unknown'][Math.floor(Math.random() * 4)];
+    const sex = ['Male', 'Female',][Math.floor(Math.random() * 4)];
     const description = `Suspect is a ${sex} with specific physical features.`;
 
     // Randomize the solved status
