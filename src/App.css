@@ -49,6 +49,9 @@
     z-index: 9999; /* Ensure it's on top */
     position: fixed;
 }
+.neon {
+  text-shadow: 0 0 5px #982222, 0 0 10px #982222, 0 0 20px #982222, 0 0 40px #ff4747;
+}
 
   .nosifer {
     font-family: "Nosifer", serif;

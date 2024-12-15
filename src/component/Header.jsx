@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import '../App.css';
 import profil from '../assets/profil.jpg';
 import { TbLayoutDashboard } from "react-icons/tb";
@@ -14,15 +14,14 @@ const Header = () => {
     const [profileImage, setProfileImage] = useState(() => localStorage.getItem('profileImage') || profil);
     const [profileName, setProfileName] = useState(() => localStorage.getItem('profileName') || "Oumaima Ikram");
     const [tempName, setTempName] = useState(profileName);
+    const [tempImage, setTempImage] = useState(profileImage); // Aperçu temporaire
 
-    // Sauvegarder les données dans le localStorage
     const handleImageChange = (e) => {
         const file = e.target.files[0];
         if (file) {
             const reader = new FileReader();
             reader.onload = () => {
-                setProfileImage(reader.result);
-                localStorage.setItem('profileImage', reader.result);
+                setTempImage(reader.result); // Mettre à jour l'aperçu temporaire
             };
             reader.readAsDataURL(file);
         }
@@ -31,9 +30,17 @@ const Header = () => {
     const handleNameSave = () => {
         if (tempName.trim()) {
             setProfileName(tempName);
+            setProfileImage(tempImage); // Sauvegarder l'image sélectionnée
             localStorage.setItem('profileName', tempName);
+            localStorage.setItem('profileImage', tempImage);
             setDropdownOpen(false);
         }
+    };
+
+    const handleCancelChanges = () => {
+        setTempName(profileName); // Réinitialiser le nom temporaire
+        setTempImage(profileImage); // Réinitialiser l'aperçu de l'image
+        setDropdownOpen(false); // Fermer la fenêtre
     };
 
     const menus = [
@@ -45,60 +52,37 @@ const Header = () => {
     ];
 
     return (
-        <div className='z-0 pl-10 pr-10 py-6 '>
+        <div className='z-10 pl-10 pr-10 py-6 '>
             {/* Header */}
-            <div className='flex justify-between'>
+            <div className='flex justify-between z-20'>
                 <div>
                     <p className="text-3xl koulen max-[600px]:text-xl max-[500px]:text-lg text-white">CRIMECHOS</p>
                 </div>
-                <div className='relative z-30'>
+                <div className='relative z-40'>
                     <div
                         className='flex items-center gap-4 cursor-pointer'
-                        onClick={() => setDropdownOpen(!dropdownOpen)}
+                        onClick={() => setDropdownOpen(true)}
                     >
-                        <img
-                            className='w-10 h-10 rounded-full max-[600px]:size-8  max-[500px]:size-6'
-                            src={profileImage}
-                            alt="Profile"
-                        />
-                        <p className='text-white text-xl font-bold py-1 max-[500px]:text-xs max-[500px]:py-1
-                            max-[600px]:py-0 max-[600px]:text-sm'>
-                            {profileName}
-                        </p>
+                       <div
+                       className="flex items-center gap-4 cursor-pointer"
+                       onClick={() => setDropdownOpen(false)}
+                   >
+                       <Link to="/profile-edit"   state={{ from: location.pathname }} >
+                           <img
+                               className="w-10 h-10 rounded-full max-[600px]:size-8 max-[500px]:size-6"
+                               src={profileImage}
+                               alt="Profile"
+                           />
+                       </Link>
+                       <Link to="/profile-edit"   state={{ from: location.pathname }}>
+                       <p className="text-white text-xl font-bold py-1 max-[500px]:text-xs max-[500px]:py-1 max-[600px]:py-0 max-[600px]:text-sm">
+                           {profileName}
+                       </p>
+                       </Link>
+                   </div>
+                   
                     </div>
-                    {dropdownOpen && (
-                        <div className='absolute right-0 mt-2 w-64 bg-white shadow-lg rounded-md p-4 max-[500px]:w-40 max-[500px]:text-xs '>
-                            <label
-                                htmlFor="image-upload"
-                                className="block px-4 py-2 text-[#982222] font-bold hover:scale-105 bg-gray-100 rounded-md cursor-pointer mb-2 "
-                            >
-                                Change Profile Picture
-                                <input
-                                    id="image-upload"
-                                    type="file"
-                                    accept="image/*"
-                                    className="hidden"
-                                    onChange={handleImageChange}
-                                />
-                            </label>
-                            <div className='mb-3'>
-                                <label className='block text-gray-700 font-medium mb-1'>Change Name</label>
-                                <input
-                                    type="text"
-                                    value={tempName}
-                                    onChange={(e) => setTempName(e.target.value)}
-                                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#982222]"
-                                    placeholder="Enter your name"
-                                />
-                            </div>
-                            <button
-                                onClick={handleNameSave}
-                                className="w-full bg-[#982222] text-white py-2 rounded-md hover:bg-[#7a1919] duration-300"
-                            >
-                                Save Changes
-                            </button>
-                        </div>
-                    )}
+                    
                 </div>
             </div>
 
@@ -111,8 +95,7 @@ const Header = () => {
                         to={menu.link}
                         key={i}
                         className={`group flex flex-col items-center text-xs gap-1 font-medium p-2 text-center 
-                            ${location.pathname === menu.link ? 'text-[#982222]' : 'hover:text-[#982222] hover:scale-105'}
-                        `}
+                            ${location.pathname === menu.link ? 'text-[#982222]' : 'hover:text-[#982222] hover:scale-105'}`}
                     >
                         <div className={`duration-500 ${location.pathname === menu.link ? 'scale-150' : 'scale-100'} 
                             max-[600px]:scale-75`}>

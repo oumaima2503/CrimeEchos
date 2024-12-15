@@ -10,6 +10,7 @@ import Dash from './pages/Dash';
 import List from './pages/List';
 import Witness from './pages/Witness';
 import Map from './pages/Map';
+import ProfileEdit from './pages/ProfileEdit';
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
     <BrowserRouter>
     <Routes>
           <Route index element={<Home />} />
+          <Route path="/profile-edit" element={<ProfileEdit />} />
           <Route path='/Home' element={<Home />} />
           <Route path='/Signup' element={<SignUpPage />} />
           <Route path='/Login' element={<SigninPage />} />

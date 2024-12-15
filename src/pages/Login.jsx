@@ -21,12 +21,12 @@ function SigninPage() {
 />
       {/* Left Side: Form */}
 
-<div className="w-full md:w-2/5 bg-cover bg-right relative h-screen ml-auto">
+<div className="w-full md:w-2/5 bg-cover bg-right relative h-screen ml-auto hidden sm:block">
   <div className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-0 p-6">
     <h1 className="text-4xl font-bold mb-4"></h1>
 
-    <h1 className="text-white text-3xl md:text-4xl font-bold z-10 -mt-40 nosifer">WELCOME</h1>
-    <h1 className="text-[#580B0B] text-3xl md:text-4xl font-bold z-0 nosifer -mt-[30px] md:-mt-[30px]">
+    <h1 className="text-white text-3xl md:text-4xl font-bold z-10 -mt-40 nosifer hidden sm:block">WELCOME</h1>
+    <h1 className="text-[#580B0B] text-3xl md:text-4xl font-bold z-0 nosifer -mt-[30px] md:-mt-[30px] hidden sm:block">
      WELCOME
     </h1>
     <img className="w-48 h-auto mb-2 mt-6" src={logo} alt="logo" />

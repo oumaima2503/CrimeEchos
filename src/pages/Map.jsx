@@ -34,7 +34,7 @@ const Map = () => {
   useEffect(() => {
     // Récupérer les données de l'API
     const getCrimesAndForces = async () => {
-      const data = await fetchDataFromAPI(31.7917, -7.0926); // Coordonnées centrées sur le Maroc
+      const data = await fetchDataFromAPI(51.505, -0.09); // Coordonnées par défaut
       const limitedCrimes = data.crimes.slice(0, 50); // Limiter les crimes
       setCrimes(limitedCrimes);
       setForces(data.forces); // Enregistrer les forces
@@ -49,8 +49,8 @@ const Map = () => {
   };
 
   const bounds = [
-    [27.0, -17.0], // Sud-ouest du Maroc
-    [36.5, -1.0],   // Nord-est du Maroc
+    [49.5, -8], // Sud-ouest du Royaume-Uni
+    [60, 2],    // Nord-est du Royaume-Uni
   ];
 
   return (
@@ -63,8 +63,8 @@ const Map = () => {
       <div className="relative z-10 w-full h-full flex justify-center items-center">
         <div className="bg-white rounded-lg shadow-lg w-11/12 lg:w-3/4 xl:w-1/2 h-3/4 justify-center items-center">
           <MapContainer
-            center={[31.7917, -7.0926]} // Centre du Maroc
-            zoom={6} // Zoom sur le Maroc
+            center={[51.505, -0.09]}
+            zoom={14}
             style={{ height: '100%', width: '100%' }}
             bounds={bounds}
             maxBounds={bounds}
