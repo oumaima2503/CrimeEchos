@@ -14,7 +14,7 @@ import { FaQuestionCircle } from "react-icons/fa";
 // Modal Component
 const CrimeModal = ({ crime, onClose }) => {
     return (
-      <div className="fixed inset-0 bg-black bg-opacity-90 flex justify-center items-center" onClick={onClose}>
+      <div className="fixed inset-0 bg-black bg-opacity-90 flex justify-center items-center z-40" onClick={onClose}>
       <div
         className="relative bg-gradient-to-br from-gray-800 via-black to-gray-900 p-6 rounded-lg w-3/4
          md:w-1/2 text-white shadow-lg  max-[900px]:text-[15px] max-[600px]:text-[10px]    "
@@ -154,9 +154,9 @@ const List = () => {
 
     return (
         <div className="h-screen bg-cover bg-no-repeat flex flex-col relative " style={{ backgroundImage: `url(${arriere})`, backgroundPosition: '90% 0%' }}>
-            <img className="absolute z-0 opacity-80" src={blood} alt="Blood Icon" />
+            <img className="absolute -z-10 opacity-80" src={blood} alt="Blood Icon" />
             <Header />
-            <div className="z-10 flex-grow p-2 overflow-auto max-[600px]:text-[10px] ">
+            <div className="z-20 flex-grow p-2 overflow-auto max-[600px]:text-[10px] ">
 
 
             {/* Filter Section */}
@@ -349,7 +349,7 @@ const List = () => {
 
 const CrimeCard = ({ crime, onSeeMore }) => {
     return (
-        <div className="flex items-stretch bg-white/90 rounded-lg shadow-md overflow-hidden koulen ">
+        <div className="flex items-stretch bg-white/90 rounded-lg shadow-md overflow-hidden koulen  ">
             <div className="bg-[#982222] text-white p-4 flex flex-col justify-center">
             <div className="mb-2 flex items-center gap-2">
               <MdPlace />
