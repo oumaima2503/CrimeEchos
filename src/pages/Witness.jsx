@@ -200,7 +200,7 @@ const Witness = () => {
                     <div className="max-[630px]:order-2  w-1/2 mt-7 max-[630px]:w-full max-[630px]:-mt-4
                      max-[900px]:bg-black/80 max-[900px]:px-4 py-4 rounded-lg shadow-lg">
                       <h2 className="text-lg font-bold koulen neon">{post.titre}</h2>
-                      <p className="text-sm text-white/90">{post.content}</p>
+                      <p className="text-sm text-white/90 ">{post.content}</p>
                       <div className="flex items-center space-x-4 mt-2 justify-between font-bold ">
                         <div className='flex gap-6 '>
                           <button
@@ -256,7 +256,7 @@ const Witness = () => {
       {selectedPost && (
         <div className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-20"  onClick={closeCommentsPopup}>
           <div
-        className="relative p-6 rounded-lg  bg-black bg-opacity-50 w-96
+        className="relative p-6 rounded-lg  bg-black bg-opacity-50 
          text-white shadow-lg  max-[900px]:text-[15px] max-[600px]:text-[10px]    "
         style={{
           backgroundImage: `url(${arriere})`,
@@ -268,10 +268,30 @@ const Witness = () => {
       >
             <div className='text-[#eed7d7] text-2xl flex items-end justify-end -mt-2 mb-4 cursor-pointer  '
               onClick={closeCommentsPopup}><MdClose /></div>
+             <h2 className='text-center nosifer neon max-[630px]:hidden'>{selectedPost.titre}</h2>
+             <div className='flex justify-between gap-10 mt-6 max-[630px]:flex-col'>
+          <div >
+          <div className='space-y-2 max-[630px]:order-1 max-[630px]:hidden'>
+            
+                        <div className='flex gap-2 mb-3'>
+                          <img className="hidden xl:block xl:h-6 xl:w-6 rounded-full " src={user} alt="" />
+                          <strong className='text-white/60 '>{selectedPost.author}</strong>
+                        </div>
+                        <img
+                          src={selectedPost.image}
+                          alt="Post Image"
+                          className="size-60 rounded order-1  border-white border-2  max-[630px]:w-full items-center"
+                        />
+                      </div>
+
+          </div>
+          <div className="bg-white/90 w-[1px] max-[630px]:hidden"></div>
+          <div className='mt-2 max-[630px]:mt-0'>
+            
            <h2 className="text-lg font-bold mb-4 koulen  text-yellow-500 text-center "> Comments section:</h2>
             {/* <h2 className="text-lg font-bold mb-4 koulen text-center text-white neon "> {selectedPost.titre}</h2> */}
            
-            <div className="space-y-2 text-white">
+            <div className="space-y-2 text-white mt-6">
               {selectedPost.comments.map((comment) => (
                 !comment.hidden && (
                   <p key={comment.id} className="text-sm flex justify-between">
@@ -292,6 +312,8 @@ const Witness = () => {
                   </p>
                 )
               ))}
+            </div>
+            </div>
             </div>
             
           </div>
