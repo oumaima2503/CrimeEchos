@@ -1,15 +1,9 @@
-import axios from 'axios';
-
-const fetchCrimes = async (lat, lng) => {
-  try {
-    const response = await axios.get(
-      `https://data.police.uk/api/crimes-street/all-crime?lat=${lat}&lng=${lng}`
-    );
-    return response.data;
-  } catch (error) {
-    console.error('Erreur lors de la récupération des données:', error);
-    return [];
+const fetchCrimes = async (latitude, longitude) => {
+  const response = await fetch(`https://your-api-endpoint?lat=${latitude}&lng=${longitude}`);
+  if (!response.ok) {
+    throw new Error('Failed to fetch crimes');
   }
+  const data = await response.json();
+  return data; // Assume the data is an array of crimes
 };
-
 export default fetchCrimes;

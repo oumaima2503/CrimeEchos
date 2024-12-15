@@ -71,7 +71,10 @@ const NavHome = ({ currentSection, setCurrentSection, scrollToSection }) => {
           <ul className="flex flex-col gap-4 text-lg">
             <li>
               <Link
+
                 to="/login"
+
+
                 className="py-2 px-4"
                 onClick={toggleMenu}
               >
