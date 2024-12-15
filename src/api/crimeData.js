@@ -502,7 +502,7 @@ const forces = {
 
 
 // Generate crime data
-export const crimes = Array.from({ length: 300 }, (_, index) => {
+export const crimes = Array.from({ length: 1000 }, (_, index) => {
     // Check if coordinates and forces are defined
     const cities = coordinates ? Object.keys(coordinates) : [];
     if (cities.length === 0) return {}; // Return an empty object if coordinates is invalid
