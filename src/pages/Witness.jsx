@@ -177,7 +177,7 @@ const Witness = () => {
           Add a Post
         </button>
       </div>
-      <div className="z-0  flex-grow overflow-auto pl-10 mr-10 no-scrollbar justify-center">
+      <div className="z-0  flex-grow overflow-auto no-scrollbar pl-10 mr-10  justify-center">
         <div className="space-y-4 flex-col   ">
           {posts.map(
             (post) =>

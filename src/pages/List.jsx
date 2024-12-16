@@ -105,7 +105,7 @@ const List = () => {
     <div className="h-screen bg-cover bg-no-repeat flex flex-col relative  " style={{ backgroundImage: `url(${arriere})`, backgroundPosition: '90% 0%' }}>
       <img className="absolute -z-10 opacity-80" src={blood} alt="Blood Icon" />
       <Header />
-      <div className="z-20 flex-grow p-2 overflow-auto max-[600px]:text-[10px] ">
+      <div className="z-20 flex-grow p-2 overflow-auto max-[600px]:text-[10px]  no-scrollbar ">
      {/* Filter Section */}
 <div className="z-10 relative">
   {/* Bouton de filtre pour les petites tailles */}
@@ -251,7 +251,10 @@ const List = () => {
 
 
         {/* Display results */}
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 z-10 py-6 pr-10 pl-10 ">
+
+
           {currentCrimes.length > 0 ? (
             currentCrimes.map((crime) => (
               <CrimeCard
