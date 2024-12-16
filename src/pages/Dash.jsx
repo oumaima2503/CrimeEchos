@@ -10,31 +10,64 @@ ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, BarEleme
 
 const Dash = () => {
   const [data, setData] = useState({
-    // Données des forces
-    totalForces: 0,
-    activeForces: 0,
-    inactiveForces: 0,
-    lastUpdate: '',
-    months: [],
-    activeForcesMonthly: [],
-    activeForcesCount: 0,
-    inactiveForcesCount: 0,
-
     // Données des crimes
+    crimes: [],
     totalCrimes: 0,
-    reportedCrimes: 0,
+    cityWithMostCrimes: '',
+    mostFrequentCategory: '',
+    monthWithMostCrimes: '',
     crimeCategories: [],
     crimeCountByCategory: [],
     monthlyCrimes: [],
+    crimesByCity: [],
   });
 
   useEffect(() => {
-    // Fonction pour récupérer les données de l'API locale
+    // Fonction pour récupérer les données des crimes
     const fetchData = async () => {
       try {
-        const response = await fetch('../api/crimeData');  // Remplace par l'URL de ton API locale
-        const data = await response.json();
-        setData(data);
+        // Récupération des données des crimes
+        const crimeResponse = await fetch('http://localhost:3000/api/crimes');
+        const crimeData = await crimeResponse.json();
+
+        // Traitement des données
+        const totalCrimes = crimeData.length;
+        const cityCrimeCounts = {};
+        const categoryCounts = {};
+        const monthlyCrimeCounts = {};
+        let mostFrequentCategory = '';
+        let monthWithMostCrimes = '';
+        let cityWithMostCrimes = '';
+
+        crimeData.forEach((crime) => {
+          // Comptabiliser les crimes par ville
+          cityCrimeCounts[crime.city] = (cityCrimeCounts[crime.city] || 0) + 1;
+
+          // Comptabiliser les crimes par catégorie
+          categoryCounts[crime.category] = (categoryCounts[crime.category] || 0) + 1;
+
+          // Comptabiliser les crimes par mois
+          const month = new Date(crime.crimeDate).toLocaleString('default', { month: 'short' });
+          monthlyCrimeCounts[month] = (monthlyCrimeCounts[month] || 0) + 1;
+        });
+
+        // Trouver les valeurs maximales
+        mostFrequentCategory = Object.keys(categoryCounts).reduce((a, b) => categoryCounts[a] > categoryCounts[b] ? a : b);
+        monthWithMostCrimes = Object.keys(monthlyCrimeCounts).reduce((a, b) => monthlyCrimeCounts[a] > monthlyCrimeCounts[b] ? a : b);
+        cityWithMostCrimes = Object.keys(cityCrimeCounts).reduce((a, b) => cityCrimeCounts[a] > cityCrimeCounts[b] ? a : b);
+
+        // Mise à jour de l'état avec les données récupérées
+        setData({
+          crimes: crimeData,  // Liste des crimes
+          totalCrimes,
+          cityWithMostCrimes,
+          mostFrequentCategory,
+          monthWithMostCrimes,
+          crimeCategories: [...new Set(crimeData.map(crime => crime.category))],  // Catégories uniques
+          crimeCountByCategory: categoryCounts,
+          monthlyCrimes: monthlyCrimeCounts,
+          crimesByCity: cityCrimeCounts,
+        });
       } catch (error) {
         console.error('Erreur lors de la récupération des données:', error);
       }
@@ -43,52 +76,27 @@ const Dash = () => {
     fetchData();
   }, []);
 
-  // Graphique 1: Nombre de forces actives par mois
-  const lineChartDataForces = {
-    labels: data.months,
-    datasets: [
-      {
-        label: 'Forces Actives',
-        data: data.activeForcesMonthly,
-        borderColor: 'rgba(75, 192, 192, 1)',
-        fill: false,
-      },
-    ],
-  };
-
-  // Graphique 2: Forces actives vs inactives
-  const barChartDataForces = {
-    labels: ['Actives', 'Inactives'],
-    datasets: [
-      {
-        label: 'Forces',
-        data: [data.activeForcesCount, data.inactiveForcesCount],
-        backgroundColor: ['#4bc0c0', '#f44336'],
-      },
-    ],
-  };
-
-  // Graphique 3: Nombre de crimes par catégorie
-  const barChartDataCrimes = {
-    labels: data.crimeCategories,
-    datasets: [
-      {
-        label: 'Crimes par Catégorie',
-        data: data.crimeCountByCategory,
-        backgroundColor: '#FF5733',
-      },
-    ],
-  };
-
-  // Graphique 4: Crimes mensuels
+  // Graphique 1: Crimes mensuels (filtré par ville)
   const lineChartDataCrimes = {
-    labels: data.months,
+    labels: Object.keys(data.monthlyCrimes),
     datasets: [
       {
         label: 'Crimes Mensuels',
-        data: data.monthlyCrimes,
+        data: Object.values(data.monthlyCrimes),
         borderColor: 'rgba(255, 99, 132, 1)',
         fill: false,
+      },
+    ],
+  };
+
+  // Graphique 2: Crimes par ville (filtré par mois)
+  const barChartDataCities = {
+    labels: Object.keys(data.crimesByCity),
+    datasets: [
+      {
+        label: 'Crimes par Ville',
+        data: Object.values(data.crimesByCity),
+        backgroundColor: '#FF5733',
       },
     ],
   };
@@ -98,7 +106,6 @@ const Dash = () => {
       className="h-screen bg-cover bg-no-repeat flex flex-col relative"
       style={{ backgroundImage: `url(${arriere})`, backgroundPosition: '90% 0%' }}
     >
-      <img className="absolute z-0 opacity-80" src={blood} alt="Blood Icon" />
       <Header />
       
       {/* Tableau de bord */}
@@ -109,26 +116,26 @@ const Dash = () => {
         <div className="row mb-4">
           <div className="col-md-3">
             <div className="card p-3 bg-gray-800">
-              <div className="card-title text-xl">Total des Forces</div>
-              <div>{data.totalForces}</div>
+              <div className="card-title text-xl">Total des Crimes</div>
+              <div>{data.totalCrimes}</div>
             </div>
           </div>
           <div className="col-md-3">
             <div className="card p-3 bg-gray-800">
-              <div className="card-title text-xl">Forces Actives</div>
-              <div>{data.activeForces}</div>
+              <div className="card-title text-xl">Mois avec le Plus de Crimes</div>
+              <div>{data.monthWithMostCrimes}</div>
             </div>
           </div>
           <div className="col-md-3">
             <div className="card p-3 bg-gray-800">
-              <div className="card-title text-xl">Forces Inactives</div>
-              <div>{data.inactiveForces}</div>
+              <div className="card-title text-xl">Ville avec le Plus de Crimes</div>
+              <div>{data.cityWithMostCrimes}</div>
             </div>
           </div>
           <div className="col-md-3">
             <div className="card p-3 bg-gray-800">
-              <div className="card-title text-xl">Dernière Mise à Jour</div>
-              <div>{data.lastUpdate}</div>
+              <div className="card-title text-xl">Catégorie la Plus Fréquente</div>
+              <div>{data.mostFrequentCategory}</div>
             </div>
           </div>
         </div>
@@ -137,30 +144,14 @@ const Dash = () => {
         <div className="row">
           <div className="col-md-6">
             <div className="card p-3 bg-gray-800">
-              <div className="card-title text-xl">Forces Actives par Mois</div>
-              <Line data={lineChartDataForces} />
-            </div>
-          </div>
-          <div className="col-md-6">
-            <div className="card p-3 bg-gray-800">
-              <div className="card-title text-xl">Forces Actives vs Inactives</div>
-              <Bar data={barChartDataForces} />
-            </div>
-          </div>
-        </div>
-
-        {/* Deuxième ligne avec 2 graphiques */}
-        <div className="row mt-4">
-          <div className="col-md-6">
-            <div className="card p-3 bg-gray-800">
-              <div className="card-title text-xl">Crimes par Catégorie</div>
-              <Bar data={barChartDataCrimes} />
-            </div>
-          </div>
-          <div className="col-md-6">
-            <div className="card p-3 bg-gray-800">
               <div className="card-title text-xl">Crimes Mensuels</div>
               <Line data={lineChartDataCrimes} />
+            </div>
+          </div>
+          <div className="col-md-6">
+            <div className="card p-3 bg-gray-800">
+              <div className="card-title text-xl">Crimes par Ville</div>
+              <Bar data={barChartDataCities} />
             </div>
           </div>
         </div>

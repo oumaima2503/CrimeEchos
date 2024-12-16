@@ -1,9 +1,13 @@
-const fetchCrimes = async (latitude, longitude) => {
-  const response = await fetch(`https://your-api-endpoint?lat=${latitude}&lng=${longitude}`);
-  if (!response.ok) {
-    throw new Error('Failed to fetch crimes');
+import axios from 'axios';
+
+const fetchForces = async () => {
+  try {
+    const response = await axios.get('http://localhost:3000/api/force');
+    return response.data; // Retourne les données des forces
+  } catch (error) {
+    console.error('Erreur lors de la récupération des données des forces:', error);
+    return [];
   }
-  const data = await response.json();
-  return data; // Assume the data is an array of crimes
 };
-export default fetchCrimes;
+
+export default fetchForces;
