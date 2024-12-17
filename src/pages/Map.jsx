@@ -94,12 +94,22 @@ const Map = () => {
   }
 
   return (
-    <div
-      className="h-screen bg-cover bg-no-repeat flex flex-col relative"
-      style={{ backgroundImage: `url(${arriere})`, backgroundPosition: '90% 0%' }}
-    >
-      <Header />
-      <div className="flex space-x-4 mb-4 justify-center w-full">
+<div className="h-screen bg-cover bg-no-repeat flex flex-col relative" style={{ backgroundImage: `url(${arriere})`, backgroundPosition: '90% 0%' }}>
+  <Header />
+  <div className="flex flex-col items-center w-full">
+
+    {/* Ligne contenant les filtres et le texte Map */}
+    <div className="flex items-center justify-between w-5/6 mb-4">
+      {/* Filtres */}
+      <div className="flex items-center">
+        <h1 className="text-3xl font-bold text-[#580B0B] nosifer max-[700px]:text-lg max-[480px]:text-xs">
+          Map 
+        </h1>
+        <h1 className="text-3xl font-bold text-white -ml-24 nosifer max-[700px]:text-lg max-[480px]:text-xs">
+          Map 
+        </h1>
+      </div>
+      <div className="flex space-x-4 w-4/5">
         <select
           value={selectedCity}
           onChange={(e) => setSelectedCity(e.target.value)}
@@ -136,89 +146,82 @@ const Map = () => {
         />
       </div>
 
-      <div className="flex justify-center">
-        <div>
-          <h1 className="text-2xl font-bold text-[#580B0B] nosifer max-[700px]:text-lg max-[480px]:text-xs max-[700px]:mt-2 max-[480px]:mt-4">
-            Map
-          </h1>
-          <h1 className="text-2xl font-bold text-white -mt-9 nosifer max-[700px]:text-lg max-[480px]:text-xs max-[480px]:-mt-6">
-            Map
-          </h1>
-        </div>
+    </div>
+  </div>
+
+  {/* Section de la carte */}
+  <div className="relative z-10 w-full h-full flex justify-center items-center -mt-12">
+    <div className="bg-white rounded-lg shadow-lg w-full xl:w-5/6 h-4/5 flex p-4">
+      {/* Carte */}
+      <div className="w-3/4 h-full pr-4">
+        <MapContainer
+          center={[33.5941, -7.5374]}
+          zoom={12}
+          style={{ height: '100%', width: '100%' }}
+          bounds={bounds}
+          maxBounds={bounds}
+        >
+          <CityZoom />
+          <TileLayer
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          />
+          {filteredCrimes.map((crime) =>
+            crime.latitude && crime.longitude ? (
+              <Marker
+                key={crime.id}
+                position={[parseFloat(crime.latitude), parseFloat(crime.longitude)]}
+                icon={crime.isSolved ? blueIcon : redIcon}
+              >
+                <Popup>
+                  <strong>Crime:</strong> {crime.category || 'Unknown'}
+                  <br />
+                  <strong>Status:</strong> {crime.isSolved ? 'Solved' : 'Unsolved'}
+                  <br />
+                  <strong>Location:</strong> {crime.crimeAddress?.district || 'Unknown District'}
+                  <br />
+                  <strong>Description:</strong> {crime.description || 'No description'}
+                </Popup>
+              </Marker>
+            ) : null
+          )}
+          {forces.map((force, index) =>
+            force.coordinates?.latitude && force.coordinates?.longitude ? (
+              <Marker
+                key={index}
+                position={[parseFloat(force.coordinates.latitude), parseFloat(force.coordinates.longitude)]}
+                icon={greenIcon}
+              >
+                <Popup>
+                  <strong>Police Force:</strong> {force.name || 'Unknown'}
+                  <br />
+                  <strong>Address:</strong> {force.address || 'No address'}
+                </Popup>
+              </Marker>
+            ) : null
+          )}
+        </MapContainer>
       </div>
-
-      <div className="relative z-10 w-full h-full flex justify-center items-center -mt-12">
-        <div className="bg-white rounded-lg shadow-lg w-full xl:w-5/6 h-4/5 flex p-4">
-          {/* Section de la carte */}
-          <div className="w-3/4 h-full pr-4">
-            <MapContainer
-              center={[33.5941, -7.5374]}
-              zoom={12}
-              style={{ height: '100%', width: '100%' }}
-              bounds={bounds}
-              maxBounds={bounds}
-            >
-              <CityZoom />
-              <TileLayer
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-              />
-              {filteredCrimes.map((crime) =>
-                crime.latitude && crime.longitude ? (
-                  <Marker
-                    key={crime.id}
-                    position={[parseFloat(crime.latitude), parseFloat(crime.longitude)]}
-                    icon={crime.isSolved ? blueIcon : redIcon}
-                  >
-                    <Popup>
-                      <strong>Crime:</strong> {crime.category || 'Unknown'}
-                      <br />
-                      <strong>Status:</strong> {crime.isSolved ? 'Solved' : 'Unsolved'}
-                      <br />
-                      <strong>Location:</strong> {crime.crimeAddress?.district || 'Unknown District'}
-                      <br />
-                      <strong>Description:</strong> {crime.description || 'No description'}
-                    </Popup>
-                  </Marker>
-                ) : null
-              )}
-              {forces.map((force, index) =>
-                force.coordinates?.latitude && force.coordinates?.longitude ? (
-                  <Marker
-                    key={index}
-                    position={[parseFloat(force.coordinates.latitude), parseFloat(force.coordinates.longitude)]}
-                    icon={greenIcon}
-                  >
-                    <Popup>
-                      <strong>Police Force:</strong> {force.name || 'Unknown'}
-                      <br />
-                      <strong>Address:</strong> {force.address || 'No address'}
-                    </Popup>
-                  </Marker>
-                ) : null
-              )}
-            </MapContainer>
-          </div>
-
-          {/* Section de la légende */}
-          <div className="w-1/4 bg-white border-l border-gray-300 p-4">
-            <h2 className="text-lg font-bold mb-4">Légende</h2>
-            <div className="flex items-center mb-2">
-              <img src={locationsolved} alt="Crime résolu" className="w-6 h-6 mr-2" />
-              <span>Crime résolu</span>
-            </div>
-            <div className="flex items-center mb-2">
-              <img src={locationDangerous} alt="Crime non résolu" className="w-6 h-6 mr-2" />
-              <span>Crime non résolu</span>
-            </div>
-            <div className="flex items-center">
-              <img src={locationPolice} alt="Force de police" className="w-6 h-6 mr-2" />
-              <span>Force de police</span>
-            </div>
-          </div>
+      {/* Légende */}
+      <div className="w-1/4 bg-white border-l border-gray-300 p-4">
+        <h2 className="text-lg font-bold mb-4">Légende</h2>
+        <div className="flex items-center mb-2">
+          <img src={locationsolved} alt="Crime résolu" className="w-6 h-6 mr-2" />
+          <span>Crime résolu</span>
+        </div>
+        <div className="flex items-center mb-2">
+          <img src={locationDangerous} alt="Crime non résolu" className="w-6 h-6 mr-2" />
+          <span>Crime non résolu</span>
+        </div>
+        <div className="flex items-center">
+          <img src={locationPolice} alt="Force de police" className="w-6 h-6 mr-2" />
+          <span>Force de police</span>
         </div>
       </div>
     </div>
+  </div>
+</div>
+
   );
 };
 
