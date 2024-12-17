@@ -83,7 +83,7 @@ const Dash = () => {
       {
         label: 'Crimes Mensuels',
         data: Object.values(data.monthlyCrimes),
-        borderColor: 'rgba(255, 99, 132, 1)',
+        borderColor: '#580B0B ',
         fill: false,
       },
     ],
@@ -96,7 +96,7 @@ const Dash = () => {
       {
         label: 'Crimes par Ville',
         data: Object.values(data.crimesByCity),
-        backgroundColor: '#FF5733',
+        backgroundColor: '#580B0B ',
       },
     ],
   };
@@ -108,53 +108,44 @@ const Dash = () => {
     >
       <Header />
       
-      {/* Tableau de bord */}
-      <div className="container mt-5 relative z-10 text-white">
-        <h1 className="text-center mb-5">Tableau de bord</h1>
-
+      <div className="container relative z-10 text-white">
         {/* Première ligne avec 4 éléments */}
-        <div className="row mb-4">
-          <div className="col-md-3">
-            <div className="card p-3 bg-gray-800">
-              <div className="card-title text-xl">Total des Crimes</div>
-              <div>{data.totalCrimes}</div>
-            </div>
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-1 mb-4 justify-items-center">
+          <div className="card p-2 w-40 h-16 bg-white/90 rounded-xl">
+            <div className="card-title nosifer text-black text-xs text-center font-semibold">Crimes Total</div>
+            <div className="text-sm text-center text-[#580B0B] koulen">{data.totalCrimes}</div>
           </div>
-          <div className="col-md-3">
-            <div className="card p-3 bg-gray-800">
-              <div className="card-title text-xl">Mois avec le Plus de Crimes</div>
-              <div>{data.monthWithMostCrimes}</div>
-            </div>
+
+          <div className="card p-2 w-40 h-16 bg-white/90 rounded-xl">
+            <div className="card-title nosifer text-black text-xs text-center font-semibold">Mois avec le Plus de Crimes</div>
+            <div className="text-sm text-center text-[#580B0B] koulen">{data.monthWithMostCrimes}</div>
           </div>
-          <div className="col-md-3">
-            <div className="card p-3 bg-gray-800">
-              <div className="card-title text-xl">Ville avec le Plus de Crimes</div>
-              <div>{data.cityWithMostCrimes}</div>
-            </div>
+
+          <div className="card p-2 w-40 h-16 bg-white/90 rounded-xl">
+            <div className="card-title nosifer text-black text-xs text-center font-semibold">Ville avec le Plus de Crimes</div>
+            <div className="text-sm text-center text-[#580B0B] koulen">{data.cityWithMostCrimes}</div>
           </div>
-          <div className="col-md-3">
-            <div className="card p-3 bg-gray-800">
-              <div className="card-title text-xl">Catégorie la Plus Fréquente</div>
-              <div>{data.mostFrequentCategory}</div>
-            </div>
+
+          <div className="card p-2 w-40 h-16 bg-white/90 rounded-xl">
+            <div className="card-title nosifer text-black text-xs text-center font-semibold">Frequent Category</div>
+            <div className="text-sm text-center text-[#580B0B] koulen">{data.mostFrequentCategory}</div>
           </div>
         </div>
 
         {/* Graphiques */}
-        <div className="row">
-          <div className="col-md-6">
-            <div className="card p-3 bg-gray-800">
-              <div className="card-title text-xl">Crimes Mensuels</div>
-              <Line data={lineChartDataCrimes} />
-            </div>
-          </div>
-          <div className="col-md-6">
-            <div className="card p-3 bg-gray-800">
-              <div className="card-title text-xl">Crimes par Ville</div>
-              <Bar data={barChartDataCities} />
-            </div>
-          </div>
-        </div>
+        <div className="flex justify-center items-center  mt-4">
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div className="card p-4 bg-white/90 rounded-xl">
+      <div className="card-title text-xl text-black nosifer mb-4 text-center">Mounthly Crimes</div>
+      <Line data={lineChartDataCrimes} />
+    </div>
+    <div className="card p-4 bg-white/90 rounded-xl">
+      <div className="card-title text-xl text-black nosifer mb-4 text-center">Crimes per city</div>
+      <Bar data={barChartDataCities} />
+    </div>
+  </div>
+</div>
+
       </div>
     </div>
   );
