@@ -8,6 +8,10 @@ import blood from '../assets/blood.svg';
 import arriere from '../assets/arriere.png';
 import Header from '../component/Header';
 import '../App.css';
+import { MdLabelImportant } from "react-icons/md";
+import { MdLabelImportantOutline } from "react-icons/md";
+
+
 
 // Modal Component
 const CrimeModal = ({ crime, onClose }) => {
@@ -45,6 +49,8 @@ const CrimeModal = ({ crime, onClose }) => {
   );
 };
 
+
+
 const List = () => {
   const [crimes, setCrimes] = useState([]); // State for storing crimes data
   const [categoryFilter, setCategoryFilter] = useState('');
@@ -80,6 +86,8 @@ const List = () => {
         .map((crime) => crime.crimeAddress.city)
     ),
   ];
+
+  
 
   // Filter crimes based on selected filters
   const filteredCrimes = crimes.filter((crime) => {
@@ -320,12 +328,18 @@ const CrimeCard = ({ crime, onSeeMore }) => {
       <div className="flex-1 p-4">
         <h2 className="text-xl font-semibold mb-2 nosifer">{crime.name}</h2>
         <p className='text-black/80'>The category of the crame is : {crime.category}</p>
+        <div className='flex justify-between items-center'>
+
+        
         <button
           onClick={() => onSeeMore(crime)}
           className="mt-4 bg-[#982222] text-white px-6 py-2 rounded hover:bg-[#c12c2c] transition-transform transform hover:scale-105"
         >
           See More
         </button>
+        {/* button save */}
+        <button className='text-[#982222] items-center hover:scale-110 text-3xl rotate-90 mt-6'><MdLabelImportantOutline/></button>
+        </div>
       </div>
     </div>
   );

@@ -11,23 +11,24 @@ import List from './pages/List';
 import Witness from './pages/Witness';
 import Map from './pages/Map';
 import ProfileEdit from './pages/ProfileEdit';
-
-
+import HelpCenter from './pages/helpCenter';
+import Security from './pages/security';  
 function App() {
   return (
     <BrowserRouter>
-    <Routes>
-          <Route index element={<Home />} />
-          <Route path="/profile-edit" element={<ProfileEdit />} />
-          <Route path='/Home' element={<Home />} />
-          <Route path='/Signup' element={<SignUpPage />} />
-          <Route path='/Login' element={<SigninPage />} />
-          <Route path='/DashBoard' element={<Dash />} />
-          <Route path='/List_Crimes' element={<List />} />
-          <Route path='/Witness' element={<Witness />} />
-          <Route path='/Map' element={<Map/>} />
-          
-    </Routes>
+      <Routes>
+        <Route index element={<Home />} />
+        <Route path="/profile-edit" element={<ProfileEdit />} />
+        <Route path='/Home' element={<Home />} />
+        <Route path='/Signup' element={<SignUpPage />} />
+        <Route path='/Login' element={<SigninPage />} />
+        <Route path='/DashBoard' element={<Dash />} />
+        <Route path='/List_Crimes' element={<List />} />
+        <Route path='/Witness' element={<Witness />} />
+        <Route path='/Map' element={<Map />} />
+        <Route path='/Security' element={<Security />} />
+        <Route path='/Help-center' element={<HelpCenter />} />
+      </Routes>
     </BrowserRouter>
   );
 }

@@ -42,8 +42,9 @@ const ProfileEdit = () => {
       style={{ backgroundImage: `url(${arriere})`, backgroundPosition: '90% 50%' }}
     >
       <img className="absolute -z-10 opacity-80" src={blood} alt="Blood Icon" />
-      
-            <div className="bg-white w-96 max-w-full p-6 rounded-lg shadow-lg">
+      <div className='flex justify-center gap-10'>
+      <div className='flex-col space-y-10'>
+            <div className="bg-white w-96 max-w-full p-6 rounded-lg shadow-lg flex-col">
                 {/* Aperçu de l'image */}
                 <div className="mb-4 flex justify-center">
                     <img
@@ -92,6 +93,20 @@ const ProfileEdit = () => {
                         Cancel
                     </button>
                 </div>
+
+                
+            </div>
+            <div className="bg-white w-96 p-6  rounded-lg shadow-lg">
+
+                </div>
+                </div>
+                
+                
+
+         {/*info general */}
+         <div className="bg-white w-96 max-w-full p-6 rounded-lg shadow-lg">
+
+            </div>
             </div>
         </div>
     );

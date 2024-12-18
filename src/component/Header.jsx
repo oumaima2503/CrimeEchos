@@ -7,6 +7,8 @@ import { PiUsersThreeBold } from "react-icons/pi";
 import { GrMapLocation } from "react-icons/gr";
 import { HiOutlineLogout } from "react-icons/hi";
 import { Link, useLocation } from "react-router-dom";
+import { TbUrgent } from "react-icons/tb";
+import { AiOutlineFileProtect } from "react-icons/ai";
 
 const Header = () => {
     const location = useLocation();
@@ -48,6 +50,9 @@ const Header = () => {
         { name: "Crimes", link: '/List_Crimes', icon: FaList },
         { name: "Witness", link: '/Witness', icon: PiUsersThreeBold },
         { name: "Map", link: '/Map', icon: GrMapLocation },
+        { name: "Security", link: '/Security', icon: AiOutlineFileProtect },
+        { name: "SOS", link: '/Help-center', icon: TbUrgent },
+        
         { name: "Log Out", link: '/', icon: HiOutlineLogout },
     ];
 
