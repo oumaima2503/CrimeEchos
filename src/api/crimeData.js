@@ -503,43 +503,44 @@ const forces = {
 
 // Generate crime data
 export const crimes = Array.from({ length: 1000 }, (_, index) => {
-    // Check if coordinates and forces are defined
-    const cities = coordinates ? Object.keys(coordinates) : [];
-    if (cities.length === 0) return {}; // Return an empty object if coordinates is invalid
+    if (!coordinates || !forces) return {}; // Vérification des données
 
-    const city = cities[index % cities.length]; // Cycle through cities
+    // Obtenir une ville aléatoire
+    const cities = Object.keys(coordinates);
+    if (cities.length === 0) return {}; // Vérification des villes disponibles
+    const city = cities[Math.floor(Math.random() * cities.length)];
+
+    // Obtenir un quartier aléatoire dans la ville
     const districts = coordinates[city] ? Object.keys(coordinates[city]) : [];
-    if (districts.length === 0) return {}; // Return an empty object if districts are invalid
-
-    const district = districts[index % districts.length]; // Cycle through districts
+    if (districts.length === 0) return {}; // Vérification des quartiers disponibles
+    const district = districts[Math.floor(Math.random() * districts.length)];
     const { latitude, longitude } = coordinates[city][district];
 
-    // Get the responsible force based on the city and district
-    const citiesForce = forces ? Object.keys(forces) : [];
-    if (citiesForce.length === 0) return {}; // Return an empty object if forces is invalid
+    // Obtenir une force responsable aléatoire
+    const citiesForce = Object.keys(forces);
+    if (citiesForce.length === 0) return {}; // Vérification des forces disponibles
+    const cityForce = citiesForce[Math.floor(Math.random() * citiesForce.length)];
 
-    const cityForce = cities[index % citiesForce.length]; // Cycle through cities
     const districtsForce = forces[cityForce] ? Object.keys(forces[cityForce]) : [];
-    if (districtsForce.length === 0) return {}; // Return an empty object if districtsForce are invalid
+    if (districtsForce.length === 0) return {}; // Vérification des districts des forces disponibles
+    const districtForce = districtsForce[Math.floor(Math.random() * districtsForce.length)];
+    const { latitudeForce, longitudeForce, name: nameForce, address: addressForce } = forces[cityForce][districtForce] || {};
 
-    const districtForce = districtsForce[index % districtsForce.length]; // Cycle through districts
-    const { latitudeForce, longitudeForce, name: nameForce, address: addressForce } = forces[cityForce][districtForce];
-
-    // Crime categories with more variety
+    // Catégories de crimes
     const categories = ['Theft', 'Murder', 'Fraud', 'Assault', 'Cybercrime', 'Vandalism', 'Drug trafficking', 'Arson', 'Kidnapping', 'Human trafficking'];
     const category = categories[Math.floor(Math.random() * categories.length)];
 
-    // Randomize the criminal's gender and description
-    const sex = ['Male', 'Female',][Math.floor(Math.random() * 4)];
+    // Informations sur le suspect
+    const sex = ['Male', 'Female'][Math.floor(Math.random() * 2)];
     const description = `Suspect is a ${sex} with specific physical features.`;
 
-    // Randomize the solved status
-    const isSolved = Math.random() > 0.5; // 50% chance of being solved
+    // Statut résolu ou non
+    const isSolved = Math.random() > 0.5;
 
-    // Randomize crime date within a range
+    // Date aléatoire du crime
     const crimeDate = new Date(2024, Math.floor(Math.random() * 12), Math.floor(Math.random() * 28) + 1).toISOString().split('T')[0];
 
-    // Randomize the crime description
+    // Description du crime
     const crimeDescription = `
         Crime ${index + 1} is categorized as ${category}.
         It occurred in ${district}, ${city} on ${crimeDate}.
@@ -549,32 +550,26 @@ export const crimes = Array.from({ length: 1000 }, (_, index) => {
 
     return {
         id: index + 1,
-        category: category,
+        category,
         name: `Crime ${index + 1}`,
-        criminalInfo: {
-            sex: sex,
-            description: description,
-        },
-        crimeAddress: {
-            city: city,
-            district: district,
-        },
-        longitude: longitude,
-        latitude: latitude,
-        isSolved: isSolved,
-        crimeDate: crimeDate,
+        criminalInfo: { sex, description },
+        crimeAddress: { city, district },
+        longitude,
+        latitude,
+        isSolved,
+        crimeDate,
         criminalAddress: `Suspect resides in ${district}, ${city}`,
         description: crimeDescription,
         responsibleForce: {
             name: nameForce || 'Unknown Force',
             address: addressForce || 'Unknown Address',
-            coordinates: {
-                latitude: latitudeForce || 0,
-                longitude: longitudeForce || 0,
-            },
+            coordinates: { latitude: latitudeForce || 0, longitude: longitudeForce || 0 },
         },
     };
 });
+
+
+
 
 // api.jsx
 

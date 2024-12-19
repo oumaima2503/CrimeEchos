@@ -11,6 +11,8 @@ import '../App.css';
 import { MdLabelImportant } from "react-icons/md";
 import { MdLabelImportantOutline } from "react-icons/md";
 
+import { useFavorites } from '../context/FavoritesContext';
+
 
 
 // Modal Component
@@ -61,6 +63,7 @@ const List = () => {
   const [selectedCrime, setSelectedCrime] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const crimesPerPage = 6;
+  
 
   // Fetch crimes data from the backend when the component mounts
   useEffect(() => {
@@ -204,6 +207,7 @@ const List = () => {
       </div>
     </div>
   )}
+  
 
   {/* Section toujours visible pour les grandes tailles */}
   <div className="hidden md:flex flex-row gap-4 pr-10 pl-10 text-[#982222] font-bold">
@@ -306,6 +310,12 @@ const List = () => {
 };
 
 const CrimeCard = ({ crime, onSeeMore }) => {
+
+  const { favorites, addToFavorites, removeFromFavorites } = useFavorites();
+  // Vérifie si le crime est dans la liste des favoris
+  const isFavorite = favorites.some((fav) => fav.id === crime.id);
+
+
   return (
     <div className="flex items-stretch bg-white/90 rounded-lg shadow-md overflow-hidden koulen">
       <div className="bg-[#982222] text-white p-4 flex flex-col justify-center">
@@ -338,7 +348,21 @@ const CrimeCard = ({ crime, onSeeMore }) => {
           See More
         </button>
         {/* button save */}
-        <button className='text-[#982222] items-center hover:scale-110 text-3xl rotate-90 mt-6'><MdLabelImportantOutline/></button>
+        <button
+  onClick={() =>
+    isFavorite
+      ? removeFromFavorites(crime.id)
+      : addToFavorites(crime)
+  }
+  className="mt-2"
+>
+  {isFavorite ? (
+    <MdLabelImportant className="text-[#982222]" />
+  ) : (
+    <MdLabelImportantOutline />
+  )}
+</button>
+
         </div>
       </div>
     </div>
