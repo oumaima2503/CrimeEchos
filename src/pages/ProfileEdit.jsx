@@ -1,11 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState ,useEffect} from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+
+import '../App.css';
 
 import Header from '../component/Header';
 import blood from '../assets/blood.svg';
 import arriere from '../assets/arriere.png';
+import { MdPlace } from "react-icons/md";
 
 const ProfileEdit = () => {
+
+
     const navigate = useNavigate();
     const location = useLocation();
     const lastPath = location.state?.from || '/'; // Récupérer le dernier chemin ou '/' par défaut
@@ -35,6 +40,45 @@ const ProfileEdit = () => {
     const handleCancelChanges = () => {
         navigate(lastPath); // Rediriger vers le dernier chemin
     };
+
+    const [crimes, setCrimes] = useState([]);
+    const [selectedCity, setSelectedCity] = useState("");  // Initialement vide
+    const [crimeCount, setCrimeCount] = useState(0);
+    const [cities, setCities] = useState([]);
+  
+    useEffect(() => {
+      fetch("http://localhost:3000/api/crimes")
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then((data) => {
+          setCrimes(data);
+          // Extraire les villes uniques et les trier par ordre alphabétique
+          const uniqueCities = [...new Set(data.map((crime) => crime.crimeAddress.city))];
+          const sortedCities = uniqueCities.sort((a, b) => a.localeCompare(b)); // Tri alphabétique
+          setCities(sortedCities);
+          
+          // Si on veut définir une ville par défaut, utilisez la ville de l'utilisateur
+          const currentLocation = "Casablanca"; // Vous pouvez ajuster cela en fonction de la localisation réelle
+          setSelectedCity(currentLocation);
+          updateCrimeCount(currentLocation);
+        })
+        .catch((error) => console.error("Error fetching crimes data:", error));
+    }, []);
+  
+    const updateCrimeCount = (city) => {
+      const count = crimes.filter((crime) => crime.crimeAddress.city === city).length;
+      setCrimeCount(count);
+    };
+  
+    const handleCityClick = (city) => {
+      setSelectedCity(city);
+      updateCrimeCount(city);
+    };
+  
 
     return (
         <div
@@ -96,8 +140,34 @@ const ProfileEdit = () => {
 
                 
             </div>
-            <div className="bg-white w-96 p-6  rounded-lg shadow-lg">
+            <div className="bg-white w-96 p-6  rounded-lg shadow-lg koulen">
+            <div className='flex justify-between py-2'>
+        <h3 className='flex items-center koulen gap-2'><MdPlace />  {selectedCity}</h3>
+        <p>Number of crimes: {crimeCount}</p>
+      </div>
+            <div>
+      <div className='flex overflow-x-scroll p-2  no-scrollbar' >
+        {cities.map((city) => (
+        <button className='rounded-md koulen'
+        key={city}
+        onClick={() => handleCityClick(city)}
+        style={{
+          marginRight: "10px",
+          padding: "10px",
+          backgroundColor: city === selectedCity ? "rgb(243 244 246 / var(--tw-bg-opacity, 1))" : "white",
+          color: city === selectedCity ? "#982222" : "black",
+          fontWeight: city === selectedCity ? "bold" : "lighter", 
+          border: "1px solid #ccc",
+          cursor: "pointer",
+        }}
+      >
+        {city}
+      </button>
+        ))}
+      </div>
 
+     
+    </div>
                 </div>
                 </div>
                 
