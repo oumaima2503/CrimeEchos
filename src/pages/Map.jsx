@@ -201,18 +201,18 @@ const Map = () => {
       </div>
       {/* Légende */}
       <div className="w-1/4  bg-white/0 border-l border-gray-300 p-4 flex flex-col justify-center h-full text-center">
-  <h2 className="text-xl nosifer font-bold mb-4">Légende</h2>
+  <h2 className="text-xl nosifer font-bold mb-4">Description</h2>
   <div className="flex items-center mb-2 justify-center">
     <img src={locationsolved} alt="Crime résolu" className="w-6 h-6 mr-2" />
-    <span className='text-xl koulen'>Crime résolu</span>
+    <span className='text-xl koulen'>Solved Crime</span>
   </div>
   <div className="flex items-center mb-2 justify-center">
     <img src={locationDangerous} alt="Crime non résolu" className="w-6 h-6 mr-2" />
-    <span className='text-xl koulen'>Crime non résolu</span>
+    <span className='text-xl koulen'>Unsolved Crime</span>
   </div>
   <div className="flex items-center justify-center mb-8">
     <img src={locationPolice} alt="Force de police" className="w-6 h-6 mr-2" />
-    <span className='text-xl koulen '>Force de police</span>
+    <span className='text-xl koulen '>Force </span>
   </div>
 </div>
 
