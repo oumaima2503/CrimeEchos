@@ -2,6 +2,11 @@ import React from "react";
 import { useFavorites } from "../context/FavoritesContext";
 import { MdPlace, MdLabelImportant, MdLabelImportantOutline } from "react-icons/md";
 import { FaCalendarCheck, FaQuestionCircle } from "react-icons/fa";
+import blood from '../assets/blood.svg';
+import arriere from '../assets/arriere.png';
+import Header from '../component/Header';
+
+
 
 function FavoriteCrimes({ crimes, onSeeMore }) {
   const { favorites, addToFavorites, removeFromFavorites } = useFavorites();
@@ -9,10 +14,18 @@ function FavoriteCrimes({ crimes, onSeeMore }) {
   const isFavorite = (id) => favorites.some((item) => item.id === id);
 
   return (
-    <div className="min-h-screen bg-[#ddd4cd] p-6">
-      <h2 className="text-2xl font-bold mb-4">Crimes Favoris</h2>
+    <div className="h-screen bg-cover bg-no-repeat flex flex-col relative  " style={{ backgroundImage: `url(${arriere})`, backgroundPosition: '90% 0%' }}>
+    <img className="absolute -z-10 opacity-80" src={blood} alt="Blood Icon" />
+    <Header />
+    <div className="z-20 flex-grow p-2 overflow-auto max-[600px]:text-[10px]  no-scrollbar pl-10 pr-10  ">
+    <div>
+          <h1 className="text-2xl font-bold text-[#580B0B] nosifer max-[700px]:text-lg max-[480px]:text-xs max-[700px]:mt-2 max-[480px]:mt-4">Your saved crimes</h1>
+          <h1 className="text-2xl font-bold text-white -mt-9 nosifer max-[700px]:text-lg max-[480px]:text-xs max-[480px]:-mt-6 ">Your saved crimes</h1>
+        </div>
+        
+      
       {favorites.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-6">
           {favorites.map((crime) => (
             <div
               key={crime.id}
@@ -37,23 +50,16 @@ function FavoriteCrimes({ crimes, onSeeMore }) {
               </div>
               <div className="flex-1 p-4">
                 <h2 className="text-xl font-semibold mb-2 nosifer">{crime.name}</h2>
-                <p className="text-black/80">
-                  The category of the crime is: {crime.category}
-                </p>
+                <p className="text-black/80"> {crime.description}</p>
                 <div className="flex justify-between items-center">
-                  <button
-                    onClick={() => onSeeMore(crime)}
-                    className="mt-4 bg-[#982222] text-white px-6 py-2 rounded hover:bg-[#c12c2c] transition-transform transform hover:scale-105"
-                  >
-                    See More
-                  </button>
-                  <button
+                  
+                  <button 
                     onClick={() =>
                       isFavorite(crime.id)
                         ? removeFromFavorites(crime.id)
                         : addToFavorites(crime)
                     }
-                    className="mt-2"
+                    className="mt-2 text-3xl rotate-90 flex justify-end items-end"
                   >
                     {isFavorite(crime.id) ? (
                       <MdLabelImportant className="text-[#982222]" />
@@ -69,7 +75,9 @@ function FavoriteCrimes({ crimes, onSeeMore }) {
       ) : (
         <p className="text-center text-lg">Aucun crime favori pour le moment.</p>
       )}
-    </div>
+       </div>
+       </div>
+   
   );
 }
 

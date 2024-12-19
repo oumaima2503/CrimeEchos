@@ -93,8 +93,8 @@ const Header = () => {
 
             {/* NavBar */}
             <div className='flex justify-between relative text-blueDark px-40
-                max-[800px]:px-20 max-[600px]:px-10 max-[450px]:px-4 max-[380px]:px-1
-                py-1 bg-white/90 rounded-xl mt-6'>
+                max-[800px]:px-20 max-[600px]:px-10 max-[480px]:px-2 max-[380px]:px-1
+                py-1 bg-white/90 rounded-xl mt-6 max-[550px]:justify-center max-[550px]:gap-[1px]' >
                 {menus.map((menu, i) => (
                     <Link
                         to={menu.link}
