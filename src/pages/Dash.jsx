@@ -155,7 +155,7 @@ const Dash = () => {
   return (
     <div className="h-screen bg-cover bg-no-repeat flex flex-col relative" style={{ backgroundImage: `url(${arriere})`, backgroundPosition: '90% 0%' }}>
       <Header />
-      <div className="  ">
+      <div className=" flex-grow overflow-auto no-scrollbar ">
 <div className="flex flex-nowrap justify-evenly items-center gap-12 mb-8 z-10 px-10 ">
   {[
     { title: 'Total Crimes', value: data.totalCrimes },

@@ -94,7 +94,7 @@ const Header = () => {
             {/* NavBar */}
             <div className='flex justify-between relative text-blueDark px-40
                 max-[800px]:px-20 max-[600px]:px-10 max-[480px]:px-2 max-[380px]:px-1
-                py-1 bg-white/90 rounded-xl mt-6 max-[550px]:justify-center max-[550px]:gap-[1px]' >
+                py-1 bg-white/90 rounded-xl mt-6 max-[550px]:justify-center max-[550px]:gap-[1px] ' >
                 {menus.map((menu, i) => (
                     <Link
                         to={menu.link}
@@ -103,18 +103,18 @@ const Header = () => {
                             ${location.pathname === menu.link ? 'text-[#982222]' : 'hover:text-[#982222] hover:scale-105'}`}
                     >
                         <div className={`duration-500 ${location.pathname === menu.link ? 'scale-150' : 'scale-100'} 
-                            max-[600px]:scale-75`}>
+                            max-[600px]:scale-75 max-[550px]:size-[20px] max-[400px]:size-[15px]`}>
                             {React.createElement(menu.icon, { size: location.pathname === menu.link ? "20" : "18" })}
                         </div>
                         <h2
                             className={`whitespace-pre duration-500 -mt-1 ${
                                 location.pathname === menu.link ? 'opacity-0' : 'block'
-                            } max-[600px]:text-[10px] max-[380px]:text-[8px]`}
+                            } max-[600px]:text-[10px] max-[550px]:text-[8px] max-[400px]:text-[6px]`}
                         >
                             {menu.name}
                         </h2>
                         <div
-                            className={`h-0.5 w-10 -mt-3 max-[450px]:w-6 ${
+                            className={`h-0.5 w-10 -mt-3 max-[550px]:w-4 max-[400px]:w-2 ${
                                 location.pathname === menu.link ? 'bg-[#982222]' : 'opacity-0'
                             } duration-500`}
                         ></div>
