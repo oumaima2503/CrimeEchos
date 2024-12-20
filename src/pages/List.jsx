@@ -354,7 +354,7 @@ const CrimeCard = ({ crime, onSeeMore }) => {
       ? removeFromFavorites(crime.id)
       : addToFavorites(crime)
   }
-  className="mt-2"
+  className="mt-4 text-3xl rotate-90 flex justify-end items-end"
 >
   {isFavorite ? (
     <MdLabelImportant className="text-[#982222]" />
