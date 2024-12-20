@@ -112,16 +112,24 @@ const Dash = () => {
       },
     ],
   };
+  const monthOrder = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+  // Trier les mois et les données correspondantes
+  const sortedMonths = selectedCity && data.monthlyCrimesByCity[selectedCity]
+    ? Object.keys(data.monthlyCrimesByCity[selectedCity])
+        .sort((a, b) => monthOrder.indexOf(a) - monthOrder.indexOf(b))
+    : [];
+  
+  const sortedData = sortedMonths.map((month) => 
+    data.monthlyCrimesByCity[selectedCity]?.[month] || 0
+  );
+  
   const lineChartDataCrimes = {
-    labels: selectedCity
-      ? Object.keys(data.monthlyCrimesByCity[selectedCity] || {})
-      : [],
+    labels: sortedMonths, // Mois triés
     datasets: [
       {
         label: `Crimes Mensuels à ${selectedCity}`,
-        data: selectedCity
-          ? Object.values(data.monthlyCrimesByCity[selectedCity] || {})
-          : [],
+        data: sortedData, // Données triées selon les mois
         borderColor: '#580B0B',
         fill: true,
         backgroundColor: (context) => {
@@ -130,13 +138,13 @@ const Dash = () => {
           // Création du gradient dynamique
           const gradient = ctx.createLinearGradient(0, 0, 0, ctx.canvas.height);
           gradient.addColorStop(0, 'rgba(239,113,63, 0.4)'); // Orange clair
-          gradient.addColorStop(1, 'rgb(255, 72, 0)');   // Transparent
+          gradient.addColorStop(1, 'rgba(255, 72, 0, 0)');   // Transparent
           return gradient;
         },
         tension: 0.4, // Courbes lissées
         pointBackgroundColor: '#580B0B',
         pointBorderColor: '#580B0B',
-        pointHoverRadius: 8,
+        pointHoverRadius: 8, // Rayon des points au survol
         pointRadius: 5, // Rayon constant des points
       },
     ],
@@ -147,24 +155,42 @@ const Dash = () => {
   return (
     <div className="h-screen bg-cover bg-no-repeat flex flex-col relative" style={{ backgroundImage: `url(${arriere})`, backgroundPosition: '90% 0%' }}>
       <Header />
-      <div className="container relative z-10 text-white">
-        <div className="flex flex-wrap justify-around items-center gap-4 mb-8">
-          {[{ title: 'Crimes Total', value: data.totalCrimes },
-            { title: 'Ville avec le Plus de Crimes', value: data.cityWithMostCrimes },
-            { title: 'Frequent Category', value: data.mostFrequentCategory },
-            { title: 'Frequent Category', value: data.mostFrequentCategory },
-            { title: 'Frequent Category', value: data.mostFrequentCategory },
-          ].map((item, index) => (
-            <div key={index} className="card p-2 w-40 h-16 bg-white/90 rounded-xl flex flex-col justify-center">
-              <div className="card-title nosifer text-black text-xs text-center font-semibold">{item.title}</div>
-              <div className="text-sm text-center text-[#580B0B] koulen">{item.value}</div>
-              
-            </div>
-            
-          ))}
-        </div>
-
-        <div className="flex flex-wrap md:flex-nowrap gap-8 justify-between items-start">
+      <div className="  ">
+<div className="flex flex-nowrap justify-evenly items-center gap-12 mb-8 z-10 px-10 ">
+  {[
+    { title: 'Total Crimes', value: data.totalCrimes },
+    { title: 'City with Most Crimes', value: data.cityWithMostCrimes },
+    { title: 'Most Frequent Category', value: data.mostFrequentCategory },
+    {
+      title: 'Month with Highest Crimes',
+      value: sortedMonths.length > 0
+        ? sortedMonths[sortedData.indexOf(Math.max(...sortedData))]
+        : 'N/A', // If no month is available
+    },
+    {
+      title: 'Crimes in Selected City',
+      value: selectedCity
+        ? Object.values(data.monthlyCrimesByCity[selectedCity] || {}).reduce((a, b) => a + b, 0)
+        : 'Not Selected', // If no city is selected
+    },
+  ].map((item, index) => (
+    <div
+      key={index}
+      className="card p-2 bg-white/90 rounded-xl flex flex-col justify-start"
+      style={{
+        width: "calc(20% - 16px)", // Each box takes 20% of the space, minus the gap
+        minWidth: "120px", // Ensures a minimum width for small screens
+        maxWidth: "200px", // Limits the maximum width for aesthetics
+      }}
+    >
+      <div className="card-title nosifer text-black text-xs text-center font-semibold">
+        {item.title}
+      </div>
+      <div className="text-xl text-center text-[#580B0B] koulen">{item.value}</div>
+    </div>
+  ))}
+</div>
+        <div className="flex flex-wrap md:flex-nowrap gap-8 justify-between items-start z-10 pl-10 pr-10  ">
           <div className="card p-4 bg-white/90 rounded-xl flex flex-col w-full md:w-1/2">
             <div className="card-title text-xl text-black nosifer mb-4 text-center">Monthly Crimes</div>
             <div className="mb-4 text-center">
