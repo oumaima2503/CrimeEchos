@@ -106,7 +106,7 @@ const Dash = () => {
         label: 'Crimes per City',
         data: Object.values(filteredCrimesByCity),
         backgroundColor: '#982222',
-        borderColor: '#580B0B',
+        borderColor: '#982222',
         borderWidth: 1,
         borderRadius: 10, // Coins arrondis
       },
@@ -128,7 +128,7 @@ const Dash = () => {
     labels: sortedMonths, // Mois triés
     datasets: [
       {
-        label: `Mounthly crimes in ${selectedCity}`,
+        label: `Crimes Mensuels à ${selectedCity}`,
         data: sortedData, // Données triées selon les mois
         borderColor: '#982222',
         fill: true,
@@ -137,26 +137,29 @@ const Dash = () => {
   
           // Création du gradient dynamique
           const gradient = ctx.createLinearGradient(0, 0, 0, ctx.canvas.height);
-          gradient.addColorStop(0,'rgb(152, 34, 34) '); // Orange clair
+          gradient.addColorStop(0, 'rgba(239,113,63, 0.4)'); // Orange clair
           gradient.addColorStop(1, 'rgba(255, 72, 0, 0)');   // Transparent
           return gradient;
         },
         tension: 0.4, // Courbes lissées
         pointBackgroundColor: '#982222',
-        pointBorderColor: '#580B0B',
+        pointBorderColor: '#982222',
         pointHoverRadius: 8, // Rayon des points au survol
         pointRadius: 5, // Rayon constant des points
       },
     ],
   };
+  
+  
+
   return (
     <div className="h-screen bg-cover bg-no-repeat flex flex-col relative" style={{ backgroundImage: `url(${arriere})`, backgroundPosition: '90% 0%' }}>
       <Header />
       <div className=" flex-grow overflow-auto no-scrollbar ">
-      <div className="flex flex-wrap justify-center items-center gap-4 mb-4 z-10 px-4">
+      <div className="flex flex-wrap justify-center sm:justify-evenly items-center gap-4 sm:gap-8 mb-8 z-10 px-4 sm:px-10">
   {[
-    { title: (<span>Total<br />Crimes</span>), value: data.totalCrimes },
-    { title: 'City with Most Crimes', value: data.cityWithMostCrimes },
+    { title: 'Total Crimes in Morocco', value: data.totalCrimes },
+    { title: 'The City with Most Crimes', value: data.cityWithMostCrimes },
     { title: 'Most Frequent Category', value: data.mostFrequentCategory },
     {
       title: 'Month with Highest Crimes',
@@ -173,70 +176,99 @@ const Dash = () => {
   ].map((item, index) => (
     <div
       key={index}
-      className="card p-2 bg-white/90 rounded-xl flex flex-col justify-start shadow-md"
+      className="card p-2 bg-white/90 rounded-xl flex flex-col justify-start space-y-2 shadow-md"
       style={{
-        flex: "1 1 calc(20% - 16px)", // Take 20% of the row minus gap
-        minWidth: "80px", // Minimum size for very small screens
-        maxWidth: "225px", // Maximum size to avoid oversized boxes
+        flex: "1 1 calc(50% - 16px)", // 50% width on small screens
+        maxWidth: "200px", // Maximum size to avoid oversized boxes
+        minWidth: "120px", // Minimum size for small screens
       }}
     >
-      <div className="card-title nosifer text-black text-xs sm:text-sm md:text-base text-center font-semibold">
+      <div className="card-title koulen text-black text-sm sm:text-base text-center font-semibold whitespace-pre">
         {item.title}
       </div>
-      <div className="text-lg sm:text-md text-center text-[#982222] koulen">{item.value}</div>
+      <div className="text-xs sm:text-sm text-center text-[#982222] nosifer">
+        {item.value}
+      </div>
     </div>
   ))}
 </div>
 
-
         <div className="flex flex-wrap md:flex-nowrap gap-8 justify-between items-start z-10 pl-10 pr-10  ">
-          <div className="card p-4 bg-white/90 rounded-xl flex flex-col w-full md:w-1/2">
-            <div className="card-title text-xl text-black nosifer mb-4 text-center">Monthly Crimes</div>
-            <div className="mb-4 text-center">
-              <label htmlFor="cityFilter" className="mr-2 koulen text-[#982222] ">Select City:</label>
-              <select
-                id="cityFilter"
-                value={selectedCity}
-                onChange={(e) => setSelectedCity(e.target.value)}
-                className="p-2 border rounded text-white koulen bg-[#982222] "
-              >
-                {Object.keys(data.crimesByCity).map((city) => (
-                  <option key={city} value={city}>
-                    {city}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className="flex-1">
-              <Line data={lineChartDataCrimes} options={{ maintainAspectRatio: false }} />
-            </div>
-          </div>
+        <div className="card p-4 bg-white/90 rounded-xl flex flex-col w-full md:w-1/2 space-y-6">
+  {/* Titre */}
+  <p className="card-title text-base sm:text-lg text-black nosifer mb-4 text-center">
+    Monthly Crimes
+  </p>
 
-          <div className="card p-4 bg-white/90 rounded-xl flex flex-col w-full md:w-1/2">
-            <div className="card-title text-xl text-black nosifer mb-4 text-center">Crimes per City</div>
-            <div className="mb-4 flex justify-center items-center">
-  <label htmlFor="startDate" className="mr-2 koulen text-[#982222] ">Start Date:</label>
-  <input
-    type="date"
-    id="startDate"
-    value={startDate}
-    onChange={(e) => setStartDate(e.target.value)}
-    className="p-2 border rounded mr-4 text-white koulen bg-[#982222] "
-  />
-  <label htmlFor="endDate" className="mr-2 koulen text-[#982222] ">End Date:</label>
-  <input
-    type="date"
-    id="endDate"
-    value={endDate}
-    onChange={(e) => setEndDate(e.target.value)}
-    className="p-2 border rounded text-white koulen bg-[#982222] "
-  />
+  {/* Sélection de la ville */}
+  <div className="mb-4 text-center flex flex-wrap justify-center gap-4 sm:gap-8 items-center">
+    <label htmlFor="cityFilter" className="text-xs sm:text-sm koulen text-[#982222]">
+      Select City:
+    </label>
+    <select
+      id="cityFilter"
+      value={selectedCity}
+      onChange={(e) => setSelectedCity(e.target.value)}
+      className="px-2 py-1 border-0 rounded text-xs sm:text-sm text-[#580B0B] koulen bg-[#cab6b6]/30"
+    >
+      {Object.keys(data.crimesByCity).map((city) => (
+        <option key={city} value={city}>
+          {city}
+        </option>
+      ))}
+    </select>
+  </div>
+
+  {/* Graphique */}
+  <div className="flex-1 h-[300px] sm:h-[400px]">
+    <Line data={lineChartDataCrimes} options={{ maintainAspectRatio: false }} />
+  </div>
 </div>
 
-            <div className="flex-1">
-              <Bar data={barChartDataCities} options={{ maintainAspectRatio: false }} />
-            </div>
-          </div>
+
+          <div className="card p-4 bg-white/90 rounded-xl flex flex-col w-full md:w-1/2 space-y-4">
+  {/* Titre */}
+  <div className="card-title text-base sm:text-lg text-black nosifer mb-4 text-center">
+    Crimes per City
+  </div>
+
+  {/* Formulaire de sélection des dates */}
+  <div className="flex flex-wrap justify-center gap-4 sm:gap-10 items-center">
+    {/* Date de début */}
+    <div className="flex flex-col items-center sm:items-start">
+      <label htmlFor="startDate" className="text-xs sm:text-sm mr-2 koulen text-[#982222]">
+        Start Date:
+      </label>
+      <input
+        type="date"
+        id="startDate"
+        value={startDate}
+        onChange={(e) => setStartDate(e.target.value)}
+        className="px-2 py-1 border rounded text-xs sm:text-sm text-[#580B0B] koulen bg-[#cab6b6]/30"
+      />
+    </div>
+
+    {/* Date de fin */}
+    <div className="flex flex-col items-center sm:items-start">
+      <label htmlFor="endDate" className="text-xs sm:text-sm mr-2 koulen text-[#982222]">
+        End Date:
+      </label>
+      <input
+        type="date"
+        id="endDate"
+        value={endDate}
+        onChange={(e) => setEndDate(e.target.value)}
+        className="px-2 py-1 border rounded text-xs sm:text-sm text-[#580B0B] koulen bg-[#cab6b6]/30"
+      />
+    </div>
+  </div>
+
+  {/* Graphique */}
+  <div className="flex-1 h-[300px] sm:h-[400px]">
+    <Bar data={barChartDataCities} options={{ maintainAspectRatio: false }} />
+  </div>
+</div>
+
         </div>
       </div>
     </div>

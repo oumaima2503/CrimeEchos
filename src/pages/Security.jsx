@@ -76,8 +76,8 @@ function Security() {
         </div>
       </div>
 
-      <div className="flex justify-center items-center px-10 py-4 ">
-        <div className="w-full p-4 rounded-lg shadow-lg max-h-[50vh] overflow-y-scroll no-scrollbar ">
+      <div className="flex justify-center items-center px-10 py-4  ">
+        <div className="w-full p-4 rounded-lg shadow-lg max-h-[50vh] flex-grow overflow-auto no-scrollbar ">
           {currentStandards.length === 0 ? (
             <p className="text-center text-gray-600">No categories found.</p>
           ) : (
@@ -95,9 +95,9 @@ function Security() {
 
                   <button
                     onClick={() => openModal(category)} // Pass category to modal
-                    className="mt-4 text-[#580B0B] py-2 px-4 rounded-full"
+                    className="mt-4 text-[#580B0B]/70 py-2 px-4 rounded-full font-bold text-sm"
                   >
-                    ...See More
+                    ...  See More
                   </button>
                 </div>
               </div>
@@ -128,7 +128,7 @@ function Security() {
       {isModalOpen && selectedCategory && (
         <div className="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center z-50 ">
           <div
-            className="relative p-6 rounded-lg bg-black bg-opacity-50 text-white shadow-lg max-[900px]:text-[15px] max-[600px]:text-[10px]"
+            className="w-1/2  relative p-6 rounded-lg bg-black bg-opacity-50  text-white shadow-lg max-[900px]:text-[15px] max-[600px]:text-[10px]"
             style={{
               backgroundImage: `url(${arriere})`,
               backgroundPosition: '90% 30%',
@@ -136,23 +136,24 @@ function Security() {
               opacity: 0.9,
             }}
           >
-            <div className="text-[#eed7d7] text-2xl flex items-end justify-end -mt-2 mb-4 cursor-pointer" onClick={closeModal}>
-              ✖ {/* Close Icon */}
+            <div className="text-white text-2xl flex items-end justify-end -mt-2 mb-4 cursor-pointer hover:text-[#982222] " onClick={closeModal}>
+              X{/* Close Icon */}
             </div>
             <h2 className="text-2xl font-bold text-white mb-4 nosifer neon max-[630px]:hidden">{selectedCategory.category}</h2>
-            <div className="overflow-x-auto ">
-              <ul className="list-disc pl-5 text-white font-[Koulen]">
+            <div className="overflow-x-auto no-scrollbar">
+              <ul className="list-disc pl-5 text-white font-[Koulen] py-2">
                 {selectedCategory.standards.map((standard, idx) => (
-                  <li key={idx}>{standard}</li>
+                  <li key={idx} className='py-2'>{standard}</li>
                 ))}
               </ul>
             </div>
+            <div className="flex justify-end">
             <button
               onClick={closeModal}
-              className="mt-4 bg-[#580B0B] text-white py-2 px-4 rounded-full hover:bg-[#4b0808]"
+             className="bg-[#982222] text-white px-6 py-2 koulen mt-4 max-[600px]:text-[10px] max-[600px]:px-3 max-[600px]:py-1 text-sm rounded transition-transform transform hover:scale-105 hover:bg-[#c12c2c] shadow-lg"
             >
               Close
-            </button>
+            </button>  </div>
           </div>
         </div>
       )}

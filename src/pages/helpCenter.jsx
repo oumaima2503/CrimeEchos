@@ -129,36 +129,39 @@ function HelpCenter() {
         </button>
       </div>
 
-      <div className="flex flex-row items-start justify-center mt-2 px-4 lg:px-16 w-full space-x-4">
+      <div className="flex flex-row items-start justify-between 
+      px-4  w-full space-x-2  flex-grow overflow-auto no-scrollbar pl-10 pr-10 mb-4 mt-4">
         {/* Form */}
-        <form onSubmit={handleFormSubmit} className="bg-white/90 p-4 rounded-lg shadow-lg w-full lg:w-1/2 h-96 flex flex-col justify-between">
-          <h2 className="text-2xl font-bold text-center koulen">What's your Emergency?</h2>
+        <form onSubmit={handleFormSubmit} className="bg-white/90 px-4 py-4 
+        rounded-lg shadow-lg w-full lg:w-1/2 h-[340px] flex flex-col justify-between">
+          <h2 className="text-xl font-bold text-center koulen">What's your Emergency?</h2>
           <input
             type="text"
             placeholder="Crime Title"
             value={crimeData.title}
             onChange={(e) => setCrimeData({ ...crimeData, title: e.target.value })}
-            className="w-full p-2  border rounded koulen"
+            className="w-full px-2 py-1  border rounded koulen"
             required
           />
+          <div className='flex gap-4'>
           <input
             type="date"
             value={crimeData.date}
             onChange={(e) => setCrimeData({ ...crimeData, date: e.target.value })}
-            className="w-full p-2  border rounded koulen"
+            className="w-full px-2 py-1  border rounded koulen"
             required
           />
           <input
             type="time"
             value={crimeData.time}
             onChange={(e) => setCrimeData({ ...crimeData, time: e.target.value })}
-            className="w-full p-2  border rounded koulen"
+            className="w-full px-2 py-1  border rounded koulen"
             required
-          />
+          /> </div>
           <select
             value={crimeData.type}
             onChange={(e) => setCrimeData({ ...crimeData, type: e.target.value })}
-            className="w-full p-2  border rounded koulen"
+            className="w-full px-2 py-1  border rounded koulen"
             required
           >
             <option value="">Crime Category</option>
@@ -171,7 +174,7 @@ function HelpCenter() {
           <select
             value={crimeData.city}
             onChange={handleCityChange}
-            className="w-full p-2 border rounded koulen"
+            className="w-full px-2 py-1 border rounded koulen"
             required
           >
             <option value="">Select City</option>
@@ -187,7 +190,7 @@ function HelpCenter() {
             placeholder="Or type your address"
             value={address}
             onChange={handleAddressChange}
-            className="w-full p-2  border rounded koulen"
+            className="w-full px-2 py-1  border rounded koulen"
           />
 
           <button type="submit" className="w-full py-2 bg-[#580B0B] text-white hover:bg-[#982222] koulen rounded">
@@ -196,7 +199,7 @@ function HelpCenter() {
         </form>
 
         {/* Map */}
-        <div className="w-full lg:w-1/2 h-96 bg-white/90 rounded-lg shadow-lg p-2">
+        <div className="w-full lg:w-1/2 h-[340px] bg-white/90 rounded-lg shadow-lg p-2">
           <MapContainer center={cityCoordinates} zoom={12} style={{ height: '100%', width: '100%' }}>
             <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
             <Marker position={cityCoordinates}>
