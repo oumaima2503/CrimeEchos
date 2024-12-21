@@ -70,14 +70,21 @@ const Map = () => {
   }, []);
 
   const filteredCrimes = crimes.filter((crime) => {
+    // Filtrer par ville
     const cityFilter = selectedCity ? crime.crimeAddress?.city === selectedCity : true;
-    const solvedFilter = selectedSolvedStatus !== '' ? (selectedSolvedStatus === 'solved' ? crime.isSolved : !crime.isSolved) : true;
+
+    // Filtrer par statut (résolu ou non résolu)
+    const solvedFilter = selectedSolvedStatus !== '' ? (
+      selectedSolvedStatus === 'solved' ? crime.isSolved === true : crime.isSolved === false
+    ) : true;
+
+    // Filtrer par plage de dates
     const dateFilter = selectedDateRange[0] && selectedDateRange[1] ? (
       new Date(crime.date) >= new Date(selectedDateRange[0]) && new Date(crime.date) <= new Date(selectedDateRange[1])
     ) : true;
 
     return cityFilter && solvedFilter && dateFilter;
-  });
+});
 
   const bounds = [
     [21.0, -17.0],
@@ -226,7 +233,7 @@ const Map = () => {
     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
   />
-  {crimes.map((crime) =>
+  {filteredCrimes.map((crime) =>
     crime.latitude && crime.longitude ? (
       <Marker
         key={crime.id}
@@ -261,6 +268,7 @@ const Map = () => {
     ) : null
   )}
 </MapContainer>
+
 
       </div>
 {/* Légende */}
