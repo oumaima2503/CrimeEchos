@@ -105,8 +105,8 @@ const Dash = () => {
       {
         label: 'Crimes per City',
         data: Object.values(filteredCrimesByCity),
-        backgroundColor: '#580B0B',
-        borderColor: '#580B0B',
+        backgroundColor: '#982222',
+        borderColor: '#982222',
         borderWidth: 1,
         borderRadius: 10, // Coins arrondis
       },
@@ -130,7 +130,7 @@ const Dash = () => {
       {
         label: `Crimes Mensuels à ${selectedCity}`,
         data: sortedData, // Données triées selon les mois
-        borderColor: '#580B0B',
+        borderColor: '#982222',
         fill: true,
         backgroundColor: (context) => {
           const ctx = context.chart.ctx;
@@ -142,8 +142,8 @@ const Dash = () => {
           return gradient;
         },
         tension: 0.4, // Courbes lissées
-        pointBackgroundColor: '#580B0B',
-        pointBorderColor: '#580B0B',
+        pointBackgroundColor: '#982222',
+        pointBorderColor: '#982222',
         pointHoverRadius: 8, // Rayon des points au survol
         pointRadius: 5, // Rayon constant des points
       },
@@ -156,10 +156,10 @@ const Dash = () => {
     <div className="h-screen bg-cover bg-no-repeat flex flex-col relative" style={{ backgroundImage: `url(${arriere})`, backgroundPosition: '90% 0%' }}>
       <Header />
       <div className=" flex-grow overflow-auto no-scrollbar ">
-<div className="flex flex-nowrap justify-evenly items-center gap-12 mb-8 z-10 px-10 ">
+<div className="flex flex-nowrap justify-evenly items-center gap-8 mb-8 z-10 px-10 ">
   {[
-    { title: 'Total Crimes', value: data.totalCrimes },
-    { title: 'City with Most Crimes', value: data.cityWithMostCrimes },
+    { title: 'Total Crimes in Morocco', value: data.totalCrimes },
+    { title: 'The City with Most Crimes', value: data.cityWithMostCrimes },
     { title: 'Most Frequent Category', value: data.mostFrequentCategory },
     {
       title: 'Month with Highest Crimes',
@@ -176,30 +176,30 @@ const Dash = () => {
   ].map((item, index) => (
     <div
       key={index}
-      className="card p-2 bg-white/90 rounded-xl flex flex-col justify-start"
+      className="card p-2 bg-white/90 rounded-xl flex flex-col justify-start space-y-2"
       style={{
         width: "calc(20% - 16px)", // Each box takes 20% of the space, minus the gap
         minWidth: "120px", // Ensures a minimum width for small screens
         maxWidth: "200px", // Limits the maximum width for aesthetics
       }}
     >
-      <div className="card-title nosifer text-black text-xs text-center font-semibold">
+      <div className="card-title koulen text-black text-sm text-center font-semibold whitespace-pre">
         {item.title}
       </div>
-      <div className="text-xl text-center text-[#580B0B] koulen">{item.value}</div>
+      <div className="text-xs text-center text-[#982222] nosifer">{item.value}</div>
     </div>
   ))}
 </div>
         <div className="flex flex-wrap md:flex-nowrap gap-8 justify-between items-start z-10 pl-10 pr-10  ">
           <div className="card p-4 bg-white/90 rounded-xl flex flex-col w-full md:w-1/2">
-            <div className="card-title text-xl text-black nosifer mb-4 text-center">Monthly Crimes</div>
-            <div className="mb-4 text-center">
-              <label htmlFor="cityFilter" className="mr-2 koulen text-[#580B0B]">Select City:</label>
+            <p className="card-title text-lg text-black nosifer mb-4 text-center">Monthly Crimes</p>
+            <div className="mb-4 text-center flex justify-center gap-8 items-center">
+              <label htmlFor="cityFilter" className="mr-2 koulen text-[#982222]">Select City:</label>
               <select
                 id="cityFilter"
                 value={selectedCity}
                 onChange={(e) => setSelectedCity(e.target.value)}
-                className="p-2 border rounded text-white koulen bg-[#580B0B]"
+                className="px-2 py-1 border-0 rounded text-[#580B0B] koulen  bg-[#cab6b6]/30"
               >
                 {Object.keys(data.crimesByCity).map((city) => (
                   <option key={city} value={city}>
@@ -214,24 +214,27 @@ const Dash = () => {
           </div>
 
           <div className="card p-4 bg-white/90 rounded-xl flex flex-col w-full md:w-1/2">
-            <div className="card-title text-xl text-black nosifer mb-4 text-center">Crimes per City</div>
-            <div className="mb-4 flex justify-center items-center">
-  <label htmlFor="startDate" className="mr-2 koulen text-[#580B0B]">Start Date:</label>
+            <div className="card-title text-lg text-black nosifer mb-4 text-center">Crimes per City</div>
+            <div className="mb-4 flex justify-center gap-10 items-center">
+              <div>
+  <label htmlFor="startDate" className="mr-2 koulen text-[#982222]">Start Date:</label>
   <input
     type="date"
     id="startDate"
     value={startDate}
     onChange={(e) => setStartDate(e.target.value)}
-    className="p-2 border rounded mr-4 text-white koulen bg-[#580B0B]"
+    className="px-2 py-1 border rounded mr-4 text-[#580B0B] koulen  bg-[#cab6b6]/30"
   />
-  <label htmlFor="endDate" className="mr-2 koulen text-[#580B0B]">End Date:</label>
+  </div>
+  <div>
+  <label htmlFor="endDate" className="mr-2 koulen text-[#982222]">End Date:</label>
   <input
     type="date"
     id="endDate"
     value={endDate}
     onChange={(e) => setEndDate(e.target.value)}
-    className="p-2 border rounded text-white koulen bg-[#580B0B]"
-  />
+    className="px-2 py-1 border rounded text-[#580B0B] koulen  bg-[#cab6b6]/30"
+  /></div>
 </div>
 
             <div className="flex-1">

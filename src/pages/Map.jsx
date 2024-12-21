@@ -106,14 +106,11 @@ const Map = () => {
     <div className="h-screen bg-cover bg-no-repeat flex flex-col relative" style={{ backgroundImage: `url(${arriere})`, backgroundPosition: '90% 0%' }}>
       <Header />
       <div className="flex justify-between z-10 pl-10 pr-10 py-6">
-        <div className="flex flex-col -mt-4">
-          <h1 className="text-2xl font-bold text-[#580B0B] nosifer max-[700px]:text-lg max-[480px]:text-xs max-[700px]:mt-2 max-[480px]:mt-4"> Map</h1>
-          <h1 className="text-2xl font-bold text-white -mt-9 nosifer max-[700px]:text-lg max-[480px]:text-xs max-[480px]:-mt-6"> Map</h1>
-        </div>
+        
 
 
         <div className="flex flex-col items-end w-full z-10 ml-2">
-  <div className="flex items-center justify-between w-full -mt-6 ml-20 md:block hidden lg:block hidden">
+  <div className="flex items-center justify-between w-full -mt-6 ml-20 md:block hidden lg:block">
     <div className="flex flex-nowrap space-x-4 w-full max-[700px]:space-x-2">
       <select
         value={selectedCity}
@@ -217,10 +214,12 @@ const Map = () => {
 
 </div>
 
-<div className="relative w-full h-full flex justify-center items-center -mt-10 z-10 pl-10 pr-10  ">
-    <div className="bg-white/90 rounded-lg shadow-lg w-full xl:w-5/6 h-4/5 flex p-4">
+<div className=" h-full  max-[600px]:-mt-4  mb-4  z-10 pl-10 pr-10 flex-grow overflow-auto no-scrollbar  ">
+  
+    <div className="bg-white/90 rounded-lg shadow-lg w-full 
+    h-full flex p-4 max-[600px]:flex-col items-center justify-between">
       {/* Carte */}
-      <div className="w-3/4 h-full pr-4 ">
+      <div className="w-full h-full max-[600px]:order-1 ">
       <MapContainer
   center={[33.5941, -7.5374]}
   zoom={12}
@@ -272,8 +271,9 @@ const Map = () => {
 
       </div>
 {/* Légende */}
-<div className="w-full w-1/2 lg:w-1/4 bg-white/0 border-l border-gray-300 p-4 flex flex-col justify-center h-full text-center mt-4 lg:mt-0">
-  <h2 className="text-sm lg:text-2xl nosifer font-bold mb-4">Description</h2>
+<div className="  lg:w-1/4 bg-white/0 border-l border-gray-300 p-4 
+ flex-col justify-center h-full text-center mt-4 lg:mt-0 max-[600px]:hidden">
+  <h2 className="text-sm lg:text-2xl nosifer font-bold mb-4 max-[650px]:text-xs">Description</h2>
   <div className="flex items-center mb-2 justify-center text-xs  lg:text-xl">
     <img src={locationsolved} alt="Crime résolu" className="w-6 h-6 mr-2" />
     <span className="koulen truncate">Solved Crime</span>
@@ -289,7 +289,25 @@ const Map = () => {
 </div>
 
 
+
     </div>
+    
+    <div className=" w-full bg-white/90 border-l border-gray-300 py-2 mb-4 rounded-md
+ flex-col justify-center text-center mt-4 lg:mt-0 min-[601px]:hidden">
+  <h2 className="text-sm lg:text-2xl nosifer font-bold mb-4 max-[650px]:text-xs">Description</h2>
+  <div className="flex items-center mb-2 justify-center text-xs  lg:text-xl">
+    <img src={locationsolved} alt="Crime résolu" className="w-6 h-6 mr-2" />
+    <span className="koulen truncate">Solved Crime</span>
+  </div>
+  <div className="flex items-center mb-2 justify-center text-xs lg:text-xl">
+    <img src={locationDangerous} alt="Crime non résolu" className="w-6 h-6 mr-2" />
+    <span className="koulen truncate">Unsolved Crime</span>
+  </div>
+  <div className="flex items-center justify-center  text-xs lg:text-xl">
+    <img src={locationPolice} alt="Force de police" className="w-6 h-6 mr-2" />
+    <span className="koulen truncate">Police Force</span>
+  </div>
+</div>
   </div>
     </div>
   );
