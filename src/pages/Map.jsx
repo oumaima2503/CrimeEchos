@@ -210,7 +210,7 @@ const Map = () => {
 
 </div>
 
-<div className="relative z-10 w-full h-full flex justify-center items-center -mt-12 z-10 pl-10 pr-10 py-6 ">
+<div className="relative w-full h-full flex justify-center items-center -mt-10 z-10 pl-10 pr-10  ">
     <div className="bg-white/90 rounded-lg shadow-lg w-full xl:w-5/6 h-4/5 flex p-4">
       {/* Carte */}
       <div className="w-3/4 h-full pr-4 ">
