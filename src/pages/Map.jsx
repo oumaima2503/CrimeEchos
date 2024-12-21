@@ -9,6 +9,7 @@ import locationsolved from '../assets/locationsolved.png';
 import locationPolice from '../assets/locationpolice.png'; // Icône pour les forces
 import L from 'leaflet';
 import axios from 'axios';
+import { FiFilter } from 'react-icons/fi'; // Add missing FiFilter import
 
 // Icônes personnalisées
 const redIcon = new L.Icon({
@@ -41,6 +42,7 @@ const Map = () => {
   const [selectedCity, setSelectedCity] = useState('');
   const [selectedSolvedStatus, setSelectedSolvedStatus] = useState('');
   const [selectedDateRange, setSelectedDateRange] = useState([null, null]);
+  const [dropdownVisible, setDropdownVisible] = useState(false); // Define state for dropdown visibility
 
   const cityCoordinates = {
     Casablanca: { lat: 33.5941, lng: -7.5374 },
@@ -94,59 +96,121 @@ const Map = () => {
   }
 
   return (
-<div className="h-screen bg-cover bg-no-repeat flex flex-col relative" style={{ backgroundImage: `url(${arriere})`, backgroundPosition: '90% 0%' }}>
-  <Header />
-  <div className="flex justify-between z-10 pl-10 pr-10 py-6">
-  <div className="flex flex-col -mt-4">
-    <h1 className="text-2xl font-bold text-[#580B0B] nosifer max-[700px]:text-lg max-[480px]:text-xs max-[700px]:mt-2 max-[480px]:mt-4"> Map</h1>
-    <h1 className="text-2xl font-bold text-white -mt-9 nosifer max-[700px]:text-lg max-[480px]:text-xs max-[480px]:-mt-6"> Map</h1>
-  </div>
-  <div className="flex flex-col items-end w-full z-10 ml-40">
-    {/* Ligne contenant les filtres et le texte Map */}
-    <div className="flex items-center justify-between w-full -mt-6 ml-20">
-      {/* Filtres */}
-      <div className="flex flex-wrap space-x-4 w-full  max-[700px]:space-x-2">
-        <select
-          value={selectedCity}
-          onChange={(e) => setSelectedCity(e.target.value)}
-          className="border p-2 text-[#982222] koulen bg-white/90 font-bold rounded-md flex-1 max-[700px]:w-1/3 max-[480px]:w-full"
-        >
-          <option value="">Select City</option>
-          {Object.keys(cityCoordinates).map((city) => (
-            <option key={city} value={city}>
-              {city}
-            </option>
-          ))}
-        </select>
-        <select
-          value={selectedSolvedStatus}
-          onChange={(e) => setSelectedSolvedStatus(e.target.value)}
-          className="border p-2 text-[#982222] koulen bg-white/90 font-bold rounded-md flex-1 max-[700px]:w-1/3 max-[480px]:w-full"
-        >
-          <option value="">Crime Status</option>
-          <option value="unsolved">Unsolved</option>
-          <option value="solved">Solved</option>
-        </select>
-        <input
-          type="date"
-          value={selectedDateRange[0] || ''}
-          onChange={(e) => setSelectedDateRange([e.target.value, selectedDateRange[1]])}
-          className="border p-2 text-[#982222] koulen bg-white/90 font-bold rounded-md flex-1 max-[700px]:w-1/3 max-[480px]:w-full"
-        />
-        <span className="text-white font-bold self-center max-[480px]:w-full max-[480px]:text-center">TO</span>
-        <input
-          type="date"
-          value={selectedDateRange[1] || ''}
-          onChange={(e) => setSelectedDateRange([selectedDateRange[0], e.target.value])}
-          className="border p-2 text-[#982222] koulen bg-white/90 font-bold rounded-md flex-1 max-[700px]:w-1/3 max-[480px]:w-full"
-        />
-      </div>
+    <div className="h-screen bg-cover bg-no-repeat flex flex-col relative" style={{ backgroundImage: `url(${arriere})`, backgroundPosition: '90% 0%' }}>
+      <Header />
+      <div className="flex justify-between z-10 pl-10 pr-10 py-6">
+        <div className="flex flex-col -mt-4">
+          <h1 className="text-2xl font-bold text-[#580B0B] nosifer max-[700px]:text-lg max-[480px]:text-xs max-[700px]:mt-2 max-[480px]:mt-4"> Map</h1>
+          <h1 className="text-2xl font-bold text-white -mt-9 nosifer max-[700px]:text-lg max-[480px]:text-xs max-[480px]:-mt-6"> Map</h1>
+        </div>
+
+
+        <div className="flex flex-col items-end w-full z-10 ml-2">
+  <div className="flex items-center justify-between w-full -mt-6 ml-20 md:block hidden lg:block hidden">
+    <div className="flex flex-nowrap space-x-4 w-full max-[700px]:space-x-2">
+      <select
+        value={selectedCity}
+        onChange={(e) => setSelectedCity(e.target.value)}
+        className="border p-2 text-[#982222] koulen bg-white/90 font-bold rounded-md flex-1 max-[700px]:w-1/3 max-[480px]:w-full"
+      >
+        <option value="">Select City</option>
+        {Object.keys(cityCoordinates).map((city) => (
+          <option key={city} value={city}>
+            {city}
+          </option>
+        ))}
+      </select>
+      <select
+        value={selectedSolvedStatus}
+        onChange={(e) => setSelectedSolvedStatus(e.target.value)}
+        className="border p-2 text-[#982222] koulen bg-white/90 font-bold rounded-md flex-1 max-[700px]:w-1/3 max-[480px]:w-full"
+      >
+        <option value="">Crime Status</option>
+        <option value="unsolved">Unsolved</option>
+        <option value="solved">Solved</option>
+      </select>
+      <input
+        type="date"
+        value={selectedDateRange[0] || ''}
+        onChange={(e) => setSelectedDateRange([e.target.value, selectedDateRange[1]])}
+        className="border p-2 text-[#982222] koulen bg-white/90 font-bold rounded-md flex-1 max-[700px]:w-1/3 max-[480px]:w-full"
+      />
+      <span className="text-white font-bold self-center max-[480px]:w-full max-[480px]:text-center">TO</span>
+      <input
+        type="date"
+        value={selectedDateRange[1] || ''}
+        onChange={(e) => setSelectedDateRange([selectedDateRange[0], e.target.value])}
+        className="border p-2 text-[#982222] koulen bg-white/90 font-bold rounded-md flex-1 max-[700px]:w-1/3 max-[480px]:w-full"
+      />
     </div>
   </div>
 </div>
 
-  {/* Section de la carte */}
-  <div className="relative z-10 w-full h-full flex justify-center items-center -mt-12 z-10 pl-10 pr-10 py-6 ">
+
+      </div>
+      <div className="z-50 relative">
+  {/* Button for small screen filter */}
+  <div className="md:hidden flex justify-end p-4 -mt-20 pr-10">
+    <button
+      className="bg-[#982222] text-white py-2 px-4 rounded-md shadow-md flex items-center text-sm"
+      onClick={() => setDropdownVisible(!dropdownVisible)}
+    >
+      <FiFilter />
+      <span className="ml-2">Filter</span>
+    </button>
+  </div>
+
+ {/* Dropdown Menu */}
+{dropdownVisible && (
+  <div className="absolute left-10 right-0 bg-white shadow-md rounded-md z-20 p-4 w-4/5  ">
+    <div className="flex flex-col gap-3 text-[#982222] font-bold min-h-[100px]">
+      {/* City Filter */}
+      <select
+        value={selectedCity}
+        onChange={(e) => setSelectedCity(e.target.value)}
+        className="border p-2 text-[#982222] bg-white rounded-md text-xs"
+      >
+        <option value="">Select City</option>
+        {Object.keys(cityCoordinates).map((city) => (
+          <option key={city} value={city}>
+            {city}
+          </option>
+        ))}
+      </select>
+
+      {/* Crime Status Filter */}
+      <select
+        value={selectedSolvedStatus}
+        onChange={(e) => setSelectedSolvedStatus(e.target.value)}
+        className="border p-2 text-[#982222] bg-white rounded-md text-xs"
+      >
+        <option value="">Crime Status</option>
+        <option value="unsolved">Unsolved</option>
+        <option value="solved">Solved</option>
+      </select>
+
+      {/* Date Range Filters */}
+      <div className="flex gap-2">
+        <input
+          type="date"
+          value={selectedDateRange[0] || ''}
+          onChange={(e) => setSelectedDateRange([e.target.value, selectedDateRange[1]])}
+          className="border p-2 text-[#982222] bg-white rounded-md text-xs w-1/2"
+        />
+        <input
+          type="date"
+          value={selectedDateRange[1] || ''}
+          onChange={(e) => setSelectedDateRange([selectedDateRange[0], e.target.value])}
+          className="border p-2 text-[#982222] bg-white rounded-md text-xs w-1/2"
+        />
+      </div>
+    </div>
+  </div>
+)}
+
+</div>
+
+<div className="relative z-10 w-full h-full flex justify-center items-center -mt-12 z-10 pl-10 pr-10 py-6 ">
     <div className="bg-white/90 rounded-lg shadow-lg w-full xl:w-5/6 h-4/5 flex p-4">
       {/* Carte */}
       <div className="w-3/4 h-full pr-4 ">
@@ -199,27 +263,27 @@ const Map = () => {
 </MapContainer>
 
       </div>
-      {/* Légende */}
-      <div className="w-1/4  bg-white/0 border-l border-gray-300 p-4 flex flex-col justify-center h-full text-center">
-  <h2 className="text-xl nosifer font-bold mb-4">Description</h2>
-  <div className="flex items-center mb-2 justify-center">
+{/* Légende */}
+<div className="w-full w-1/2 lg:w-1/4 bg-white/0 border-l border-gray-300 p-4 flex flex-col justify-center h-full text-center mt-4 lg:mt-0">
+  <h2 className="text-sm lg:text-2xl nosifer font-bold mb-4">Description</h2>
+  <div className="flex items-center mb-2 justify-center text-xs  lg:text-xl">
     <img src={locationsolved} alt="Crime résolu" className="w-6 h-6 mr-2" />
-    <span className='text-xl koulen'>Solved Crime</span>
+    <span className="koulen truncate">Solved Crime</span>
   </div>
-  <div className="flex items-center mb-2 justify-center">
+  <div className="flex items-center mb-2 justify-center text-xs lg:text-xl">
     <img src={locationDangerous} alt="Crime non résolu" className="w-6 h-6 mr-2" />
-    <span className='text-xl koulen'>Unsolved Crime</span>
+    <span className="koulen truncate">Unsolved Crime</span>
   </div>
-  <div className="flex items-center justify-center mb-8">
+  <div className="flex items-center justify-center mb-8 text-xs lg:text-xl">
     <img src={locationPolice} alt="Force de police" className="w-6 h-6 mr-2" />
-    <span className='text-xl koulen '>Force </span>
+    <span className="koulen truncate">Police Force</span>
   </div>
 </div>
+
 
     </div>
   </div>
-</div>
-
+    </div>
   );
 };
 
