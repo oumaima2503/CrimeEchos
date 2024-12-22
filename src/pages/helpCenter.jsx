@@ -31,34 +31,40 @@ function HelpCenter() {
     'Casablanca', 'Rabat', 'Marrakech', 'Fès', 'Tanger', 'Agadir', 'Oujda', 'Tétouan', 'Meknès', 'Salé'
   ];
 
-const handleFormSubmit = async (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
-    const newCrime = { ...crimeData, id: Date.now() };
+
+    // Ajouter les coordonnées actuelles
+    const newCrime = { 
+        ...crimeData, 
+        id: Date.now(),
+        location: cityCoordinates // Inclure les coordonnées
+    };
 
     // Mettre à jour l'historique local
     const updatedHistory = [...crimeHistory, newCrime];
     setCrimeHistory(updatedHistory);
     localStorage.setItem('crimeHistory', JSON.stringify(updatedHistory));
 
-    // Envoi des données à l'API pour les stocker temporairement (sans base de données)
+    // Envoi des données à l'API
     try {
-      await axios.post('http://localhost:3000/api/emergencies', { emergencies: [newCrime] }); // Envoi du nouveau crime uniquement
+      await axios.post('http://localhost:3000/api/emergencies', { emergencies: [newCrime] });
 
-      // Affichage du message de succès
+      // Afficher un message de succès
       setAlertMessage('Your emergency has been reported successfully! We are sending help, don\'t worry.');
       setShowPopup(true);
     } catch (error) {
-      // Si l'API retourne une erreur, affichage du message d’erreur
       console.error('Error sending emergencies to API:', error);
       setAlertMessage('There was an error reporting your emergency.');
       setShowPopup(true);
     }
 
-    // Réinitialisation des données du crime après soumission
+    // Réinitialisation des données
     const currentDate = new Date().toISOString().split('T')[0];
     const currentTime = new Date().toLocaleTimeString();
     setCrimeData({ title: '', description: '', date: currentDate, time: currentTime, type: '', witness: '', location: null, city: '' });
 };
+
 
   useEffect(() => {
     const currentDate = new Date().toISOString().split('T')[0];
@@ -275,7 +281,7 @@ const handleFormSubmit = async (e) => {
               <ul className="flex-col justify-center">
   {crimeHistory.map((crime, index) => (
     <li key={index} className="text-white text-xl flex items-center justify-center">
-      <span>{crime.title} - {crime.date} {crime.time} - {crime.type}</span>
+      <span>{crime.title} - {crime.date} {crime.time} - {crime.type}- {crime.city}</span>
       <MdDelete 
         onClick={() => deleteCrime(crime.id)} 
         className="ml-4 text-red-500 hover:text-red-700 cursor-pointer"
