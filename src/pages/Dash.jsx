@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import blood from '../assets/blood.svg';
+import iconNext from '../assets/iconNext.svg';
 import arriere from '../assets/arriere.png';
 import Header from '../component/Header';
 import { Line, Bar } from 'react-chartjs-2';
@@ -157,47 +158,76 @@ const Dash = () => {
       <Header />
       
       <div className=" flex-grow overflow-auto no-scrollbar">
-<div className="scroll-container flex  justify-between sm:justify-evenly items-center 
-gap-4 sm:gap-8 mb-8 z-10  flex-nowrap no-scrollbar min-[1000px]:pl-10 min-[1000px]:pr-10 min-[1000px]:gap-2
-max-[750px]:gap-2 overflow-x-auto snap-x    
-snap-mandatory  max-[750px]:w-[600px] mx-auto max-[1000px]:w-[750px]
- max-[650px]:w-[500px]   max-[550px]:w-[450px] max-[480px]:w-[360px]  max-[450px]:w-[260px]  ">
-  {[
-    { title: 'Total Crimes in Morocco', value: data.totalCrimes },
-    { title: 'The City with Most Crimes', value: data.cityWithMostCrimes },
-    { title: 'Most Frequent Category', value: data.mostFrequentCategory },
-    {
-      title: 'Month with Highest Crimes',
-      value: sortedMonths.length > 0
-        ? sortedMonths[sortedData.indexOf(Math.max(...sortedData))] : 'N/A',
-    },
-    {
-      title: 'Crimes in Selected City',
-      value: selectedCity
-        ? Object.values(data.monthlyCrimesByCity[selectedCity] || {}).reduce((a, b) => a + b, 0)
-        : 'Not Selected',
-    },
-  ].map((item, index) => (
-    <div
-      key={index}
-      className="card py-2 bg-white/90 rounded-xl flex flex-col justify-start 
-       space-y-2 shadow-md max-[750px]:min-w-[100px] max-[750px]:max-w-[150px] max-[750px]:text-xs 
-       max-[750px]:truncate"
-      style={{
-        flex: "1 1 calc(50% - 16px)",
-        maxWidth: "350px",
-        minWidth: "220px",
-      }}
-    >
-      <div className="card-title koulen text-black text-sm sm:text-base text-center font-semibold whitespace-pre">
-        {item.title}
+      <div className="relative ">
+  {/* Flèche gauche */}
+  <button
+    className=" min-[1001px]:hidden
+    absolute left-10 top-1/2 transform rotate-180 -translate-y-1/2 bg-[#580B0B]  p-1 rounded-full shadow-md z-20"
+    onClick={() => {
+      document.querySelector('.scroll-container').scrollBy({ left: -200, behavior: 'smooth' });
+    }}
+  >
+     <img src={iconNext} alt="" className='size-6' />
+  </button>
+
+  <div
+    className="scroll-container flex justify-between sm:justify-evenly items-center 
+      gap-4 sm:gap-8 mb-8 z-10 flex-nowrap no-scrollbar min-[1000px]:pl-10 min-[1000px]:pr-10
+       min-[1000px]:gap-2 max-[910px]:w-[650px] max-[800px]:w-[600px]
+      max-[750px]:gap-2 overflow-x-auto snap-x snap-mandatory max-[750px]:w-[550px] mx-auto max-[1000px]:w-[750px]
+      max-[700px]:w-[450px] max-[600px]:w-[400px] max-[550px]:w-[300px] max-[450px]:w-[260px] max-[400px]:w-[240px]"
+  >
+    {[
+      { title: 'Total Crimes in Morocco', value: data.totalCrimes },
+      { title: 'The City with Most Crimes', value: data.cityWithMostCrimes },
+      { title: 'Most Frequent Category', value: data.mostFrequentCategory },
+      {
+        title: 'Month with Highest Crimes',
+        value: sortedMonths.length > 0
+          ? sortedMonths[sortedData.indexOf(Math.max(...sortedData))] : 'N/A',
+      },
+      {
+        title: 'Crimes in Selected City',
+        value: selectedCity
+          ? Object.values(data.monthlyCrimesByCity[selectedCity] || {}).reduce((a, b) => a + b, 0)
+          : 'Not Selected',
+      },
+    ].map((item, index) => (
+      <div
+        key={index}
+        className="card py-2 bg-white/90 rounded-xl flex flex-col justify-start 
+          space-y-2 shadow-md max-[750px]:min-w-[100px] max-[750px]:max-w-[150px] max-[750px]:text-xs 
+          max-[750px]:truncate"
+        style={{
+          flex: "1 1 calc(50% - 16px)",
+          maxWidth: "350px",
+          minWidth: "220px",
+        }}
+      >
+        <div className="card-title koulen text-black text-sm sm:text-base
+         text-center font-semibold whitespace-pre">
+          {item.title}
+        </div>
+        <div className="text-xs sm:text-sm text-center text-[#982222] nosifer">
+          {item.value}
+        </div>
       </div>
-      <div className="text-xs sm:text-sm text-center text-[#982222] nosifer">
-        {item.value}
-      </div>
-    </div>
-  ))}
+    ))}
+  </div>
+
+  {/* Flèche droite */}
+  <button
+    className="min-[1001px]:hidden
+    absolute right-10 top-1/2 transform  
+     -translate-y-1/2 bg-[#580B0B] p-1 rounded-full shadow-md z-20"
+    onClick={() => {
+      document.querySelector('.scroll-container').scrollBy({ left: 200, behavior: 'smooth' });
+    }}
+  >
+    <img src={iconNext} alt="" className='size-6' />
+  </button>
 </div>
+
         <div className="flex flex-wrap min-[900px]:flex-nowrap gap-8 justify-between
          items-start z-10 pl-10 pr-10">
         <div className="card p-4 bg-white/90 rounded-xl flex flex-col w-full min-[901px]:w-1/2 space-y-6">

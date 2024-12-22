@@ -186,7 +186,7 @@ const redIcon = new L.Icon({
   <button 
     onClick={handleHistoryButtonClick} 
     className="bg-[#580B0B] text-white hover:bg-[#982222]
-     nosifer py-2 px-4 rounded-lg z-20 max-[550px]:text-xs max-[700px]:ml-auto text-xs max-[490px]:hidden"
+     nosifer py-2 px-4 rounded-lg z-20 max-[550px]:text-xs max-[700px]:ml-auto text-sm max-[490px]:hidden"
   >
     Emergency's history
   </button>
@@ -198,18 +198,19 @@ const redIcon = new L.Icon({
     <FaHistory />
   </button>
 </div> 
-<div className='flex-grow overflow-auto no-scrollbar pl-10 pr-10 space-y-4 mb-2 items-center  '>
-<div className="  flex max-[640px]:flex-col max-[640px]:space-y-4 h-[90%] max-[1000px]:h-full  items-center   justify-between  w-full space-x-2   ">
+<div className='flex-grow overflow-auto no-scrollbar pl-10 pr-10 space-y-4 mb-2 items-center mt-4 max-[1000px]:text-sm '>
+<div className="  flex max-[640px]:flex-col max-[640px]:space-y-4 h-[90%] 
+max-[1000px]:h-full  items-center   justify-between  w-full space-x-2   ">
   {/* Form */}
   <div className='bg-white/90   px-4 py-2 rounded-lg shadow-lg w-full sm:w-1/2 h-full flex max-[640px]:order-1 '>
   <form onSubmit={handleFormSubmit} className="flex w-full flex-col justify-between h-full  ">
-    <h2 className="text-xl font-bold text-center koulen max-[750px]:text-sm ">What's your Emergency?</h2>
+    <h2 className="text-xl py-2 font-bold text-center koulen max-[750px]:text-sm ">What's your Emergency?</h2>
     <input
       type="text"
       placeholder="Crime Title"
       value={crimeData.title}
       onChange={(e) => setCrimeData({ ...crimeData, title: e.target.value })}
-      className="w-full px-2 py-1  border rounded koulen emergenc"
+      className="w-full px-2 py-2  border rounded koulen emergenc max-[1000px]:py-1"
       required
     />
     <div className='flex gap-4'>
@@ -217,14 +218,14 @@ const redIcon = new L.Icon({
         type="date"
         value={crimeData.date}
         onChange={(e) => setCrimeData({ ...crimeData, date: e.target.value })}
-        className="w-full px-2 py-1 border rounded koulen max-[400px]:w-28 emergenc"
+        className="w-full px-2 py-1 border rounded koulen  emergenc"
         required
       />
       <input
         type="time"
         value={crimeData.time}
         onChange={(e) => setCrimeData({ ...crimeData, time: e.target.value })}
-        className="w-full px-2 py-1 border rounded koulen max-[400px]:w-24 -ml-4 emergenc"
+        className="w-full px-2 py-1 border rounded koulen  emergenc"
         required
       />
     </div>
@@ -270,10 +271,11 @@ const redIcon = new L.Icon({
       placeholder="Or type your address"
       value={address}
       onChange={handleAddressChange}
-      className="w-full px-2 py-1 border rounded koulen emergenc"
+      className="w-full px-2 py-2 border rounded koulen emergenc max-[1000px]:py-1"
     />
 
-    <button type="submit" className="w-full py-4  bg-[#580B0B] text-white hover:bg-[#982222] koulen rounded max-[600px]:h-8 text-xs max-[600px]:w-28 mt-[2px]  max-[600px]:mx-auto ">
+    <button type="submit" className="w-full py-2  bg-[#580B0B] text-white hover:bg-[#982222] koulen
+     rounded max-[600px]:h-8 max-[600px]:text-xs max-[600px]:w-28 mt-[2px]  max-[600px]:mx-auto ">
       Call for Emergency
     </button>
   </form></div>
@@ -305,11 +307,36 @@ const redIcon = new L.Icon({
     <div>Loading emergencies...</div>
   )}
 </MapContainer>
-
-
-
     </div>
 </div>
+
+<div className="w-full  h-full bg-white/90 rounded-lg shadow-lg p-2 min-[641px]:hidden">
+  <MapContainer
+  ref={mapRef}
+  center={cityCoordinates}
+  zoom={12}
+  style={{ height: "100%", width: "100%" }}
+>
+  <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+  {emergencies.length > 0 ? (
+    emergencies.map((emergency) => (
+      <Marker key={emergency.id} position={emergency.location} icon={redIcon}>
+        <Popup>
+          <strong>{emergency.title}</strong>
+          <br />
+          {emergency.date} {emergency.time}
+          <br />
+          {emergency.type}
+          <br />
+          {emergency.city}
+        </Popup>
+      </Marker>
+    ))
+  ) : (
+    <div>Loading emergencies...</div>
+  )}
+</MapContainer>
+    </div>
 
   </div>
 

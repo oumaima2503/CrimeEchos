@@ -58,15 +58,15 @@ function Security() {
       <Header />
       <div className="flex justify-between pl-10 mr-10 z-0 ">
         <div>
-          <h1 className="text-2xl font-bold text-[#580B0B] nosifer max-[700px]:text-md max-[480px]:text-xs ">
+          <h1 className="text-2xl font-bold text-[#580B0B] nosifer max-[700px]:text-lg max-[480px]:text-xs max-[700px]:mt-2 max-[480px]:mt-4">
             Security
           </h1>
-          <h1 className="text-2xl font-bold text-white -mt-9 nosifer max-[700px]:text-md max-[480px]:text-xs max-[480px]:-mt-6">
+          <h1 className="text-2xl font-bold text-white -mt-9 nosifer max-[700px]:text-lg max-[480px]:text-xs max-[480px]:-mt-6">
             Security
           </h1>
         </div>
 
-        <div className="flex justify-center h-10 w-64 max-[500px]:w-28 max-[500px]:-mt-2 h-6 max-[750px]:w-60 max-[750px]:-mt-2 max-[750px]:h-6 ">
+        <div className="flex justify-center w-64 max-[600px]:w-40  ">
           <input
             type="text"
             placeholder="Search by category..."
@@ -77,8 +77,9 @@ function Security() {
         </div>
       </div>
 
-      <div className="flex justify-center items-center px-8  ">
-        <div className="w-full p-4 rounded-lg shadow-lg max-h-[50vh] overflow-y-scroll
+      <div className="flex justify-center items-center px-10 py-4 h-full overflow-y-scroll
+         no-scrollbar flex-grow ">
+        <div className="w-full p-4 rounded-lg shadow-lg h-full overflow-y-scroll
          no-scrollbar flex-grow  ">
           {currentStandards.length === 0 ? (
             <p className="text-center text-gray-600">No categories found.</p>
@@ -105,27 +106,29 @@ function Security() {
               </div>
             ))
           )}
-        </div>
-      </div>
-
-      {/* Pagination controls */}
-      <div className="flex justify-center gap-4 ">
+          {/* Pagination controls */}
+      <div className="flex justify-center gap-4  ">
         <button
           onClick={() => paginate(currentPage - 1)}
           disabled={currentPage === 1}
-          className="bg-[#982222]  min-[720px]:text-lg mt-4 min-[720px]:w-24 h-10  text-white koulen px-4 py-1 rounded disabled:opacity-50 max-[500px]:px-2 max-[500px]:w-16   text-xs max-[500px]:h-8 max-[750px]:w-20  max-[750px]:h-8 mt-2 "
+          className="bg-[#982222] text-white px-4 py-1 rounded disabled:opacity-50"
         >
           Previous
         </button>
-        <span className="text-sm font-medium text-white koulen py-2 max-[750px]: mt-2   min-[720px]:text-lg   ">{`Page ${currentPage} of ${totalPages}`}</span>
+        <span className="text-sm font-medium text-white koulen py-2">{`Page ${currentPage} of ${totalPages}`}</span>
         <button
           onClick={() => paginate(currentPage + 1)}
           disabled={currentPage === totalPages}
-          className="bg-[#982222] text-white koulen min-[720px]:text-lg mt-4 min-[720px]:w-24 h-10  px-8 py-1 rounded disabled:opacity-50 max-[500px]:px-4 text-xs max-[500px]:h-8 max-[750px]:px-8  max-[750px]:h-8 mt-2 "
+          className="bg-[#982222] text-white px-4 py-1 rounded disabled:opacity-50"
         >
           Next
         </button>
       </div>
+        </div>
+        
+      </div>
+
+      
 
       {isModalOpen && selectedCategory && (
         <div className="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center z-50
@@ -142,7 +145,7 @@ function Security() {
             <div className="text-white text-2xl flex items-end justify-end -mt-2 mb-4 cursor-pointer hover:text-[#982222] " onClick={closeModal}>
               X{/* Close Icon */}
             </div>
-            <h2 className="text-2xl font-bold text-white mb-4 nosifer neon max-[700px]:text-lg">{selectedCategory.category}</h2>
+            <h2 className="text-2xl font-bold text-white mb-4 nosifer neon max-[700px]:">{selectedCategory.category}</h2>
             <div className="overflow-x-auto no-scrollbar">
               <ul className="list-disc pl-5 text-white font-[Koulen] py-2">
                 {selectedCategory.standards.map((standard, idx) => (

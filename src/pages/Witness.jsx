@@ -187,8 +187,8 @@ const Witness = () => {
                   <div className="flex  gap-10 justify-center max-[630px]:flex-col">
                     {post.image && (
                       <div className='space-y-2 max-[630px]:order-1 '>
-                        <div className='flex gap-2 mb-3'>
-                          <img className="hidden xl:block xl:h-6 xl:w-6 rounded-full " src={profil} alt="" />
+                        <div className='flex gap-2 mb-3 items-center'>
+                          <img className=" xl:block h-8 w-8 rounded-full " src={profil} alt="" />
                           <strong className='text-white/60 '>{post.author}</strong>
                         </div>
                         <img
@@ -277,7 +277,7 @@ const Witness = () => {
           <div className='space-y-2 max-[630px]:order-1 max-[630px]:hidden'>
             
                         <div className='flex gap-2 mb-3'>
-                          <img className="hidden xl:block xl:h-6 xl:w-6 rounded-full " src={profil} alt="" />
+                          <img className=" xl:block xl:h-6 xl:w-6 rounded-full " src={profil} alt="" />
                           <strong className='text-white/60 '>{selectedPost.author}</strong>
                         </div>
                         <img
@@ -324,9 +324,10 @@ const Witness = () => {
       )}
 
       {showForm && (
-        <div className="fixed inset-0  bg-black bg-opacity-50 flex items-center justify-center z-20 max-[450px]:m-10 text-sm ">
-          <div className="bg-white/90 p-6 rounded shadow-lg w-96 mt-12">
-            <h2 className="text-xl font-bold mb-4 nosifer  text-[#580B0B]">Add a Witness Report</h2>
+        <div className="fixed inset-0  bg-black bg-opacity-50
+         flex items-center justify-center z-20  text-sm ">
+          <div className="bg-white/90 p-6 rounded shadow-lg w-96 mt-12 max-[450px]:mx-10">
+            <h2 className="text-xl font-bold mb-4 nosifer max-[450px]:text-sm text-center text-[#580B0B]">Add a Witness Report</h2>
             <form onSubmit={handleAddPost} className="space-y-4">
               <input
                 type="text"
