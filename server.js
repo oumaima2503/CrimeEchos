@@ -1,32 +1,45 @@
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
-import multer from 'multer';
-import path from 'path';
-import { fileURLToPath } from 'url';
 
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-// Use import for crimeData
-import { crimes } from './src/api/crimeData.js';  // Ensure .js extension is used
-import { force } from './src/api/forceData.js'; 
+// Route POST pour recevoir les urgences sans base de données
+app.post('/api/emergencies', (req, res) => {
+  try {
+    const { emergencies } = req.body; // Extraction des données envoyées depuis le frontend
+    console.log('Received emergencies:', emergencies); // Affichage des données dans la console pour vérification
 
+    // Vous pouvez effectuer des actions supplémentaires ici si nécessaire (ex: les envoyer par email ou les afficher ailleurs)
 
-
-// Route to fetch all emergencies
-app.get('/api/emergencies', (req, res) => {
-  res.json(emergencies);
+    res.status(200).json({ message: 'Emergencies have been received successfully!', data: emergencies });
+  } catch (error) {
+    console.error('Error receiving emergencies:', error);
+    res.status(500).json({ message: 'There was an error receiving your emergencies.' });
+  }
 });
+
+// Route pour récupérer les urgences (bien que vous ne les stockiez pas dans une base de données)
+app.get('/api/emergencies', (req, res) => {
+  res.status(200).json({ emergencies: [] }); // Retourner une réponse vide ou un message comme vous le souhaitez
+});
+
 // Utilisation des données dans une route d'Express
+import { crimes } from './src/api/crimeData.js'; // Assurez-vous que les données sont bien importées
+import { force } from './src/api/forceData.js';
+
 app.get('/api/crimes', (req, res) => {
-    res.json(crimes);
+  res.json(crimes);
 });
 
 app.get('/api/force', (req, res) => {
   res.json(force);
 });
+
+export default app;
+
 
 
 const categoriesWithStandards = {

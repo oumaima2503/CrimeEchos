@@ -60,7 +60,7 @@ const NavHome = ({ currentSection, setCurrentSection, scrollToSection }) => {
         <Link to="/Login" className="py-2 px-4">
           SIGN IN
         </Link>
-        <Link to="/signup" className="bg-[#982222] py-2 px-4">
+        <Link to="/signup" className="bg-[#982222] py-2 px-4 rounded-md">
           SIGN UP
         </Link>
       </div>
