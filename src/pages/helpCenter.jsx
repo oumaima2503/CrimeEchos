@@ -228,10 +228,20 @@ function HelpCenter() {
       required
     >
       <option value="">Crime Category</option>
-      <option value="Vol">Vol</option>
-      <option value="Agression">Agression</option>
-      <option value="Fraude">Fraude</option>
-      <option value="Autre">Autre</option>
+      <option value="Vol">Vandalism</option>
+      <option value="Agression">Drug trafficking</option>
+      <option value="Fraude">Arson</option>
+      <option value="Autre">Kidnapping</option>
+      <option value="Autre">Human trafficking
+      </option>
+      <option value="Autre">Fraud
+      </option>
+      <option value="Autre">Murder
+      </option> 
+       <option value="Autre">Theft
+      </option>
+      <option value="Autre">Other
+      </option>
     </select>
 
     <select
