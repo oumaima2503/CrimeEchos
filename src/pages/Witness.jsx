@@ -4,6 +4,7 @@ import arriere from '../assets/arriere.png';
 import Header from '../component/Header';
 import kid from '../assets/image.png';
 import user from '../assets/user.jpg';
+import profil from '../assets/profil.jpg';
 import '../App.css';
 import { FaHandHoldingHeart, FaComments, FaEyeSlash } from "react-icons/fa";
 import { MdPhotoLibrary } from "react-icons/md";
@@ -20,7 +21,7 @@ const Witness = () => {
               id: 1,
               author: 'Oumaima Ikram',
               titre: 'Incident Report: Tragic Child Accident',
-              content: 'In my neighborhood, two children were playing...',
+              content: 'In my neighborhood, two children were playing when a tragic accident occurred. They were mock sword fighting with sticks when one child accidentally struck the other on the head. The injured child collapsed and was unresponsive. Despite quick action by adults and paramedics, the child later passed away. This heartbreaking event reminds us of the importance of ensuring safety, even during innocent play.',
               image: kid,
               comments: [],
               likes: 0,
@@ -34,7 +35,7 @@ const Witness = () => {
           id: 1,
           author: 'Oumaima Ikram',
           titre: 'Incident Report: Tragic Child Accident',
-          content: 'In my neighborhood, two children were playing...',
+          content: 'In my neighborhood, two children were playing when a tragic accident occurred. They were mock sword fighting with sticks when one child accidentally struck the other on the head. The injured child collapsed and was unresponsive. Despite quick action by adults and paramedics, the child later passed away. This heartbreaking event reminds us of the importance of ensuring safety, even during innocent play.',
           image: kid,
           comments: [],
           likes: 0,
@@ -62,7 +63,7 @@ const Witness = () => {
           ...posts,
           {
             id: posts.length + 1,
-            author: 'Anonymous',
+            author: 'Oumaima Ikram',
             titre: newPost.titre,
             content: newPost.content,
             image: reader.result,
@@ -82,7 +83,7 @@ const Witness = () => {
           ...posts,
           {
             id: posts.length + 1,
-            author: 'Anonymous',
+            author: 'Oumaima Ikram',
             titre: newPost.titre,
             content: newPost.content,
             image: null,
@@ -187,7 +188,7 @@ const Witness = () => {
                     {post.image && (
                       <div className='space-y-2 max-[630px]:order-1 '>
                         <div className='flex gap-2 mb-3'>
-                          <img className="hidden xl:block xl:h-6 xl:w-6 rounded-full " src={user} alt="" />
+                          <img className="hidden xl:block xl:h-6 xl:w-6 rounded-full " src={profil} alt="" />
                           <strong className='text-white/60 '>{post.author}</strong>
                         </div>
                         <img
@@ -276,7 +277,7 @@ const Witness = () => {
           <div className='space-y-2 max-[630px]:order-1 max-[630px]:hidden'>
             
                         <div className='flex gap-2 mb-3'>
-                          <img className="hidden xl:block xl:h-6 xl:w-6 rounded-full " src={user} alt="" />
+                          <img className="hidden xl:block xl:h-6 xl:w-6 rounded-full " src={profil} alt="" />
                           <strong className='text-white/60 '>{selectedPost.author}</strong>
                         </div>
                         <img

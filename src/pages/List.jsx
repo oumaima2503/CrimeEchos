@@ -19,7 +19,7 @@ import { useFavorites } from '../context/FavoritesContext';
 const CrimeModal = ({ crime, onClose }) => {
   return (
     <div className="fixed inset-0 bg-black bg-opacity-90 flex justify-center items-center z-40" onClick={onClose}>
-      <div className="relative bg-gradient-to-br from-gray-800 via-black to-gray-900 p-6 rounded-lg w-3/4 md:w-1/2
+      <div className=" z-40 relative bg-gradient-to-br from-gray-800 via-black to-gray-900 p-6 rounded-lg w-3/4 md:w-1/2
        text-white shadow-lg max-[900px]:text-[15px] max-[600px]:text-[10px] "
       style={{ backgroundImage: `url(${arriere})`, backgroundPosition: '90% 0%'  }}>
         <div className="my-6"></div>
@@ -117,7 +117,7 @@ const List = () => {
       <img className="absolute -z-10 opacity-80" src={blood} alt="Blood Icon" />
       <Header />
        {/* Filter Section */}
-<div className="z-10 relative mb-2">
+<div className="z-20 relative mb-2">
   {/* Bouton de filtre pour les petites tailles */}
   <div className="md:hidden flex justify-end px-4 pr-10">
     <button
@@ -131,18 +131,18 @@ const List = () => {
 
   {/* Dropdown Menu */}
   {dropdownVisible && (
-    <div className="absolute top-16 left-0 right-0 bg-white/90 shadow-md rounded-md p-4 z-20">
-      <div className="flex flex-col gap-4 text-[#982222] font-bold">
+    <div className="absolute top-10  right-20 bg-[#982222] shadow-md w-1/2 rounded-md p-4 z-20">
+      <div className="flex flex-col gap-4 text-white font-bold">
         {/* Place Filter */}
-        <div>
+        <div className='flex justify-between items-center'>
           <label htmlFor="placeFilter" className="block text-sm font-semibold mb-1">
-            Select Place
+            Select Place :
           </label>
           <select
             id="placeFilter"
             value={placeFilter}
             onChange={handlePlaceChange}
-            className="p-2 border rounded w-full"
+            className="p-2 border rounded w-[60%] text-black text-xs"
           >
             <option value="">Select Place</option>
             {uniquePlaces.map((place, index) => (
@@ -154,29 +154,29 @@ const List = () => {
         </div>
 
         {/* Date Filter */}
-        <div className=''>
+        <div className='flex justify-between items-center'>
           <label htmlFor="dateFilter" className="block text-sm font-semibold mb-1 ">
-            Select Date
+            Select Date :
           </label>
           <input
             id="dateFilter"
             type="date"
             value={dateFilter}
             onChange={handleDateChange}
-            className=" border rounded w-full"
+            className=" border p-2 rounded w-[60%] text-black text-xs"
           />
         </div>
 
         {/* Category Filter */}
-        <div>
+        <div className='flex justify-between items-center'>
           <label htmlFor="categoryFilter" className="block text-sm font-semibold mb-1">
-            Select Category
+             Category :
           </label>
           <select
             id="categoryFilter"
             value={categoryFilter}
             onChange={(e) => setCategoryFilter(e.target.value)}
-            className="p-2 border rounded w-full"
+            className="p-2 border rounded w-[60%] text-black text-xs"
           >
             <option value="">All Categories</option>
             <option value="Theft">Theft</option>
@@ -188,15 +188,15 @@ const List = () => {
         </div>
 
         {/* Solved Status Filter */}
-        <div>
+        <div className='flex justify-between items-center'>
           <label htmlFor="solvedFilter" className="block text-sm font-semibold mb-1">
-            Solved Status
+            Solved Status :
           </label>
           <select
             id="solvedFilter"
             value={solvedFilter}
             onChange={(e) => setSolvedFilter(e.target.value ? JSON.parse(e.target.value) : null)}
-            className="p-2 border rounded w-full"
+            className="p-2 border rounded w-[60%] text-black text-xs"
           >
             <option value="">Solved Status</option>
             <option value="true">Solved</option>
@@ -209,7 +209,7 @@ const List = () => {
   
 
   {/* Section toujours visible pour les grandes tailles */}
-  <div className="hidden md:flex flex-row gap-4 pr-10 pl-10 text-[#982222] koulen font-bold ">
+  <div className="  hidden md:flex flex-row gap-4 pr-10 pl-10 text-[#982222] koulen font-bold ">
     <div className="flex-1">
       <select
         value={placeFilter}
@@ -259,7 +259,7 @@ const List = () => {
     </div>
   </div>
 </div>
-      <div className="z-20 flex-grow overflow-auto no-scrollbar px-2  max-[600px]:text-[10px]  ">
+      <div className="flex-grow overflow-auto no-scrollbar px-2  max-[600px]:text-[10px]  ">
     
 
 
@@ -318,7 +318,7 @@ const CrimeCard = ({ crime, onSeeMore }) => {
 
 
   return (
-    <div className="flex items-stretch bg-white/90 rounded-lg max-[600px]:-mt-4 shadow-md overflow-hidden koulen">
+    <div className="z-0 flex items-stretch bg-white/90 rounded-lg max-[600px]:-mt-4 shadow-md overflow-hidden koulen">
       <div className="bg-[#982222] text-white p-4 flex flex-col justify-center">
         <div className="mb-2 flex items-center gap-2">
           <MdPlace />
@@ -337,8 +337,8 @@ const CrimeCard = ({ crime, onSeeMore }) => {
         </div>
       </div>
       <div className="flex-1 p-4">
-        <h2 className="text-xl font-semibold mb-2 nosifer">{crime.name}</h2>
-        <p className='text-black/80'>The category of the crame is : {crime.category}</p>
+        <h2 className=" font-semibold mb-2 nosifer">{crime.name}</h2>
+        <p className='text-black/80'>The category of the crime is : {crime.category}</p>
         <div className='flex justify-between items-center'>
 
         
