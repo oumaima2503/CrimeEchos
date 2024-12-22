@@ -128,7 +128,7 @@ const Dash = () => {
     labels: sortedMonths, // Mois triés
     datasets: [
       {
-        label: `Crimes Mensuels à ${selectedCity}`,
+        label: `Monthly crimes in ${selectedCity}`,
         data: sortedData, // Données triées selon les mois
         borderColor: '#982222',
         fill: true,
@@ -156,7 +156,11 @@ const Dash = () => {
     <div className="h-screen bg-cover bg-no-repeat flex flex-col relative" style={{ backgroundImage: `url(${arriere})`, backgroundPosition: '90% 0%' }}>
       <Header />
       <div className=" flex-grow overflow-auto no-scrollbar ">
-      <div className="flex flex-wrap justify-center sm:justify-evenly items-center gap-4 sm:gap-8 mb-8 z-10 px-4 sm:px-10">
+<div className="scroll-container flex flex-wrap justify-center sm:justify-evenly items-center 
+gap-4 sm:gap-8 mb-8 z-10 px-4 sm:px-10 max-[750px]:flex-nowrap 
+max-[750px]:gap-2 max-[750px]:overflow-x-auto max-[750px]:snap-x 
+max-[750px]:snap-mandatory max-[750px]:px-6 max-[750px]:w-[600px] mx-auto
+ max-[650px]:w-[500px]   mx-auto max-[550px]:w-[450px] max-[450px]:w-[260px]  ">
   {[
     { title: 'Total Crimes in Morocco', value: data.totalCrimes },
     { title: 'The City with Most Crimes', value: data.cityWithMostCrimes },
@@ -164,23 +168,22 @@ const Dash = () => {
     {
       title: 'Month with Highest Crimes',
       value: sortedMonths.length > 0
-        ? sortedMonths[sortedData.indexOf(Math.max(...sortedData))]
-        : 'N/A', // If no month is available
+        ? sortedMonths[sortedData.indexOf(Math.max(...sortedData))] : 'N/A',
     },
     {
       title: 'Crimes in Selected City',
       value: selectedCity
         ? Object.values(data.monthlyCrimesByCity[selectedCity] || {}).reduce((a, b) => a + b, 0)
-        : 'Not Selected', // If no city is selected
+        : 'Not Selected',
     },
   ].map((item, index) => (
     <div
       key={index}
-      className="card p-2 bg-white/90 rounded-xl flex flex-col justify-start space-y-2 shadow-md"
+      className="card p-2 bg-white/90 rounded-xl flex flex-col justify-start space-y-2 shadow-md max-[750px]:min-w-[100px] max-[750px]:max-w-[150px] max-[750px]:text-xs max-[750px]:truncate"
       style={{
-        flex: "1 1 calc(50% - 16px)", // 50% width on small screens
-        maxWidth: "200px", // Maximum size to avoid oversized boxes
-        minWidth: "120px", // Minimum size for small screens
+        flex: "1 1 calc(50% - 16px)",
+        maxWidth: "200px",
+        minWidth: "150px",
       }}
     >
       <div className="card-title koulen text-black text-sm sm:text-base text-center font-semibold whitespace-pre">
@@ -192,7 +195,6 @@ const Dash = () => {
     </div>
   ))}
 </div>
-
         <div className="flex flex-wrap md:flex-nowrap gap-8 justify-between items-start z-10 pl-10 pr-10  ">
         <div className="card p-4 bg-white/90 rounded-xl flex flex-col w-full md:w-1/2 space-y-6">
   {/* Titre */}

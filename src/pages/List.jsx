@@ -126,7 +126,7 @@ const List = () => {
       onClick={() => setDropdownVisible(!dropdownVisible)} // Gérer la visibilité du dropdown
     >
       <FiFilter />
-      <span className="ml-2 ">Filter</span>
+      <span className="ml-2 koulen ">Filter</span>
     </button>
   </div>
 
@@ -155,8 +155,8 @@ const List = () => {
         </div>
 
         {/* Date Filter */}
-        <div>
-          <label htmlFor="dateFilter" className="block text-sm font-semibold mb-1">
+        <div >
+          <label htmlFor="dateFilter" className="block text-sm font-semibold mb-1 ">
             Select Date
           </label>
           <input
@@ -210,7 +210,7 @@ const List = () => {
   
 
   {/* Section toujours visible pour les grandes tailles */}
-  <div className="hidden md:flex flex-row gap-4 pr-10 pl-10 text-[#982222] font-bold">
+  <div className="hidden md:flex flex-row gap-4 pr-10 pl-10 text-[#982222] koulen font-bold">
     <div className="flex-1">
       <select
         value={placeFilter}
@@ -225,12 +225,12 @@ const List = () => {
         ))}
       </select>
     </div>
-    <div className="flex-1">
+    <div className="flex-1 ">
       <input
         type="date"
         value={dateFilter}
         onChange={handleDateChange}
-        className="mt-2 p-2 border rounded w-full bg-white/90"
+        className="mt-2  p-2 border rounded w-full bg-white/90"
       />
     </div>
     <div className="flex-1">
