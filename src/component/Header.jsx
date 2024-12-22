@@ -57,7 +57,7 @@ const Header = () => {
     ];
 
     return (
-        <div className='z-10 pl-10 pr-10 py-6 '>
+        <div className='z-10 pl-10 pr-10 -mt-2 py-6 '>
             {/* Header */}
             <div className='flex justify-between z-20'>
                 <div>
@@ -94,7 +94,7 @@ const Header = () => {
             {/* NavBar */}
             <div className='flex justify-between relative text-blueDark px-40
                 max-[800px]:px-20 max-[600px]:px-10 max-[480px]:px-2 max-[380px]:px-1
-                py-1 bg-white/90 rounded-xl mt-6 max-[550px]:justify-center max-[550px]:gap-[1px] ' >
+                py-1 bg-white/90 rounded-xl mt-3 max-[550px]:justify-center max-[550px]:gap-[1px] ' >
                 {menus.map((menu, i) => (
                     <Link
                         to={menu.link}

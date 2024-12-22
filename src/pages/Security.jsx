@@ -66,39 +66,41 @@ function Security() {
           </h1>
         </div>
 
-        <div className="flex justify-center w-64 ">
+        <div className="flex justify-center w-64 max-[600px]:w-40  ">
           <input
             type="text"
             placeholder="Search by category..."
             onChange={handleSearchChange}
-            className="px-4 py-2 border border-gray-300 bg-white/90 rounded-lg w-3/4 max-w-lg"
+            className="px-4 py-2 border max-[600px]:text-xs
+             border-gray-300 bg-white/90  rounded-lg w-3/4 max-w-lg"
           />
         </div>
       </div>
 
-      <div className="flex justify-center items-center px-10 py-4  ">
-        <div className="w-full p-4 rounded-lg shadow-lg max-h-[50vh] flex-grow overflow-auto no-scrollbar ">
+      <div className="flex justify-center items-center px-10 py-4 ">
+        <div className="w-full p-4 rounded-lg shadow-lg max-h-[50vh] overflow-y-scroll
+         no-scrollbar flex-grow  ">
           {currentStandards.length === 0 ? (
             <p className="text-center text-gray-600">No categories found.</p>
           ) : (
             currentStandards.map((category, index) => (
-              <div key={index} className="mb-6">
-                <div className="bg-white/90 p-4 rounded-lg shadow-lg">
-                  <h2 className="text-xl font-bold text-[#580B0B]">{category.category}</h2>
+              <div key={index} className="mb-6 flex justify-center  items-center">
+                <div className=" p-4 bg-black/40 rounded-lg shadow-lg w-11/12 max-[700px]:w-full  items-center  ">
+                  <h2 className="text-xl font-bold text-white koulen neon">{category.category}</h2>
                   <div className="mt-4">
                     <ul className="list-disc pl-5">
                       {category.standards.slice(0, 2).map((standard, idx) => (
-                        <li key={idx} className="text-gray-800">{standard}</li>
+                        <li key={idx} className="text-white font-semibold text-lg max-[700px]:text-sm">{standard}</li>
                       ))}
                     </ul>
                   </div>
-
+                      <div className='flex justify-end'>
                   <button
                     onClick={() => openModal(category)} // Pass category to modal
-                    className="mt-4 text-[#580B0B]/70 py-2 px-4 rounded-full font-bold text-sm"
+                    className="mt-4 text-yellow-500/80 py-2 px-4 rounded-full font-bold koulen"
                   >
                     ...  See More
-                  </button>
+                  </button></div>
                 </div>
               </div>
             ))
@@ -111,15 +113,15 @@ function Security() {
         <button
           onClick={() => paginate(currentPage - 1)}
           disabled={currentPage === 1}
-          className="bg-[#982222] text-white px-4 py-2 rounded disabled:opacity-50"
+          className="bg-[#982222] text-white px-4 py-1 rounded disabled:opacity-50"
         >
           Previous
         </button>
-        <span className="text-lg font-medium text-white koulen py-2">{`Page ${currentPage} of ${totalPages}`}</span>
+        <span className="text-sm font-medium text-white koulen py-2">{`Page ${currentPage} of ${totalPages}`}</span>
         <button
           onClick={() => paginate(currentPage + 1)}
           disabled={currentPage === totalPages}
-          className="bg-[#982222] text-white px-4 py-2 rounded disabled:opacity-50"
+          className="bg-[#982222] text-white px-4 py-1 rounded disabled:opacity-50"
         >
           Next
         </button>
