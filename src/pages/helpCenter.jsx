@@ -10,7 +10,7 @@ import { MdDelete } from "react-icons/md";
 import { FaHistory } from "react-icons/fa";
 
 function HelpCenter() {
-  const [cityCoordinates, setCityCoordinates] = useState([33.5731, -7.5898]);
+  const [cityCoordinates, setCityCoordinates] = useState([33.5731, -7.5898]); // Casablanca par défaut
   const [address, setAddress] = useState('');
   const [crimeData, setCrimeData] = useState({
     title: '',
@@ -23,6 +23,7 @@ function HelpCenter() {
     city: 'Casablanca',
   });
   const [crimeHistory, setCrimeHistory] = useState(JSON.parse(localStorage.getItem('crimeHistory')) || []);
+  const [emergencies, setEmergencies] = useState([]); // Urgences provenant de l'API
   const [showPopup, setShowPopup] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
   const [showHistoryPopup, setShowHistoryPopup] = useState(false);
@@ -31,26 +32,35 @@ function HelpCenter() {
     'Casablanca', 'Rabat', 'Marrakech', 'Fès', 'Tanger', 'Agadir', 'Oujda', 'Tétouan', 'Meknès', 'Salé'
   ];
 
+  useEffect(() => {
+    const fetchEmergencies = async () => {
+      try {
+        const response = await axios.get('http://localhost:3000/api/emergencies');
+        console.log(response.data);  // Ajoutez ceci pour vérifier les données
+        setEmergencies(response.data);
+      } catch (error) {
+        console.error('Erreur lors de la récupération des urgences depuis l\'API :', error);
+      }
+    };
+    fetchEmergencies();
+  }, []);
+  
+
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
-    // Ajouter les coordonnées actuelles
     const newCrime = { 
-        ...crimeData, 
-        id: Date.now(),
-        location: cityCoordinates // Inclure les coordonnées
+      ...crimeData, 
+      id: Date.now(),
+      location: cityCoordinates // L'emplacement est directement pris à partir de cityCoordinates
     };
 
-    // Mettre à jour l'historique local
     const updatedHistory = [...crimeHistory, newCrime];
     setCrimeHistory(updatedHistory);
     localStorage.setItem('crimeHistory', JSON.stringify(updatedHistory));
 
-    // Envoi des données à l'API
     try {
       await axios.post('http://localhost:3000/api/emergencies', { emergencies: [newCrime] });
-
-      // Afficher un message de succès
       setAlertMessage('Your emergency has been reported successfully! We are sending help, don\'t worry.');
       setShowPopup(true);
     } catch (error) {
@@ -59,12 +69,11 @@ function HelpCenter() {
       setShowPopup(true);
     }
 
-    // Réinitialisation des données
+    // Resetting crimeData after submission
     const currentDate = new Date().toISOString().split('T')[0];
     const currentTime = new Date().toLocaleTimeString();
     setCrimeData({ title: '', description: '', date: currentDate, time: currentTime, type: '', witness: '', location: null, city: '' });
-};
-
+  };
 
   useEffect(() => {
     const currentDate = new Date().toISOString().split('T')[0];
@@ -128,6 +137,7 @@ function HelpCenter() {
     setCrimeHistory(updatedHistory);
     localStorage.setItem('crimeHistory', JSON.stringify(updatedHistory));
   };
+
   return (
     <div
       className="h-screen bg-cover bg-no-repeat flex flex-col relative"
@@ -232,23 +242,36 @@ function HelpCenter() {
   </form></div>
 
   {/* Map */}
-  <div className="w-full sm:w-1/2 h-full bg-white/90 rounded-lg shadow-lg p-2  max-[640px]:hidden">
-    <MapContainer center={cityCoordinates} zoom={12} style={{ height: '100%', width: '100%' }}>
-      <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-      <Marker position={cityCoordinates}>
-        <Popup>Your emergency is here!</Popup>
+  <div className="w-full sm:w-1/2 h-full bg-white/90 rounded-lg shadow-lg p-2 max-[640px]:hidden">
+  <MapContainer
+  center={emergencies.length > 0 ? emergencies[emergencies.length - 1].location : cityCoordinates}
+  zoom={12}
+  style={{ height: "100%", width: "100%" }}
+>
+  <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+  {emergencies.length > 0 ? (
+    emergencies.map((emergency) => (
+      <Marker key={emergency.id} position={emergency.location}>
+        <Popup>
+          <strong>{emergency.title}</strong>
+          <br />
+          {emergency.date} {emergency.time}
+          <br />
+          {emergency.type}
+          <br />
+          {emergency.city}
+        </Popup>
       </Marker>
-    </MapContainer>
-  </div>
+    ))
+  ) : (
+    <div>Loading emergencies...</div>
+  )}
+</MapContainer>
+
+
+    </div>
 </div>
-<div className="w-full h-full bg-white/90 rounded-lg shadow-lg p-2  min-[641px]:hidden">
-    <MapContainer center={cityCoordinates} zoom={12} style={{ height: '100%', width: '100%' }}>
-      <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-      <Marker position={cityCoordinates}>
-        <Popup>Your emergency is here!</Popup>
-      </Marker>
-    </MapContainer>
-  </div>
+
   </div>
 
 
