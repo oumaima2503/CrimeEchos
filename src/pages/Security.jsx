@@ -108,18 +108,23 @@ function Security() {
           )}
           {/* Pagination controls */}
       <div className="flex justify-center gap-4  ">
-        <button
-          onClick={() => paginate(currentPage - 1)}
-          disabled={currentPage === 1}
-          className="bg-[#982222] text-white px-4 py-1 rounded disabled:opacity-50"
-        >
-          Previous
-        </button>
-        <span className="text-sm font-medium text-white koulen py-2">{`Page ${currentPage} of ${totalPages}`}</span>
+      
+        
         <button
           onClick={() => paginate(currentPage + 1)}
           disabled={currentPage === totalPages}
-          className="bg-[#982222] text-white px-4 py-1 rounded disabled:opacity-50"
+          
+
+          className="bg-[#982222]  min-[720px]:text-lg * min-[720px]:w-24 h-10  text-white koulen px-4 py-1 rounded disabled:opacity-50 max-[500px]:px-2 max-[500px]:w-16   text-xs max-[500px]:h-8 max-[750px]:w-20  max-[750px]:h-8 mt-2 "
+        >
+          Previous
+        </button>
+        <span className="text-sm font-medium text-white koulen py-2 max-[750px]: mt-2   min-[720px]:text-lg  ">{`Page ${currentPage} of ${totalPages}`}</span>
+        <button
+          onClick={() => paginate(currentPage + 1)}
+          disabled={currentPage === totalPages}
+          className="bg-[#982222] text-white koulen min-[720px]:text-lg min-[720px]:w-24 h-10  px-8 py-1 rounded disabled:opacity-50 max-[500px]:px-4 text-xs max-[500px]:h-8 max-[750px]:px-8  max-[750px]:h-8 mt-2 "
+
         >
           Next
         </button>
