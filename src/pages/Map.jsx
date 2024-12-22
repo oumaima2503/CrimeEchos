@@ -154,7 +154,7 @@ const Map = () => {
       </div>
       <div className="z-50 relative">
   {/* Button for small screen filter */}
-  <div className="md:hidden flex justify-end p-4 -mt-20 pr-10">
+  <div className="md:hidden flex justify-end p-4 -mt-20 pr-10  ">
     <button
       className="bg-[#982222] text-white py-2 px-4 rounded-md shadow-md 
       koulen flex items-center text-sm max-[450px]:text-[10px]"
@@ -167,8 +167,8 @@ const Map = () => {
 
  {/* Dropdown Menu */}
 {dropdownVisible && (
-  <div className="absolute left-10 right-0 bg-white shadow-md rounded-md z-20 p-4 w-4/5  ">
-    <div className="flex flex-col gap-3 text-[#982222] font-bold min-h-[100px]">
+  <div className="absolute left-10 right-0 bg-[#982222]  shadow-md rounded-md z-20 p-4 w-4/5  ">
+    <div className="flex flex-col gap-3 text-[#982222] font-bold min-h-[100px] bg-[#982222] ">
       {/* City Filter */}
       <select
         value={selectedCity}

@@ -155,6 +155,7 @@ const Dash = () => {
   return (
     <div className="h-screen bg-cover bg-no-repeat flex flex-col relative" style={{ backgroundImage: `url(${arriere})`, backgroundPosition: '90% 0%' }}>
       <Header />
+      
       <div className=" flex-grow overflow-auto no-scrollbar">
 <div className="scroll-container flex  justify-between sm:justify-evenly items-center 
 gap-4 sm:gap-8 mb-8 z-10  flex-nowrap no-scrollbar min-[1000px]:pl-10 min-[1000px]:pr-10 min-[1000px]:gap-2

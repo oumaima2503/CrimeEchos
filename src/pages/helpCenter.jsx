@@ -8,6 +8,7 @@ import arriere from '../assets/arriere.png';
 import Header from '../component/Header';
 import { MdDelete } from "react-icons/md";
 import { FaHistory } from "react-icons/fa";
+import locationDangerous from '../assets/locationdangerous.png';
 
 function HelpCenter() {
   const [cityCoordinates, setCityCoordinates] = useState([33.5731, -7.5898]); // Casablanca par défaut
@@ -27,7 +28,13 @@ function HelpCenter() {
   const [showPopup, setShowPopup] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
   const [showHistoryPopup, setShowHistoryPopup] = useState(false);
-
+const redIcon = new L.Icon({
+  iconUrl: locationDangerous,
+  iconSize: [41, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41],
+});
   const cities = [
     'Casablanca', 'Rabat', 'Marrakech', 'Fès', 'Tanger', 'Agadir', 'Oujda', 'Tétouan', 'Meknès', 'Salé'
   ];
@@ -192,17 +199,17 @@ function HelpCenter() {
   </button>
 </div> 
 <div className='flex-grow overflow-auto no-scrollbar pl-10 pr-10 space-y-4 mb-2 items-center  '>
-<div className="  flex max-[640px]:flex-col max-[640px]:space-y-4 h-[90%] max-[1000px]:h-full items-center   justify-between  w-full space-x-2   mt-4">
+<div className="  flex max-[640px]:flex-col max-[640px]:space-y-4 h-[90%] max-[1000px]:h-full  items-center   justify-between  w-full space-x-2   ">
   {/* Form */}
-  <div className='bg-white/90 px-4 py-4 rounded-lg shadow-lg w-full sm:w-1/2 h-full flex max-[640px]:order-1'>
-  <form onSubmit={handleFormSubmit} className="flex w-full flex-col justify-between h-full ">
-    <h2 className="text-xl font-bold text-center koulen">What's your Emergency?</h2>
+  <div className='bg-white/90   px-4 py-2 rounded-lg shadow-lg w-full sm:w-1/2 h-full flex max-[640px]:order-1 '>
+  <form onSubmit={handleFormSubmit} className="flex w-full flex-col justify-between h-full  ">
+    <h2 className="text-xl font-bold text-center koulen max-[750px]:text-sm ">What's your Emergency?</h2>
     <input
       type="text"
       placeholder="Crime Title"
       value={crimeData.title}
       onChange={(e) => setCrimeData({ ...crimeData, title: e.target.value })}
-      className="w-full px-2 py-1 border rounded koulen"
+      className="w-full px-2 py-1  border rounded koulen emergenc"
       required
     />
     <div className='flex gap-4'>
@@ -210,21 +217,21 @@ function HelpCenter() {
         type="date"
         value={crimeData.date}
         onChange={(e) => setCrimeData({ ...crimeData, date: e.target.value })}
-        className="w-full px-2 py-1 border rounded koulen"
+        className="w-full px-2 py-1 border rounded koulen max-[400px]:w-28 emergenc"
         required
       />
       <input
         type="time"
         value={crimeData.time}
         onChange={(e) => setCrimeData({ ...crimeData, time: e.target.value })}
-        className="w-full px-2 py-1 border rounded koulen"
+        className="w-full px-2 py-1 border rounded koulen max-[400px]:w-24 -ml-4 emergenc"
         required
       />
     </div>
     <select
       value={crimeData.type}
       onChange={(e) => setCrimeData({ ...crimeData, type: e.target.value })}
-      className="w-full px-2 py-1 border rounded koulen"
+      className="w-full px-2 py-1 border rounded koulen emergenc"
       required
     >
       <option value="">Crime Category</option>
@@ -247,7 +254,7 @@ function HelpCenter() {
     <select
       value={crimeData.city}
       onChange={handleCityChange}
-      className="w-full px-2 py-1 border rounded koulen"
+      className="w-full px-2 py-1 border rounded koulen emergenc"
       required
     >
       <option value="">Select City</option>
@@ -263,10 +270,10 @@ function HelpCenter() {
       placeholder="Or type your address"
       value={address}
       onChange={handleAddressChange}
-      className="w-full px-2 py-1 border rounded koulen"
+      className="w-full px-2 py-1 border rounded koulen emergenc"
     />
 
-    <button type="submit" className="w-full py-2 bg-[#580B0B] text-white hover:bg-[#982222] koulen rounded">
+    <button type="submit" className="w-full py-4  bg-[#580B0B] text-white hover:bg-[#982222] koulen rounded max-[600px]:h-8 text-xs max-[600px]:w-28 mt-[2px]  max-[600px]:mx-auto ">
       Call for Emergency
     </button>
   </form></div>
@@ -282,7 +289,7 @@ function HelpCenter() {
   <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
   {emergencies.length > 0 ? (
     emergencies.map((emergency) => (
-      <Marker key={emergency.id} position={emergency.location}>
+      <Marker key={emergency.id} position={emergency.location} icon={redIcon}>
         <Popup>
           <strong>{emergency.title}</strong>
           <br />

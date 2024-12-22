@@ -73,4 +73,8 @@
   display: none;  /* Pour Chrome, Safari, et Opera */
 }
 
-
+@media (max-height: 443px) {
+  .emergenc {
+    height: 20px; /* exemple de style */
+  }
+}

@@ -324,8 +324,8 @@ const Witness = () => {
       )}
 
       {showForm && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-20">
-          <div className="bg-white/90 p-6 rounded shadow-lg w-96">
+        <div className="fixed inset-0  bg-black bg-opacity-50 flex items-center justify-center z-20 max-[450px]:m-10 text-sm ">
+          <div className="bg-white/90 p-6 rounded shadow-lg w-96 mt-12">
             <h2 className="text-xl font-bold mb-4 nosifer  text-[#580B0B]">Add a Witness Report</h2>
             <form onSubmit={handleAddPost} className="space-y-4">
               <input

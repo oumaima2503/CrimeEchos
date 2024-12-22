@@ -285,19 +285,19 @@ const List = () => {
         </div>
 
         {/* Pagination Controls */}
-        <div className="flex justify-center gap-4 py-4 ">
+        <div className="flex justify-center gap-4 py-4 max-[500px]:-mt-8 max-[750px]:-mt-6 ">
           <button
             onClick={() => paginate(currentPage - 1)}
             disabled={currentPage === 1}
-            className="bg-[#982222] text-white px-4 py-2 rounded disabled:opacity-50"
+            className="bg-[#982222] text-white koulen px-4 py-1 rounded disabled:opacity-50 max-[500px]:w-16 text-xs max-[500px]:h-8 max-[750px]:w-20  max-[750px]:h-8 "
           >
             Previous
           </button>
-          <span className="text-lg font-medium text-white koulen py-2">{`Page ${currentPage} of ${totalPages}`}</span>
+          <span className="text-lg font-medium text-white koulen py-2 max-[500px]:text-xs max-[750px]:text-sm  ">{`Page ${currentPage} of ${totalPages}`}</span>
           <button
             onClick={() => paginate(currentPage + 1)}
             disabled={currentPage === totalPages}
-            className="bg-[#982222] text-white px-4 py-2 rounded disabled:opacity-50"
+            className="bg-[#982222] text-white koulen px-4 py-1 rounded disabled:opacity-50 max-[500px]:w-16 text-xs max-[500px]:h-8 max-[750px]:w-20  max-[750px]:h-8 "
           >
             Next
           </button>

@@ -86,7 +86,7 @@ function Home() {
           </p>
           <button className="bg-[#982222] rounded-md mt-6 md:mt-8 py-2 px-5 koulen text-white text-xl md:text-3xl"
           onClick={handleExplore } >
-            EXPLORE
+            GET STARTED
           </button>
         </div>
 
