@@ -155,12 +155,12 @@ const Dash = () => {
   return (
     <div className="h-screen bg-cover bg-no-repeat flex flex-col relative" style={{ backgroundImage: `url(${arriere})`, backgroundPosition: '90% 0%' }}>
       <Header />
-      <div className=" flex-grow overflow-auto no-scrollbar pl-10 pr-10">
-<div className="scroll-container flex  justify-center sm:justify-evenly items-center 
-gap-4 sm:gap-8 mb-8 z-10 px-4 sm:px-10 flex-nowrap no-scrollbar 
+      <div className=" flex-grow overflow-auto no-scrollbar">
+<div className="scroll-container flex  justify-between sm:justify-evenly items-center 
+gap-4 sm:gap-8 mb-8 z-10  flex-nowrap no-scrollbar min-[1000px]:pl-10 min-[1000px]:pr-10 min-[1000px]:gap-2
 max-[750px]:gap-2 overflow-x-auto snap-x    
-snap-mandatory max-[750px]:px-6 max-[750px]:w-[600px] mx-auto
- max-[650px]:w-[500px]   max-[550px]:w-[450px] max-[450px]:w-[260px]  ">
+snap-mandatory  max-[750px]:w-[600px] mx-auto max-[1000px]:w-[750px]
+ max-[650px]:w-[500px]   max-[550px]:w-[450px] max-[480px]:w-[360px]  max-[450px]:w-[260px]  ">
   {[
     { title: 'Total Crimes in Morocco', value: data.totalCrimes },
     { title: 'The City with Most Crimes', value: data.cityWithMostCrimes },
@@ -179,11 +179,13 @@ snap-mandatory max-[750px]:px-6 max-[750px]:w-[600px] mx-auto
   ].map((item, index) => (
     <div
       key={index}
-      className="card p-2 bg-white/90 rounded-xl flex flex-col justify-start space-y-2 shadow-md max-[750px]:min-w-[100px] max-[750px]:max-w-[150px] max-[750px]:text-xs max-[750px]:truncate"
+      className="card py-2 bg-white/90 rounded-xl flex flex-col justify-start 
+       space-y-2 shadow-md max-[750px]:min-w-[100px] max-[750px]:max-w-[150px] max-[750px]:text-xs 
+       max-[750px]:truncate"
       style={{
         flex: "1 1 calc(50% - 16px)",
         maxWidth: "350px",
-        minWidth: "200px",
+        minWidth: "220px",
       }}
     >
       <div className="card-title koulen text-black text-sm sm:text-base text-center font-semibold whitespace-pre">
@@ -195,15 +197,16 @@ snap-mandatory max-[750px]:px-6 max-[750px]:w-[600px] mx-auto
     </div>
   ))}
 </div>
-        <div className="flex flex-wrap md:flex-nowrap gap-8 justify-between items-start z-10  ">
-        <div className="card p-4 bg-white/90 rounded-xl flex flex-col w-full md:w-1/2 space-y-6">
+        <div className="flex flex-wrap min-[900px]:flex-nowrap gap-8 justify-between
+         items-start z-10 pl-10 pr-10">
+        <div className="card p-4 bg-white/90 rounded-xl flex flex-col w-full min-[901px]:w-1/2 space-y-6">
   {/* Titre */}
-  <p className="card-title text-base sm:text-lg text-black nosifer mb-4 text-center">
+  <p className="card-title text-base sm:text-lg text-black nosifer  text-center">
     Monthly Crimes
   </p>
 
   {/* Sélection de la ville */}
-  <div className="mb-4 text-center flex flex-wrap justify-center gap-4 sm:gap-8 items-center">
+  <div className="mb-2 text-center flex flex-wrap justify-center gap-4 sm:gap-8 items-center ">
     <label htmlFor="cityFilter" className="text-xs sm:text-sm koulen text-[#982222]">
       Select City:
     </label>
@@ -222,23 +225,23 @@ snap-mandatory max-[750px]:px-6 max-[750px]:w-[600px] mx-auto
   </div>
 
   {/* Graphique */}
-  <div className="flex-1 h-[300px] sm:h-[400px]">
+  <div className="flex-1 h-full  sm:h-[400px]">
     <Line data={lineChartDataCrimes} options={{ maintainAspectRatio: false }} />
   </div>
 </div>
 
 
-          <div className="card p-4 bg-white/90 rounded-xl flex flex-col w-full md:w-1/2 space-y-4">
+          <div className="card p-4 bg-white/90 rounded-xl flex flex-col w-full min-[901px]:w-1/2  space-y-4">
   {/* Titre */}
   <div className="card-title text-base sm:text-lg text-black nosifer mb-4 text-center">
     Crimes per City
   </div>
 
   {/* Formulaire de sélection des dates */}
-  <div className="flex flex-wrap justify-center gap-4 sm:gap-10 items-center">
+  <div className="flex flex-wrap justify-center  gap-4 sm:gap-2 items-center w-full ">
     {/* Date de début */}
-    <div className="flex flex-col items-center sm:items-start">
-      <label htmlFor="startDate" className="text-xs sm:text-sm mr-2 koulen text-[#982222]">
+    <div className="flex  items-center sm:items-start ">
+      <label htmlFor="startDate" className="text-xs sm:text-sm mr-2 koulen py-1 text-[#982222]">
         Start Date:
       </label>
       <input
@@ -251,8 +254,8 @@ snap-mandatory max-[750px]:px-6 max-[750px]:w-[600px] mx-auto
     </div>
 
     {/* Date de fin */}
-    <div className="flex flex-col items-center sm:items-start">
-      <label htmlFor="endDate" className="text-xs sm:text-sm mr-2 koulen text-[#982222]">
+    <div className="flex items-center sm:items-start">
+      <label htmlFor="endDate" className="text-xs sm:text-sm mr-2 py-1 koulen text-[#982222]">
         End Date:
       </label>
       <input
@@ -266,7 +269,7 @@ snap-mandatory max-[750px]:px-6 max-[750px]:w-[600px] mx-auto
   </div>
 
   {/* Graphique */}
-  <div className="flex-1 h-[300px] sm:h-[400px]">
+  <div className="flex-1 h-full sm:h-[400px] w-full ">
     <Bar data={barChartDataCities} options={{ maintainAspectRatio: false }} />
   </div>
 </div>

@@ -154,7 +154,7 @@ const List = () => {
         </div>
 
         {/* Date Filter */}
-        <div >
+        <div className=''>
           <label htmlFor="dateFilter" className="block text-sm font-semibold mb-1 ">
             Select Date
           </label>
@@ -163,7 +163,7 @@ const List = () => {
             type="date"
             value={dateFilter}
             onChange={handleDateChange}
-            className="p-2 border rounded w-full"
+            className=" border rounded w-full"
           />
         </div>
 
@@ -224,12 +224,12 @@ const List = () => {
         ))}
       </select>
     </div>
-    <div className="flex-1 ">
+    <div className="flex-1  ">
       <input
         type="date"
         value={dateFilter}
         onChange={handleDateChange}
-        className="mt-2  p-2 border rounded w-full bg-white/90"
+        className="mt-2 px-2 py-[10px] border rounded w-full bg-white/90"
       />
     </div>
     <div className="flex-1">
