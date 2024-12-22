@@ -128,9 +128,10 @@ function Security() {
       </div>
 
       {isModalOpen && selectedCategory && (
-        <div className="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center z-50 ">
+        <div className="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center z-50
+         ">
           <div
-            className="w-1/2  relative p-6 rounded-lg bg-black bg-opacity-50  text-white shadow-lg max-[900px]:text-[15px] max-[600px]:text-[10px]"
+            className="w-1/2 max-[1000px]:w-full  relative p-6 rounded-lg bg-black bg-opacity-50  text-white shadow-lg max-[900px]:text-[15px] max-[600px]:text-[10px]"
             style={{
               backgroundImage: `url(${arriere})`,
               backgroundPosition: '90% 30%',
@@ -141,7 +142,7 @@ function Security() {
             <div className="text-white text-2xl flex items-end justify-end -mt-2 mb-4 cursor-pointer hover:text-[#982222] " onClick={closeModal}>
               X{/* Close Icon */}
             </div>
-            <h2 className="text-2xl font-bold text-white mb-4 nosifer neon max-[630px]:hidden">{selectedCategory.category}</h2>
+            <h2 className="text-2xl font-bold text-white mb-4 nosifer neon max-[700px]:text-lg">{selectedCategory.category}</h2>
             <div className="overflow-x-auto no-scrollbar">
               <ul className="list-disc pl-5 text-white font-[Koulen] py-2">
                 {selectedCategory.standards.map((standard, idx) => (
