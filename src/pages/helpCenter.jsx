@@ -213,7 +213,7 @@ max-[1000px]:h-full  items-center   justify-between  w-full space-x-2   ">
       className="w-full px-2 py-2  border rounded koulen emergenc max-[1000px]:py-1"
       required
     />
-    <div className='flex gap-4'>
+    <div className='flex gap-4 max-[330px]:gap-1'>
       <input
         type="date"
         value={crimeData.date}

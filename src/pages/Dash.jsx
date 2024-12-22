@@ -161,10 +161,10 @@ const Dash = () => {
       <div className="relative ">
   {/* Flèche gauche */}
   <button
-    className=" min-[1001px]:hidden
+    className=" min-[1001px]:hidden  max-[400px]:left-6 max-[370px]:left-4
     absolute left-10 top-1/2 transform rotate-180 -translate-y-1/2 bg-[#580B0B]  p-1 rounded-full shadow-md z-20"
     onClick={() => {
-      document.querySelector('.scroll-container').scrollBy({ left: -200, behavior: 'smooth' });
+      document.querySelector('.scroll-container').scrollBy({ left: -230, behavior: 'smooth' });
     }}
   >
      <img src={iconNext} alt="" className='size-6' />
@@ -217,11 +217,11 @@ const Dash = () => {
 
   {/* Flèche droite */}
   <button
-    className="min-[1001px]:hidden
+    className="min-[1001px]:hidden max-[400px]:right-6 max-[370px]:right-4
     absolute right-10 top-1/2 transform  
      -translate-y-1/2 bg-[#580B0B] p-1 rounded-full shadow-md z-20"
     onClick={() => {
-      document.querySelector('.scroll-container').scrollBy({ left: 200, behavior: 'smooth' });
+      document.querySelector('.scroll-container').scrollBy({ left: 230, behavior: 'smooth' });
     }}
   >
     <img src={iconNext} alt="" className='size-6' />
