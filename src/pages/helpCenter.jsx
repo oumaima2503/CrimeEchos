@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useRef } from 'react';
 import axios from 'axios';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -44,21 +44,27 @@ function HelpCenter() {
     };
     fetchEmergencies();
   }, []);
+  useEffect(() => {
+    if (mapRef.current && cityCoordinates) {
+      mapRef.current.flyTo(cityCoordinates, 12); // Déplace la carte vers les nouvelles coordonnées
+    }
+  }, [cityCoordinates]);
+  
   
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-
+  
     const newCrime = { 
       ...crimeData, 
       id: Date.now(),
       location: cityCoordinates // L'emplacement est directement pris à partir de cityCoordinates
     };
-
+  
     const updatedHistory = [...crimeHistory, newCrime];
     setCrimeHistory(updatedHistory);
     localStorage.setItem('crimeHistory', JSON.stringify(updatedHistory));
-
+  
     try {
       await axios.post('http://localhost:3000/api/emergencies', { emergencies: [newCrime] });
       setAlertMessage('Your emergency has been reported successfully! We are sending help, don\'t worry.');
@@ -68,12 +74,20 @@ function HelpCenter() {
       setAlertMessage('There was an error reporting your emergency.');
       setShowPopup(true);
     }
-
+  
     // Resetting crimeData after submission
     const currentDate = new Date().toISOString().split('T')[0];
     const currentTime = new Date().toLocaleTimeString();
     setCrimeData({ title: '', description: '', date: currentDate, time: currentTime, type: '', witness: '', location: null, city: '' });
+    setEmergencies(prevEmergencies => [...prevEmergencies, newCrime]); // Ajoute la nouvelle urgence
+
+    // Déplace la carte vers la nouvelle localisation après la soumission
+    if (mapRef.current) {
+      mapRef.current.setView(cityCoordinates, 12); // Ajuste le niveau de zoom selon tes besoins
+    }
   };
+  
+  const mapRef = useRef();
 
   useEffect(() => {
     const currentDate = new Date().toISOString().split('T')[0];
@@ -85,16 +99,21 @@ function HelpCenter() {
   const handleCityChange = (e) => {
     const city = e.target.value;
     setCrimeData({ ...crimeData, city });
+    const newAddress = city + ' Maroc'; // Add the selected city and "Maroc" to the address
+    setAddress(newAddress); // Update the address field
     getCityCoordinates(city);
   };
-
+  
   const handleAddressChange = async (e) => {
-    setAddress(e.target.value);
-    if (e.target.value.length > 3) {
+    const newAddress = e.target.value;
+    setAddress(newAddress);
+  
+    // Allow the user to manually add more to the address
+    if (newAddress.length > 3) {
       try {
         const response = await axios.get('https://nominatim.openstreetmap.org/search', {
           params: {
-            q: e.target.value,
+            q: newAddress,
             format: 'json',
             addressdetails: 1,
             limit: 1
@@ -109,6 +128,7 @@ function HelpCenter() {
       }
     }
   };
+  
 
   const getCityCoordinates = async (city) => {
     try {
@@ -244,7 +264,8 @@ function HelpCenter() {
   {/* Map */}
   <div className="w-full sm:w-1/2 h-full bg-white/90 rounded-lg shadow-lg p-2 max-[640px]:hidden">
   <MapContainer
-  center={emergencies.length > 0 ? emergencies[emergencies.length - 1].location : cityCoordinates}
+  ref={mapRef}
+  center={cityCoordinates}
   zoom={12}
   style={{ height: "100%", width: "100%" }}
 >
@@ -267,6 +288,7 @@ function HelpCenter() {
     <div>Loading emergencies...</div>
   )}
 </MapContainer>
+
 
 
     </div>
