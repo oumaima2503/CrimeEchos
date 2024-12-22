@@ -6,25 +6,36 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-// Route POST pour recevoir les urgences sans base de données
+// Tableau en mémoire pour stocker les données
+let emergencies = [];
+
+// Endpoint pour récupérer les urgences
+app.get('/api/emergencies', (req, res) => {
+  res.json(emergencies);
+});
+
+// Endpoint pour ajouter une urgence
 app.post('/api/emergencies', (req, res) => {
-  try {
-    const { emergencies } = req.body; // Extraction des données envoyées depuis le frontend
-    console.log('Received emergencies:', emergencies); // Affichage des données dans la console pour vérification
-
-    // Vous pouvez effectuer des actions supplémentaires ici si nécessaire (ex: les envoyer par email ou les afficher ailleurs)
-
-    res.status(200).json({ message: 'Emergencies have been received successfully!', data: emergencies });
-  } catch (error) {
-    console.error('Error receiving emergencies:', error);
-    res.status(500).json({ message: 'There was an error receiving your emergencies.' });
+  const { emergencies: newEmergencies } = req.body;
+  if (newEmergencies && Array.isArray(newEmergencies)) {
+    emergencies = emergencies.concat(newEmergencies);
+    res.status(201).json({ message: 'Emergencies added successfully!' });
+  } else {
+    res.status(400).json({ message: 'Invalid data format.' });
   }
 });
 
-// Route pour récupérer les urgences (bien que vous ne les stockiez pas dans une base de données)
-app.get('/api/emergencies', (req, res) => {
-  res.status(200).json({ emergencies: [] }); // Retourner une réponse vide ou un message comme vous le souhaitez
+// Endpoint pour supprimer une urgence par ID
+app.delete('/api/emergencies/:id', (req, res) => {
+  const id = parseInt(req.params.id, 10);
+  emergencies = emergencies.filter(emergency => emergency.id !== id);
+  res.json({ message: 'Emergency deleted successfully!' });
 });
+
+
+
+
+
 
 // Utilisation des données dans une route d'Express
 import { crimes } from './src/api/crimeData.js'; // Assurez-vous que les données sont bien importées
@@ -124,6 +135,13 @@ app.get('/api/security', (req, res) => {
 
   res.json(result);
 });
+
+
+
+
+
+
+
 
 // Define your PORT (if it's missing)
 const PORT = process.env.PORT || 3000;
