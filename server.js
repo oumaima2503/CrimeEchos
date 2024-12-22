@@ -7,11 +7,18 @@ import { fileURLToPath } from 'url';
 
 const app = express();
 app.use(cors());
+app.use(bodyParser.json());
 
 // Use import for crimeData
 import { crimes } from './src/api/crimeData.js';  // Ensure .js extension is used
 import { force } from './src/api/forceData.js'; 
 
+
+
+// Route to fetch all emergencies
+app.get('/api/emergencies', (req, res) => {
+  res.json(emergencies);
+});
 // Utilisation des données dans une route d'Express
 app.get('/api/crimes', (req, res) => {
     res.json(crimes);
