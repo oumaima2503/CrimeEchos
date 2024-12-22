@@ -11,7 +11,7 @@ import List from './pages/List';
 import Witness from './pages/Witness';
 import Map from './pages/Map';
 import ProfileEdit from './pages/ProfileEdit';
-import HelpCenter from './pages/HelpCenter';
+import HelpCenter from './pages/helpCenter';
 import Security from './pages/Security';
 import FavoriteCrimes from './pages/FavoritesCrimes';
 
