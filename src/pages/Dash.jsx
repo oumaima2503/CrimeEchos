@@ -183,7 +183,7 @@ snap-mandatory max-[750px]:px-6 max-[750px]:w-[600px] mx-auto
       style={{
         flex: "1 1 calc(50% - 16px)",
         maxWidth: "350px",
-        minWidth: "300px",
+        minWidth: "200px",
       }}
     >
       <div className="card-title koulen text-black text-sm sm:text-base text-center font-semibold whitespace-pre">
