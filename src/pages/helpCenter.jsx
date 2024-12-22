@@ -124,7 +124,7 @@ function HelpCenter() {
     >
       <img className="absolute -z-10 opacity-80" src={blood} alt="Blood Icon" />
       <Header />
-      <div className="flex justify-between pl-10 mr-10 z-0 flex-wrap">
+      <div className="flex justify-between pl-10 mr-10 z-0 flex-wrap mb-2">
   <div>
     <h1 className="text-2xl  font-bold text-[#580B0B] nosifer max-[700px]:text-lg max-[480px]:text-sm max-[700px]:mt-2  max-[480px]:-mt-2 ">
       Help Center
@@ -148,10 +148,12 @@ function HelpCenter() {
   >
     <FaHistory />
   </button>
-</div>
-<div className="flex flex-col sm:flex-row items-start justify-between px-4 w-full space-x-2 flex-grow overflow-auto no-scrollbar pl-10 pr-10 mb-4 mt-4">
+</div> 
+<div className='flex-grow overflow-auto no-scrollbar pl-10 pr-10 space-y-4 mb-2 items-center '>
+<div className="  flex max-[640px]:flex-col max-[640px]:space-y-4 h-[90%] max-[1000px]:h-full items-center   justify-between  w-full space-x-2   mt-4">
   {/* Form */}
-  <form onSubmit={handleFormSubmit} className="bg-white/90 px-4 py-4 rounded-lg shadow-lg w-full sm:w-1/2 h-[340px] flex flex-col justify-between">
+  <div className='bg-white/90 px-4 py-4 rounded-lg shadow-lg w-full sm:w-1/2 h-full flex max-[640px]:order-1'>
+  <form onSubmit={handleFormSubmit} className="flex w-full flex-col justify-between h-full ">
     <h2 className="text-xl font-bold text-center koulen">What's your Emergency?</h2>
     <input
       type="text"
@@ -215,10 +217,10 @@ function HelpCenter() {
     <button type="submit" className="w-full py-2 bg-[#580B0B] text-white hover:bg-[#982222] koulen rounded">
       Call for Emergency
     </button>
-  </form>
+  </form></div>
 
   {/* Map */}
-  <div className="w-full sm:w-1/2 h-[340px] bg-white/90 rounded-lg shadow-lg p-2 sticky top-0">
+  <div className="w-full sm:w-1/2 h-full bg-white/90 rounded-lg shadow-lg p-2  max-[640px]:hidden">
     <MapContainer center={cityCoordinates} zoom={12} style={{ height: '100%', width: '100%' }}>
       <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
       <Marker position={cityCoordinates}>
@@ -227,6 +229,16 @@ function HelpCenter() {
     </MapContainer>
   </div>
 </div>
+<div className="w-full h-full bg-white/90 rounded-lg shadow-lg p-2  min-[641px]:hidden">
+    <MapContainer center={cityCoordinates} zoom={12} style={{ height: '100%', width: '100%' }}>
+      <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+      <Marker position={cityCoordinates}>
+        <Popup>Your emergency is here!</Popup>
+      </Marker>
+    </MapContainer>
+  </div>
+  </div>
+
 
       {/* Reassurance Popup */}
       {showPopup && (
