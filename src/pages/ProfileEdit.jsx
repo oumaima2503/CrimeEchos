@@ -110,7 +110,7 @@ const ProfileEdit = () => {
 
       <h2 className='text-white nosifer  text-center mb-4 max-[900px]:hidden mt-20 '>
         Your safety is our priority. Protect your information, stay vigilant, <br /> and report suspicious activity.</h2>
-      <div className='flex justify-center gap-10 max-[900px]:flex-col   max-[900px]:mt-80
+      <div className='flex justify-center gap-10 max-[900px]:flex-col   max-[900px]:mt-60 
       flex-grow'>
       <div className='flex-col space-y-10 '>
             <div className="bg-white w-96 max-w-full p-6 rounded-lg shadow-lg flex-col max-[900px]:w-80 ">
