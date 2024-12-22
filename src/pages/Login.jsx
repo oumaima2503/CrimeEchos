@@ -33,13 +33,24 @@ function SigninPage() {
 
       {/* Formulaire de connexion */}
       <div className="w-full md:w-2/5 bg-cover bg-right relative h-screen ml-auto hidden sm:block">
-        <div className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-0 p-6">
+        <div className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-0 p-6 mt-20">
           <h1 className="text-white text-3xl md:text-4xl font-bold z-10 -mt-40 nosifer">WELCOME</h1>
           <h1 className="text-[#580B0B] text-3xl md:text-4xl font-bold z-0 nosifer -mt-[30px] md:-mt-[30px]">
             WELCOME
           </h1>
           <img className="w-48 h-auto mb-2 mt-6" src={logo} alt="logo" />
           <p className="text-3xl text-white uppercase font-bold tracking-wide koulen">Crimechos</p>
+           {/* Back to Home Button */}
+      <motion.button
+          onClick={handleGoHome}
+          className=" flex items-center text-white bg-[#580B0B] px-4 py-2 nosifer text-xs mt-8  p-2 rounded-full hover:bg-[#330d0d] transition-all"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5, duration: 0.8 }}
+        >
+        <IoMdArrowRoundBack className="text-2xl mr-2 koulen" />
+        Back to Home
+      </motion.button>
         </div>
         <img 
           src={arr} 
@@ -88,17 +99,7 @@ function SigninPage() {
         </div>
 
 
-      {/* Back to Home Button */}
-      <motion.button
-          onClick={handleGoHome}
-          className="absolute top-2 -mt-10 right-0 mr-12 flex items-center text-white bg-black p-2 rounded-full hover:bg-gray-700 transition-all"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5, duration: 0.8 }}
-        >
-        <IoMdArrowRoundBack className="text-2xl mr-2 koulen" />
-        Back to Home
-      </motion.button>
+     
       </div>
     </motion.div>
   );

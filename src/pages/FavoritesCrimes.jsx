@@ -59,7 +59,7 @@ function FavoriteCrimes({ crimes, onSeeMore }) {
                         ? removeFromFavorites(crime.id)
                         : addToFavorites(crime)
                     }
-                    className="mt-2 text-3xl rotate-90 flex justify-end items-end"
+                    className="mt-2 text-3xl -rotate-90 flex justify-end items-end"
                   >
                     {isFavorite(crime.id) ? (
                       <MdLabelImportant className="text-[#982222]" />

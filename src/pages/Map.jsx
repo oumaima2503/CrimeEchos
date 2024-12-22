@@ -110,7 +110,7 @@ const Map = () => {
 
 
         <div className="flex flex-col items-end w-full z-10 ml-2">
-  <div className="flex items-center justify-between w-full -mt-6 ml-20 md:block hidden lg:block">
+  <div className="items-center justify-between w-full -mt-6 ml-20 md:block hidden lg:block">
     <div className="flex flex-nowrap space-x-4 w-full max-[700px]:space-x-2">
       <select
         value={selectedCity}
@@ -156,7 +156,8 @@ const Map = () => {
   {/* Button for small screen filter */}
   <div className="md:hidden flex justify-end p-4 -mt-20 pr-10">
     <button
-      className="bg-[#982222] text-white py-2 px-4 rounded-md shadow-md flex items-center text-sm"
+      className="bg-[#982222] text-white py-2 px-4 rounded-md shadow-md 
+      koulen flex items-center text-sm max-[450px]:text-[10px]"
       onClick={() => setDropdownVisible(!dropdownVisible)}
     >
       <FiFilter />

@@ -129,7 +129,7 @@ const handleFormSubmit = async (e) => {
     >
       <img className="absolute -z-10 opacity-80" src={blood} alt="Blood Icon" />
       <Header />
-      <div className="flex justify-between pl-10 mr-10 z-0 flex-wrap mb-2">
+      <div className="flex justify-between pl-10 mr-10 z-0 flex-wrap mb-2 ">
   <div>
     <h1 className="text-2xl  font-bold text-[#580B0B] nosifer max-[700px]:text-lg max-[480px]:text-sm max-[700px]:mt-2  max-[480px]:-mt-2 ">
       Help Center
@@ -142,7 +142,8 @@ const handleFormSubmit = async (e) => {
   {/* Emergency history button */}
   <button 
     onClick={handleHistoryButtonClick} 
-    className="bg-[#580B0B] text-white hover:bg-[#982222] nosifer py-2 px-4 rounded-lg z-20 max-[550px]:text-xs max-[700px]:ml-auto text-xs max-[490px]:hidden"
+    className="bg-[#580B0B] text-white hover:bg-[#982222]
+     nosifer py-2 px-4 rounded-lg z-20 max-[550px]:text-xs max-[700px]:ml-auto text-xs max-[490px]:hidden"
   >
     Emergency's history
   </button>
@@ -154,7 +155,7 @@ const handleFormSubmit = async (e) => {
     <FaHistory />
   </button>
 </div> 
-<div className='flex-grow overflow-auto no-scrollbar pl-10 pr-10 space-y-4 mb-2 items-center '>
+<div className='flex-grow overflow-auto no-scrollbar pl-10 pr-10 space-y-4 mb-2 items-center  '>
 <div className="  flex max-[640px]:flex-col max-[640px]:space-y-4 h-[90%] max-[1000px]:h-full items-center   justify-between  w-full space-x-2   mt-4">
   {/* Form */}
   <div className='bg-white/90 px-4 py-4 rounded-lg shadow-lg w-full sm:w-1/2 h-full flex max-[640px]:order-1'>

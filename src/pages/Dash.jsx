@@ -155,12 +155,12 @@ const Dash = () => {
   return (
     <div className="h-screen bg-cover bg-no-repeat flex flex-col relative" style={{ backgroundImage: `url(${arriere})`, backgroundPosition: '90% 0%' }}>
       <Header />
-      <div className=" flex-grow overflow-auto no-scrollbar ">
-<div className="scroll-container flex flex-wrap justify-center sm:justify-evenly items-center 
-gap-4 sm:gap-8 mb-8 z-10 px-4 sm:px-10 max-[750px]:flex-nowrap 
-max-[750px]:gap-2 max-[750px]:overflow-x-auto max-[750px]:snap-x 
-max-[750px]:snap-mandatory max-[750px]:px-6 max-[750px]:w-[600px] mx-auto
- max-[650px]:w-[500px]   mx-auto max-[550px]:w-[450px] max-[450px]:w-[260px]  ">
+      <div className=" flex-grow overflow-auto no-scrollbar pl-10 pr-10">
+<div className="scroll-container flex  justify-center sm:justify-evenly items-center 
+gap-4 sm:gap-8 mb-8 z-10 px-4 sm:px-10 flex-nowrap no-scrollbar 
+max-[750px]:gap-2 overflow-x-auto snap-x    
+snap-mandatory max-[750px]:px-6 max-[750px]:w-[600px] mx-auto
+ max-[650px]:w-[500px]   max-[550px]:w-[450px] max-[450px]:w-[260px]  ">
   {[
     { title: 'Total Crimes in Morocco', value: data.totalCrimes },
     { title: 'The City with Most Crimes', value: data.cityWithMostCrimes },
@@ -182,8 +182,8 @@ max-[750px]:snap-mandatory max-[750px]:px-6 max-[750px]:w-[600px] mx-auto
       className="card p-2 bg-white/90 rounded-xl flex flex-col justify-start space-y-2 shadow-md max-[750px]:min-w-[100px] max-[750px]:max-w-[150px] max-[750px]:text-xs max-[750px]:truncate"
       style={{
         flex: "1 1 calc(50% - 16px)",
-        maxWidth: "200px",
-        minWidth: "150px",
+        maxWidth: "350px",
+        minWidth: "300px",
       }}
     >
       <div className="card-title koulen text-black text-sm sm:text-base text-center font-semibold whitespace-pre">
@@ -195,7 +195,7 @@ max-[750px]:snap-mandatory max-[750px]:px-6 max-[750px]:w-[600px] mx-auto
     </div>
   ))}
 </div>
-        <div className="flex flex-wrap md:flex-nowrap gap-8 justify-between items-start z-10 pl-10 pr-10  ">
+        <div className="flex flex-wrap md:flex-nowrap gap-8 justify-between items-start z-10  ">
         <div className="card p-4 bg-white/90 rounded-xl flex flex-col w-full md:w-1/2 space-y-6">
   {/* Titre */}
   <p className="card-title text-base sm:text-lg text-black nosifer mb-4 text-center">

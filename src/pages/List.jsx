@@ -116,13 +116,12 @@ const List = () => {
     <div className="h-screen bg-cover bg-no-repeat flex flex-col relative  " style={{ backgroundImage: `url(${arriere})`, backgroundPosition: '90% 0%' }}>
       <img className="absolute -z-10 opacity-80" src={blood} alt="Blood Icon" />
       <Header />
-      <div className="z-20 flex-grow p-2 overflow-auto max-[600px]:text-[10px]  no-scrollbar ">
-     {/* Filter Section */}
-<div className="z-10 relative">
+       {/* Filter Section */}
+<div className="z-10 relative mb-2">
   {/* Bouton de filtre pour les petites tailles */}
-  <div className="md:hidden flex justify-end p-4 pr-10">
+  <div className="md:hidden flex justify-end px-4 pr-10">
     <button
-      className="bg-[#982222] text-white py-2 px-4 rounded-md shadow-md flex items-center text-sm"
+      className="bg-[#982222] text-white py-2 px-4 rounded-md shadow-md flex items-center text-sm max-[450px]:text-[10px]"
       onClick={() => setDropdownVisible(!dropdownVisible)} // Gérer la visibilité du dropdown
     >
       <FiFilter />
@@ -210,7 +209,7 @@ const List = () => {
   
 
   {/* Section toujours visible pour les grandes tailles */}
-  <div className="hidden md:flex flex-row gap-4 pr-10 pl-10 text-[#982222] koulen font-bold">
+  <div className="hidden md:flex flex-row gap-4 pr-10 pl-10 text-[#982222] koulen font-bold ">
     <div className="flex-1">
       <select
         value={placeFilter}
@@ -260,11 +259,13 @@ const List = () => {
     </div>
   </div>
 </div>
+      <div className="z-20 flex-grow overflow-auto no-scrollbar px-2  max-[600px]:text-[10px]  ">
+    
 
 
         {/* Display results */}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 z-10 py-6 pr-10 pl-10 ">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 z-10 py-6 pr-10 pl-10   ">
 
 
           {currentCrimes.length > 0 ? (
@@ -317,7 +318,7 @@ const CrimeCard = ({ crime, onSeeMore }) => {
 
 
   return (
-    <div className="flex items-stretch bg-white/90 rounded-lg shadow-md overflow-hidden koulen">
+    <div className="flex items-stretch bg-white/90 rounded-lg max-[600px]:-mt-4 shadow-md overflow-hidden koulen">
       <div className="bg-[#982222] text-white p-4 flex flex-col justify-center">
         <div className="mb-2 flex items-center gap-2">
           <MdPlace />
@@ -343,7 +344,8 @@ const CrimeCard = ({ crime, onSeeMore }) => {
         
         <button
           onClick={() => onSeeMore(crime)}
-          className="mt-4 bg-[#982222] text-white px-6 py-2 rounded hover:bg-[#c12c2c] transition-transform transform hover:scale-105"
+          className="mt-4 bg-[#982222] text-white px-6 py-2 rounded hover:bg-[#c12c2c]
+           transition-transform transform hover:scale-105"
         >
           See More
         </button>
@@ -354,7 +356,7 @@ const CrimeCard = ({ crime, onSeeMore }) => {
       ? removeFromFavorites(crime.id)
       : addToFavorites(crime)
   }
-  className="mt-4 text-3xl rotate-90 flex justify-end items-end"
+  className="mt-4 text-3xl -rotate-90 flex justify-end items-end"
 >
   {isFavorite ? (
     <MdLabelImportant className="text-[#982222]" />

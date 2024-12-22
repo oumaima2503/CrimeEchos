@@ -80,10 +80,22 @@ function SignUpPage() {
         </div>
       </div>
 
-      {/* Back to Home Button */}
+     
+
+      {/* Section à droite */}
+      <div className="w-full md:w-2/5 bg-cover bg-right relative h-screen ml-auto hidden sm:block">
+        <div className="absolute inset-0 flex flex-col items-center justify-center mt-20 bg-black bg-opacity-0 p-6">
+          <h1 className="text-white text-3xl md:text-4xl font-bold z-10 -mt-40 nosifer">GET STARTED</h1>
+          <h1 className="text-[#580B0B] text-3xl md:text-4xl font-bold z-0 nosifer -mt-[30px] md:-mt-[30px] ">
+            GET STARTED
+          </h1>
+          <img className="w-48 h-auto mb-2 mt-6" src={logo} alt="logo" />
+          <p className="text-3xl text-white uppercase font-bold tracking-wide koulen">Crimechos</p>
+
+           {/* Back to Home Button */}
       <motion.button
         onClick={handleGoHome}
-        className="absolute top-5 left-5 flex items-center text-white bg-black p-2 rounded-full hover:bg-gray-700 transition-all"
+        className=" flex items-center text-white bg-[#580B0B] px-4 py-2 nosifer text-xs mt-8  p-2 rounded-full hover:bg-[#330d0d] transition-all"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.5, duration: 0.8 }}
@@ -91,16 +103,6 @@ function SignUpPage() {
         <IoMdArrowRoundBack className="text-2xl mr-2 koulen" />
         Back to Home
       </motion.button>
-
-      {/* Section à droite */}
-      <div className="w-full md:w-2/5 bg-cover bg-right relative h-screen ml-auto hidden sm:block">
-        <div className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-0 p-6">
-          <h1 className="text-white text-3xl md:text-4xl font-bold z-10 -mt-40 nosifer">GET STARTED</h1>
-          <h1 className="text-[#580B0B] text-3xl md:text-4xl font-bold z-0 nosifer -mt-[30px] md:-mt-[30px] ">
-            GET STARTED
-          </h1>
-          <img className="w-48 h-auto mb-2 mt-6" src={logo} alt="logo" />
-          <p className="text-3xl text-white uppercase font-bold tracking-wide koulen">Crimechos</p>
         </div>
 
         {/* Image de fond */}
