@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { motion } from "framer-motion"; // Importer framer-motion
+import { motion } from "framer-motion"; // Importation de Framer Motion
 import blood from '../assets/blood.svg';
 import arr from '../assets/arrieresansblood.svg';
 import logo from '../assets/logo_crime.png';
@@ -8,6 +8,7 @@ import { IoMdArrowRoundBack } from "react-icons/io";
 
 function SignUpPage() {
   const navigate = useNavigate();
+  const [isTransitioning, setIsTransitioning] = useState(false); // État pour gérer la transition
 
   const handleSignUp = (e) => {
     e.preventDefault();
@@ -18,29 +19,37 @@ function SignUpPage() {
     navigate('/');
   };
 
+  const handleLogInClick = () => {
+    setIsTransitioning(true); // Déclencher la transition
+    setTimeout(() => navigate('/login'), 10); // Naviguer après la transition
+  };
+
   return (
-    <motion.div 
-      className="min-h-screen flex items-center justify-center bg-black text-white"
-      initial={{ x: '100%' }}     // Initialisation de l'animation (hors de l'écran à droite)
-      animate={{ x: 0 }}          // Position finale (au centre)
-      exit={{ x: '-100%' }}       // Quand la page quitte, elle se déplace à gauche
-      transition={{ duration: 0.8 }} // Durée de l'animation
-    >
+    <div className="min-h-screen flex items-center justify-center bg-black text-white relative">
       <img 
-        className="absolute z-0 opacity-60 top-0 left-0 h-64 w-full object-cover" 
+        className="absolute z-0 opacity-60 top-0 left-0 w-full object-cover h-[250px] md:h-64" 
         src={blood} 
         alt="Blood Icon" 
       />
       
       {/* Formulaire d'inscription */}
-      <div className="w-full md:w-3/5 relative flex items-center justify-center px-4"> 
-        <div className="w-full max-w-md h-[500px] bg-white p-6 flex flex-col justify-center border border-white rounded-3xl backdrop-blur-xl bg-opacity-30">
+      <motion.div
+        className={`w-full md:w-3/5 relative flex items-center justify-center px-4 ${
+          isTransitioning ? "z-0" : "z-10"
+        }`}
+        animate={isTransitioning ? { x: "-100%" } : { x: 0 }} // Déplacement vers la gauche
+        transition={{ duration: 0.8 }}
+      >
+        <div className="w-full max-w-md h-auto lg:h-[450px]  bg-white p-6 flex flex-col justify-center border border-white rounded-3xl backdrop-blur-xl bg-opacity-30">
           <h1 className="text-3xl font-bold mb-4 text-center koulen">CREATE ACCOUNT</h1>
           <p className="text-lg text-center text-white mb-6">
             Already have an Account?{" "}
-            <a href="/login" className="text-yellow-400 hover:underline">
+            <span
+              onClick={handleLogInClick}
+              className="text-yellow-400 hover:underline cursor-pointer"
+            >
               Log in
-            </a>
+            </span>
           </p>
           <form className="space-y-4">
             <div className="group">
@@ -78,31 +87,32 @@ function SignUpPage() {
             </div>
           </form>
         </div>
-      </div>
-
-     
+      </motion.div>
 
       {/* Section à droite */}
-      <div className="w-full md:w-2/5 bg-cover bg-right relative h-screen ml-auto hidden sm:block">
-        <div className="absolute inset-0 flex flex-col items-center justify-center mt-20 bg-black bg-opacity-0 p-6">
-          <h1 className="text-white text-3xl md:text-4xl font-bold z-10 -mt-40 nosifer">GET STARTED</h1>
-          <h1 className="text-[#580B0B] text-3xl md:text-4xl font-bold z-0 nosifer -mt-[30px] md:-mt-[30px] ">
+      <motion.div
+        className={`w-full md:w-2/5 bg-cover bg-right relative h-screen ml-auto hidden sm:block ${
+          isTransitioning ? "z-10" : "z-0"
+        }`}
+        animate={isTransitioning ? { x: "100%" } : { x: 0 }} // Déplacement vers la droite
+        transition={{ duration: 0.8 }}
+      >
+        <div className="absolute inset-0 flex flex-col items-center justify-center p-2">
+          <h1 className="text-white text-3xl md:text-3xl font-bold z-10 -mt-12 nosifer">GET STARTED</h1>
+          <h1 className="text-[#580B0B] text-3xl md:text-3xl font-bold z-0 nosifer -mt-[30px] md:-mt-[30px] ">
             GET STARTED
           </h1>
-          <img className="w-48 h-auto mb-2 mt-6" src={logo} alt="logo" />
+          <img className="w-48 h-auto mb-2 mt-2" src={logo} alt="logo" />
           <p className="text-3xl text-white uppercase font-bold tracking-wide koulen">Crimechos</p>
 
-           {/* Back to Home Button */}
-      <motion.button
-        onClick={handleGoHome}
-        className=" flex items-center text-white bg-[#580B0B] px-4 py-2 nosifer text-xs mt-8  p-2 rounded-full hover:bg-[#330d0d] transition-all"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.5, duration: 0.8 }}
-      >
-        <IoMdArrowRoundBack className="text-2xl mr-2 koulen" />
-        Back to Home
-      </motion.button>
+          {/* Back to Home Button */}
+          <button
+            onClick={handleGoHome}
+            className="flex items-center text-white bg-[#580B0B] px-4 py-2 nosifer text-xs mt-8 p-2 rounded-full hover:bg-[#330d0d] transition-all"
+          >
+            <IoMdArrowRoundBack className="text-2xl mr-2 koulen" />
+            Back to Home
+          </button>
         </div>
 
         {/* Image de fond */}
@@ -111,8 +121,8 @@ function SignUpPage() {
           alt="Crime Scene Background"
           className="w-full h-full object-cover"
         />
-      </div>
-    </motion.div>
+      </motion.div>
+    </div>
   );
 }
 
