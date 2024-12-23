@@ -10,6 +10,7 @@ import locationPolice from '../assets/locationpolice.png'; // Icône pour les fo
 import L from 'leaflet';
 import axios from 'axios';
 import { FiFilter } from 'react-icons/fi'; // Add missing FiFilter import
+import { FiChevronUp, FiChevronDown} from 'react-icons/fi';
 
 // Icônes personnalisées
 const redIcon = new L.Icon({
@@ -290,15 +291,24 @@ const Map = () => {
 <div className="  lg:w-1/4 bg-white/0 border-l border-gray-300 p-4 
  flex-col justify-center h-full text-center mt-4 lg:mt-0 max-[600px]:hidden">
   <h2 className="text-sm lg:text-2xl nosifer font-bold mb-4 max-[650px]:text-xs">Description</h2>
-  <div className=" flex justify-center p-4 -mt-4 ">
+  <div className="flex justify-center p-4 -mt-4">
   <button
-    className="bg-[#982222] max[800px] :text-xs  text-white py-2 px-4 rounded-md shadow-md koulen flex items-center text-sm max-[450px]:text-[10px]"
+    className="bg-[#982222] text-white py-2 px-4 rounded-md shadow-md koulen flex items-center text-sm max-[450px]:text-[10px]"
     onClick={() => setShowForces(!showForces)} // Toggle l'état showForces
   >
     <FiFilter />
-    <span className="ml-2 ">Toggle Forces</span>
+    {/* Afficher une flèche différente en fonction de l'état */}
+    {showForces ? (
+      <span className="ml-2">Hide forces</span> // Si les forces sont affichées
+    ) : (
+      <span className="ml-2">View forces</span> // Si les forces sont cachées
+    )}
+    <span className="ml-2">
+      {showForces ? <FiChevronUp /> : <FiChevronDown />} {/* Icône dynamique */}
+    </span>
   </button>
 </div>
+
   <div className="flex items-center mb-2 justify-center text-xs  lg:text-xl">
     <img src={locationsolved} alt="Crime résolu" className="w-6 h-6 mr-2" />
     <span className="koulen truncate">Solved Crime</span>
@@ -322,15 +332,26 @@ const Map = () => {
   
   <h2 className="text-sm lg:text-2xl nosifer font-bold mb-4 max-[650px]:text-xs">Description</h2>
 
+
   <div className="md:hidden flex justify-center p-4 -mt-6">
   <button
     className="bg-[#982222] text-white py-2 px-4 rounded-md shadow-md koulen flex items-center text-sm max-[450px]:text-[10px]"
     onClick={() => setShowForces(!showForces)} // Toggle l'état showForces
   >
     <FiFilter />
-    <span className="ml-2">Toggle Forces</span>
+    {/* Afficher une flèche différente en fonction de l'état */}
+    {showForces ? (
+      <span className="ml-2">Hide forces</span> // Si les forces sont affichées
+    ) : (
+      <span className="ml-2">View forces</span> // Si les forces sont cachées
+    )}
+    <span className="ml-2">
+      {showForces ? <FiChevronUp /> : <FiChevronDown />} {/* Icône dynamique */}
+    </span>
   </button>
 </div>
+
+
   <div className="flex items-center mb-2 justify-center text-xs  lg:text-xl">
     <img src={locationsolved} alt="Crime résolu" className="w-6 h-6 mr-2" />
     <span className="koulen truncate">Solved Crime</span>
