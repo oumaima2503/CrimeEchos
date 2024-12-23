@@ -81,6 +81,7 @@ const Map = () => {
   
     fetchData();
   }, []);
+  const [showForces, setShowForces] = useState(true); // Contrôle de l'affichage des forces
 
   const filteredCrimes = crimes.filter((crime) => {
     // Filtrer par ville
@@ -265,21 +266,22 @@ const Map = () => {
       </Marker>
     ) : null
   )}
-  {forces.map((force, index) =>
-    force.coordinates?.latitude && force.coordinates?.longitude ? (
-      <Marker
-        key={index}
-        position={[parseFloat(force.coordinates.latitude), parseFloat(force.coordinates.longitude)]}
-        icon={greenIcon}
-      >
-        <Popup>
-          <strong>Police Force:</strong> {force.name || 'Unknown'}
-          <br />
-          <strong>Address:</strong> {force.address || 'No address'}
-        </Popup>
-      </Marker>
-    ) : null
-  )}
+{showForces && forces.map((force, index) =>
+  force.coordinates?.latitude && force.coordinates?.longitude ? (
+    <Marker
+      key={index}
+      position={[parseFloat(force.coordinates.latitude), parseFloat(force.coordinates.longitude)]}
+      icon={greenIcon}
+    >
+      <Popup>
+        <strong>Police Force:</strong> {force.name || 'Unknown'}
+        <br />
+        <strong>Address:</strong> {force.address || 'No address'}
+      </Popup>
+    </Marker>
+  ) : null
+)}
+
 </MapContainer>
 
 
@@ -288,6 +290,15 @@ const Map = () => {
 <div className="  lg:w-1/4 bg-white/0 border-l border-gray-300 p-4 
  flex-col justify-center h-full text-center mt-4 lg:mt-0 max-[600px]:hidden">
   <h2 className="text-sm lg:text-2xl nosifer font-bold mb-4 max-[650px]:text-xs">Description</h2>
+  <div className=" flex justify-center p-4 -mt-4 ">
+  <button
+    className="bg-[#982222] max[800px] :text-xs  text-white py-2 px-4 rounded-md shadow-md koulen flex items-center text-sm max-[450px]:text-[10px]"
+    onClick={() => setShowForces(!showForces)} // Toggle l'état showForces
+  >
+    <FiFilter />
+    <span className="ml-2 ">Toggle Forces</span>
+  </button>
+</div>
   <div className="flex items-center mb-2 justify-center text-xs  lg:text-xl">
     <img src={locationsolved} alt="Crime résolu" className="w-6 h-6 mr-2" />
     <span className="koulen truncate">Solved Crime</span>
@@ -308,7 +319,18 @@ const Map = () => {
     
     <div className=" w-full bg-white/90 border-l border-gray-300 py-2 mb-4 rounded-md
  flex-col justify-center text-center mt-4 lg:mt-0 min-[601px]:hidden">
+  
   <h2 className="text-sm lg:text-2xl nosifer font-bold mb-4 max-[650px]:text-xs">Description</h2>
+
+  <div className="md:hidden flex justify-center p-4 -mt-6">
+  <button
+    className="bg-[#982222] text-white py-2 px-4 rounded-md shadow-md koulen flex items-center text-sm max-[450px]:text-[10px]"
+    onClick={() => setShowForces(!showForces)} // Toggle l'état showForces
+  >
+    <FiFilter />
+    <span className="ml-2">Toggle Forces</span>
+  </button>
+</div>
   <div className="flex items-center mb-2 justify-center text-xs  lg:text-xl">
     <img src={locationsolved} alt="Crime résolu" className="w-6 h-6 mr-2" />
     <span className="koulen truncate">Solved Crime</span>
