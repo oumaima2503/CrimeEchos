@@ -277,7 +277,7 @@ const Witness = () => {
           <div className='space-y-2 max-[630px]:order-1 max-[630px]:hidden'>
             
                         <div className='flex gap-2 mb-3'>
-                          <img className=" xl:block xl:h-6 xl:w-6 rounded-full " src={profil} alt="" />
+                          <img className=" block h-6 w-6 rounded-full " src={profil} alt="" />
                           <strong className='text-white/60 '>{selectedPost.author}</strong>
                         </div>
                         <img
@@ -300,7 +300,7 @@ const Witness = () => {
                   <p key={comment.id} className="text-sm flex justify-between">
                     <div className='flex justify-center gap-2 '>
                       <div className='flex gap-2 mb-3 items-center'>
-                        <img className="hidden xl:block xl:h-4 xl:w-4 rounded-full " src={user} alt="" />
+                        <img className=" xl:block h-4 w-4  rounded-full " src={user} alt="" />
                         <p className='text-white/70 font-bold '>{comment.author} :</p>
                       </div>
                       
