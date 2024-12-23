@@ -239,16 +239,16 @@ max-[1000px]:h-full  items-center   justify-between  w-full space-x-2   ">
       <option value="Vol">Vandalism</option>
       <option value="Agression">Drug trafficking</option>
       <option value="Fraude">Arson</option>
-      <option value="Autre">Kidnapping</option>
-      <option value="Autre">Human trafficking
+      <option value="Kidnapping">Kidnapping</option>
+      <option value="Human trafficking">Human trafficking
       </option>
-      <option value="Autre">Fraud
+      <option value="Fraud">Fraud
       </option>
-      <option value="Autre">Murder
+      <option value="Murder">Murder
       </option> 
-       <option value="Autre">Theft
+       <option value="Theft">Theft
       </option>
-      <option value="Autre">Other
+      <option value="Other">Other
       </option>
     </select>
 

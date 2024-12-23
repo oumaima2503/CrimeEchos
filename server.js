@@ -5,6 +5,9 @@ import bodyParser from 'body-parser';
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
+app.get('/', (req, res) => {
+  res.send('Bienvenue sur l\'API des urgences !');
+});
 
 // Tableau en mémoire pour stocker les données
 let emergencies = [];

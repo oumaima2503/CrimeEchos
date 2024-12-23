@@ -43,13 +43,21 @@ const Map = () => {
   const [selectedSolvedStatus, setSelectedSolvedStatus] = useState('');
   const [selectedDateRange, setSelectedDateRange] = useState([null, null]);
   const [dropdownVisible, setDropdownVisible] = useState(false); // Define state for dropdown visibility
+  const [cities, setCities] = useState([]); // Ajouter un état pour les villes
 
   const cityCoordinates = {
     Casablanca: { lat: 33.5941, lng: -7.5374 },
     Rabat: { lat: 34.020882, lng: -6.84165 },
     Marrakech: { lat: 31.6295, lng: -7.9811 },
-    Fes: { lat: 34.0333, lng: -5.0000 },
+    Fès: { lat: 34.0333, lng: -5.0000 },
+    Tanger: { lat: 35.7595, lng: -5.8340 },
+    Oujda: { lat: 34.6816, lng: -1.9103 },
+    Kenitra: { lat: 34.2617, lng: -6.5771 },
+    Agadir: { lat: 30.4200, lng: -9.5985 },
+    Meknès: { lat: 33.8938, lng: -5.5513 },
+    Tetouan: { lat: 35.5743, lng: -5.3699 }
   };
+  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -58,33 +66,39 @@ const Map = () => {
           axios.get('http://localhost:3000/api/crimes'),
           axios.get('http://localhost:3000/api/force')
         ]);
-
+    
         setCrimes(crimesResponse.data || []);
         setForces(forcesResponse.data || []);
+    
+        // Extraire les villes uniques des crimes reçus
+        const citiesFromCrimes = [...new Set(crimesResponse.data.map(crime => crime.crimeAddress?.city))];
+        setCities(citiesFromCrimes);
+    
       } catch (error) {
         console.error('Erreur lors du chargement des données:', error);
       }
     };
-
+  
     fetchData();
   }, []);
 
   const filteredCrimes = crimes.filter((crime) => {
     // Filtrer par ville
     const cityFilter = selectedCity ? crime.crimeAddress?.city === selectedCity : true;
-
+  
     // Filtrer par statut (résolu ou non résolu)
     const solvedFilter = selectedSolvedStatus !== '' ? (
       selectedSolvedStatus === 'solved' ? crime.isSolved === true : crime.isSolved === false
     ) : true;
-
+  
     // Filtrer par plage de dates
     const dateFilter = selectedDateRange[0] && selectedDateRange[1] ? (
-      new Date(crime.date) >= new Date(selectedDateRange[0]) && new Date(crime.date) <= new Date(selectedDateRange[1])
+      new Date(crime.crimeDate) >= new Date(selectedDateRange[0]) && new Date(crime.crimeDate) <= new Date(selectedDateRange[1])
     ) : true;
-
+  
     return cityFilter && solvedFilter && dateFilter;
-});
+  });
+  
 
   const bounds = [
     [21.0, -17.0],
@@ -106,24 +120,23 @@ const Map = () => {
     <div className="h-screen bg-cover bg-no-repeat flex flex-col relative" style={{ backgroundImage: `url(${arriere})`, backgroundPosition: '90% 0%' }}>
       <Header />
       <div className="flex justify-between z-10 pl-10 pr-10 py-6">
-        
-
 
         <div className="flex flex-col items-end w-full z-10 ml-2">
   <div className="items-center justify-between w-full -mt-6 ml-20 md:block hidden lg:block">
     <div className="flex flex-nowrap space-x-4 w-full max-[700px]:space-x-2">
-      <select
-        value={selectedCity}
-        onChange={(e) => setSelectedCity(e.target.value)}
-        className="border p-2 text-[#982222] koulen bg-white/90 font-bold rounded-md flex-1 max-[700px]:w-1/3 max-[480px]:w-full"
-      >
-        <option value="">Select City</option>
-        {Object.keys(cityCoordinates).map((city) => (
-          <option key={city} value={city}>
-            {city}
-          </option>
-        ))}
-      </select>
+    <select
+  value={selectedCity}
+  onChange={(e) => setSelectedCity(e.target.value)}
+  className="border p-2 text-[#982222] koulen bg-white/90 font-bold rounded-md flex-1 max-[700px]:w-1/3 max-[480px]:w-full"
+>
+  <option value="">Select City</option>
+  {cities.map((city) => (
+    <option key={city} value={city}>
+      {city}
+    </option>
+  ))}
+</select>
+
       <select
         value={selectedSolvedStatus}
         onChange={(e) => setSelectedSolvedStatus(e.target.value)}
