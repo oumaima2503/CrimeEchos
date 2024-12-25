@@ -19,21 +19,22 @@ import { useFavorites } from '../context/FavoritesContext';
 const CrimeModal = ({ crime, onClose }) => {
   return (
     <div className="fixed inset-0 bg-black bg-opacity-90 flex justify-center items-center z-40" onClick={onClose}>
-      <div className=" z-40 relative bg-gradient-to-br from-gray-800 via-black to-gray-900 p-6 rounded-lg w-3/4 md:w-1/2
+      <div className=" z-40 relative bg-black bg-opacity-40   p-6 rounded-lg w-3/4 md:w-1/2
        text-white shadow-lg max-[900px]:text-[15px] max-[600px]:text-[10px] "
-      style={{ backgroundImage: `url(${arriere})`, backgroundPosition: '90% 0%'  }}>
+      style={{ backgroundImage: `url(${arriere})`, backgroundPosition: '90% 0%' , backgroundBlendMode: 'overlay',
+      opacity:0.9, }}>
         <div className="my-6"></div>
         <div className='flex gap-4 text-center items-center justify-center max-[600px]:text-[15px] max-[900px]:text-2xl neon font-bold text-3xl py-3'>
           <h2 className='nosifer mb-6 max-[600px]:mb-0'>{crime?.category || "No category"}</h2>
         </div>
         <div className="my-4"></div>
-        <p><strong className="nosifer">Criminal Info:</strong><br /> {crime?.criminalInfo?.sex || "Unknown"}, {crime?.criminalInfo?.description || "No description"}</p>
+        <p><strong className="koulen">Criminal Info:</strong><br /> {crime?.criminalInfo?.sex || "Unknown"}, {crime?.criminalInfo?.description || "No description"}</p>
         <div className="my-4"></div>
-        <p><strong className="nosifer">Description:</strong><br /> {crime?.description || "No description available"}</p>
+        <p><strong className="koulen">Description:</strong><br /> {crime?.description || "No description available"}</p>
         <div className="my-4"></div>
-        <p><strong className="nosifer">Responsible Force:</strong><br />  {crime?.responsibleForce?.name || "Unknown force"}</p>
+        <p><strong className="koulen">Responsible Force:</strong><br />  {crime?.responsibleForce?.name || "Unknown force"}</p>
         <div className="my-4"></div>
-        <p><strong className="nosifer">Solved:</strong> {crime?.isSolved ? "Yes" : "No"}</p>
+        <p><strong className="koulen">Solved:</strong> {crime?.isSolved ? "Yes" : "No"}</p>
         <div className="flex justify-end">
           <button className="bg-[#982222] text-white px-6 py-2 koulen -mt-8 max-[600px]:text-[10px] max-[600px]:px-3 max-[600px]:py-1 text-sm rounded transition-transform transform hover:scale-105 hover:bg-[#c12c2c] shadow-lg" onClick={onClose}>
             Close
